@@ -1,0 +1,226 @@
+
+{% extends "default.html.twig" %}
+
+{% block title %}
+	{% if dataText.communchamp %}
+		Guide des champignons - Editer: {{dataText.communchamp}}
+	{% else %}
+		Guide des champignons - Ajouter une fiche descriptive
+	{% endif %}
+{% endblock %}
+
+{% block meta %}
+	{% if dataText.communchamp %}
+		<meta name="Editer" content="Editer {{dataText.communchamp}} dans notre base de données interactive, en partageant votre passion avec le guide des champignons.">
+	{% else %}
+		<meta name="Nouvelle description" content="Ajouter une fiche descriptive de champignons dans notre base de données interactive.">
+	{% endif %}
+{% endblock %}
+
+{% block og %}
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="website">
+	{% if dataText.communchamp %}
+		<meta property="og:title" content="Guide des champignons - Editer: {{dataText.communchamp}}">
+    	<meta property="og:description" content="Editer {{dataText.communchamp}} dans notre base de données interactive, en partageant votre passion avec le guide des champignons.">
+	{% else %}
+		<meta property="og:title" content="Guide des champignons - Ajouter une fiche descriptive">
+    	<meta property="og:description" content="Ajouter une fiche descriptive de champignons dans notre base de données interactive.">
+	{% endif %}
+    <meta property="og:url" content="">
+    <meta property="og:image" content="./assets/icones/logo.png }}"/>
+    <meta property="og:image:width" content="100" />
+    <meta property="og:image:height" content="100" />
+{% endblock %}
+
+{% block body %}
+<div class="added_bg-img"></div>
+<div class="container added my-3 p-4">
+	<div class="row">
+		<div class="col-12 mb-3">
+			<form action="{{route}}"  method="POST" enctype="multipart/form-data" class="px-3 pb-3 added_form">
+				<div class="form-row p-4">
+				<p class="added__errorMessage">{{message}}</p>
+				<input type="hidden" name="idchamp" value="{{ dataText.idchamp }}">
+				</div>
+				<div class="form-row p-4">
+					<div class="col-12 col-sm was-validated">
+						<label for="FormControlInput1">Nom commun</label>
+						<input type="text" class="form-control is-valid" id="validationServer01" placeholder="ex : Lactaire délicieux" name="nomcommun" value="{{dataText.communchamp}}"  required>
+						<div class="invalid-feedback">Veuillez remplir ce champ ! </div>
+					</div>
+					<div class="col-12 col-sm">
+						<label for="FormControlInput2">Nom latin</label>
+						<input type="text" class="form-control" placeholder="ex : lactarius deliciosus" name="nomlatin" value="{{dataText.latinchamp}}">
+					</div>
+					<div class="col-12 col-sm">
+						<label for="FormControlInput3">Nom local</label>
+						<input type="text" class="form-control" placeholder="ex : Safrané" name="nomlocal" value="{{dataText.localchamp}}">
+					</div>
+				</div>
+				<div class="row p-3 added__upload" id="added__upload">
+					<div class="col-12">
+						<p>Attention a ne pas dépasser la capacité d'upload : 25 mo.
+						(total du poids de toutes vos photos).<br>
+						Les types d'images acceptées : jpg, jpeg, gif, png.
+						</p>
+					</div>
+					<div class="col-12 col-md-4 form-group p-4">
+						<label for="photo-1">Photo</label>
+						<input type="file" class="form-control-file" img="photo-1" name="photo[]" >
+						<img src="{{ dataImage[0] }}" id="photo-1" alt="" width="100%" height="auto"  class="my-1 border rounded">
+					</div>
+					<div class="col-12 col-md-4 form-group p-4" id="collapse2">
+						<label for="photo-2">Photo</label>
+						<input type="file" class="form-control-file" img="photo-2" name="photo[]">
+						<img src="{{ dataImage[1] }}" id="photo-2" alt="" width="100%" height="auto"  class="my-1 border rounded">
+					</div>
+					<div class="col-12 col-md-4 form-group p-4">
+						<label for="photo-3">Photo</label>
+						<input type="file" class="form-control-file" img="photo-3" name="photo[]">
+						<img src="{{ dataImage[2] }}" id="photo-3" alt="" width="100%" height="auto" class="my-1 border rounded">
+					</div>
+					<div class="col-12 col-md-4 form-group p-4">
+						<label for="photo-4">Photo</label>
+						<input type="file" class="form-control-file" img="photo-4" name="photo[]">
+						<img src="{{ dataImage[3] }}" id="photo-4" alt="" width="100%" height="auto"  class="my-1 border rounded">
+					</div>
+					<div class="col-12 col-md-4 form-group p-4">
+						<label for="photo-5">Photo</label>
+						<input type="file" class="form-control-file" img="photo-5" name="photo[]">
+						<img src="{{ dataImage[4] }}" id="photo-5" alt="" width="100%" height="auto"  class="my-1 border rounded">
+					</div>
+					<div class="col-12 col-md-4 form-group p-4">
+						<label for="photo-6">Photo</label>
+						<input type="file" class="form-control-file" img="photo-6" name="photo[]">
+						<img src="{{ dataImage[5] }}" id="photo-6" alt="" width="100%" height="auto" class="my-1 border rounded">
+					</div>
+				</div>
+				<h2 class="my-4">Descriptif</h2>
+				<div class="form-group">
+					<label for="FormControlSelect1">Comestible</label>
+					<select class="form-control" name="conso" id="FormControlSelect1">
+						<option value="">Néant</option>
+						<option value="Excellent comestible" {% if dataText.consochamp == "Excellent comestible" %}selected{% endif %}>Excellent comestible</option>
+						<option value="Bon comestible" {% if dataText.consochamp == "Bon comestible" %}selected{% endif %}>Bon comestible</option>
+						<option value="Comestible médiocre" {% if dataText.consochamp == "Comestible médiocre" %}selected{% endif %}>Comestible médiocre</option>
+						<option value="A rejeter" {% if dataText.consochamp == "A rejeter" %}selected{% endif %}>A rejeter</option>
+						<option value="Toxique" {% if dataText.consochamp == "Toxique" %}selected{% endif %}>Toxique</option>
+						<option value="Mortel" {% if dataText.consochamp == "Mortel" %}selected{% endif %}>Mortel</option>
+					</select>
+				</div> 
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Chapeau</label>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="chapeau">{{dataText.chapeauchamp}}</textarea>
+				</div>
+				<label class="mt-4">Type de lames</label>
+				<div class="row text-center text-md-left p-3 added__typeLame">
+					<div class="col-6 col-sm-4 col-md-3 col-lg px-2 added__typeLame--width">
+						<img src="{{ "/assets/lames/none.png" }}">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios" value="" {% if dataText.typelameschamp == "" %}checked{% endif %}>
+							<label class="form-check-label" for="gridRadios">
+								Néant
+							</label>
+						</div>
+					</div>
+					<div class="col-6 col-sm-4 col-md-3 col-lg px-2 added__typeLame--width">
+						<img src="{{ "/assets/lames/adnees.png" }}">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Adnées" {% if dataText.typelameschamp == "Adnées" %}checked{% endif %}>
+							<label class="form-check-label" for="gridRadios1">
+								Adnées
+							</label>
+						</div>
+					</div>
+					<div class="col-6 col-sm-4 col-md-3 col-lg px-2 added__typeLame--width">
+						<img src="{{ "/assets/lames/decurrentes.png" }}">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Décurrentes" {% if dataText.typelameschamp == "Décurrentes" %}checked{% endif %}>
+							<label class="form-check-label" for="gridRadios2">
+								Décurrentes
+							</label>
+						</div>
+					</div>
+					<div class="col-6 col-sm-4 col-md-3 col-lg px-2 added__typeLame--width">
+						<img src="{{ "/assets/lames/echancrees.png" }}">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="Echancrées" {% if dataText.typelameschamp == "Echancrées" %}checked{% endif %}>
+							<label class="form-check-label" for="gridRadios3">
+								Echancrées
+							</label>
+						</div>
+					</div>
+					<div class="col-6 col-sm-4 col-md-3 col-lg px-2 added__typeLame--width">
+						<img src="{{ "/assets/lames/emarginees.png" }}">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="Emarginées" {% if dataText.typelameschamp == "Emarginées" %}checked{% endif %}>
+							<label class="form-check-label" for="gridRadios4">
+								Emarginées
+							</label>
+						</div>
+					</div>
+					<div class="col-6 col-sm-4 col-md-3 col-lg px-2 added__typeLame--width">
+						<img src="{{ "/assets/lames/libres.png" }}">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="Libres"{% if dataText.typelameschamp == "Libres" %}checked{% endif %}>
+							<label class="form-check-label" for="gridRadios5">
+								Libres
+							</label>
+						</div>
+					</div>
+					<div class="col-6 col-sm-4 col-md-3 col-lg px-2 added__typeLame--width">
+						<img src="{{ "/assets/lames/secedentes.png" }}">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios6" value="Sécédentes"{% if dataText.typelameschamp == "Sécédentes" %}checked{% endif %}>
+							<label class="form-check-label" for="gridRadios6">
+								Sécédentes
+							</label>
+						</div>
+					</div>
+					<div class="col-6 col-sm-4 col-md-3 col-lg px-2 added__typeLame--width">
+						<img src="{{ "/assets/lames/sinuees.png" }}">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios7" value="Sinuées"{% if dataText.typelameschamp == "Sinuées" %}checked{% endif %}>
+							<label class="form-check-label" for="gridRadios7">
+								Sinuées
+							</label>
+						</div>
+					</div>
+					{# <div class="col-6 text-center px-2">
+						<img src="{{ "/assets/lames/subdecurrentes.png" }}">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios8" value="Subdécurrentes"{% if dataText.typelameschamp == "Subdécurrentes" %}checked{% endif %}>
+							<label class="form-check-label" for="gridRadios8">
+								Subdécurrentes
+							</label>
+						</div>
+					</div> #}
+				</div>
+				<div class="form-group mt-3">
+					<label for="exampleFormControlTextarea1">Hyménium(Lames - Tubes - Plis - Aiguillons - Pores)</label>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="lames">{{dataText.lameschamp}}</textarea>
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Pied</label>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="pied">{{dataText.piedchamp}}</textarea>
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Chair</label>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="chair">{{dataText.chairchamp}}</textarea>
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Habitat</label>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="habitat">{{dataText.habitatchamp}}</textarea>
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Remarques</label>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="remarques">{{dataText.remarqueschamp}}</textarea>
+				</div>
+				<button type="submit" class="btn-lg btn-primary">Enregistrer</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="/assets/javascript/main.js"></script>
+{% endblock %}

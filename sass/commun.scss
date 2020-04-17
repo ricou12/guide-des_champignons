@@ -1,0 +1,52 @@
+/* ******************************************************* 
+                      THEMES COMMUN                    
+******************************************************* */
+@import "node_modules/rfs/scss";
+
+h1 {
+    font-family: 'Tangerine', cursive;
+    @include font-size(6rem);
+}
+
+h2 {
+    font-family: 'Libre Baskerville', serif;
+    @include font-size(2rem);
+}
+
+h3,
+h4 {
+    font-family: 'Libre Baskerville', serif;
+    @include font-size(1rem);
+}
+
+h5 {
+    font-family: 'Libre Baskerville',
+        serif;
+    color: rgb(242, 184, 44);
+    @include font-size(1.5rem);
+}
+
+p {
+    font-family: 'Libre Baskerville', serif;
+    @include font-size(1.2rem);
+    line-height: 1.5em;
+    color: #474847;
+}
+
+// ombrage des vignettes
+.box-shadow-down {
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+}
+
+.background-dark {
+    background-color: rgba(52, 58, 64, 0.9) !important;
+}
+
+.bg-green {
+    background-color: rgb(146, 163, 143);
+}
+
+.bg-green-light {
+    background-color: rgba(193, 213, 190, 1);
+}

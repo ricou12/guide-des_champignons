@@ -1,0 +1,64 @@
+.fiche {
+    @include waitShow;
+
+    &__header{
+         &__title{
+        color:rgb(85, 84, 84);
+        text-shadow: 2px 1px 5px rgb(0, 0, 0);
+        }
+        &__letter {
+            color: rgb(224, 139, 94);
+            letter-spacing: 15px;
+            line-height: 30px;
+        }
+    }
+  
+
+    &__eat {
+        img {
+            filter: invert(0.7);
+            height: 50px;
+        }
+
+        p {
+            color: rgb(85, 84, 84);
+            margin-top: 5px;
+        }
+    }
+
+    &__preview {
+        width: 5vw;
+        max-width: 50px;
+        filter: invert(0.5);
+    }
+
+    &__follow {
+        width: 5vw;
+        max-width: 50px;
+        filter: invert(0.5);
+    }
+
+    &__img {
+        overflow: hidden;
+        border-radius: 60px 0px 60px 0px;
+    }
+
+    &__description {
+        span {
+            font-size: 1.2em;
+            font-weight: 800;
+        }
+    }
+}
+
+@media screen and (min-width: 1140px) {
+    .fiche {
+        padding: 0 5% 0 5%;    
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .fiche {
+        padding: 0 15% 0 15%;    
+    }
+}

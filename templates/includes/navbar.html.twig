@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark p-3">
+	<a class="navbar-brand" href="index.php?routing=home"><img class="logo mr-3" src="/assets/icones/logo.png" width="50" alt=""></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="index.php?routing=fiches">Guide<span class="sr-only">(current)</span></a>
+			</li>
+			{% if is_userConnect %}
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?routing=mon-compte">Gérer mes fiches</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?routing=deconnexion">Me déconnecter</a>
+				</li>
+			{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?routing=register">S'incrire</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?routing=loginVerify">Se connecter</a>
+				</li>
+			{% endif %}
+		</ul>
+	</div>
+	<div class="collapse navbar-collapse d-inline">
+		<h2 class="text-white text-center m-0">{{title}}</h2>
+	</div>
+	
+	{% if is_userConnect %}
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div class="collapse navbar-collapse navbar__connecter d-flex flex-nowrap justify-content-end mr-lg-5">
+			<img src="./assets/icones/radio.svg" alt="connecté" width="45" class="mr-3">
+			<h5>{{is_userConnect.pseudouser}}</h5>
+		</div>
+	</div>
+	{% endif %}
+	
+
+</nav>
+
+

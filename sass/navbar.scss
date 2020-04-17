@@ -1,0 +1,25 @@
+@import "gradient";
+
+.navbar {
+    // @include bg-8;
+    background: linear-gradient(to right, #363c2a 0%, #e5f9d9 100%);
+    color: white;
+
+
+    li {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.15em;
+        letter-spacing: 0.5px;
+        font-weight: 700;
+    }
+
+    &__connecter {
+        h5 {
+            color: rgb(2, 2, 2);
+            font-weight: 600;
+        }
+        img{
+            @include login;
+        }
+    }
+}

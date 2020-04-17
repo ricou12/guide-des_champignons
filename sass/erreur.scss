@@ -1,0 +1,25 @@
+.erreur {
+    @include waitShow;
+    height: 100vh;
+    min-height: 600px;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    &__title {
+        font-family: 'Libre Baskerville',
+            serif;
+        font-size: 2em;
+        color: white;
+    }
+
+    &__bg-img {
+        background-image: url("/assets/images/foret/foret-5.jpg");
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -100;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}

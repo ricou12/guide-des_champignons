@@ -1,0 +1,48 @@
+.added {
+    background-color: rgba(193, 213, 190, 0.4);
+    border-radius: 10px;
+
+    &__errorMessage {
+        font-size: 1.4em;
+
+        color: rgb(129, 2, 2);
+    }
+
+    &__upload {
+        background-color: rgba(255, 255, 255, 0.5);
+
+        input {
+            border-radius: 20px;
+        }
+    }
+
+    &__typeLame {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+ 
+    &_title--bg-color {
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    &_bg-img {
+        background-image: url("/assets/images/foret/foret-1.jpg");
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -100;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: blur(2px);
+    }
+
+    &_form {
+        border-radius: 10px;
+        font-size: 1.1em;
+
+        label {
+            font-weight: 800;
+        }
+    }
+}

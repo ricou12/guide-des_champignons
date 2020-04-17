@@ -1,0 +1,231 @@
+{% extends "default.html.twig" %}
+
+{% block title %}
+    Guide des champignons - Espace administrateur
+{% endblock %}
+
+{% block meta %}
+    <meta name="Espace administrateur" content="Administrer la base de données du guide des champignons.">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Guide des champignons - Espace administrateur">
+    <meta property="og:description" content="Administrer la base de données du guide des champignons.">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="./assets/icones/logo.png }}"/>
+    <meta property="og:image:width" content="50" />
+    <meta property="og:image:height" content="50" />
+{% endblock %}
+
+{% block body %}
+    <div class="member__filter"></div>
+    <div class="member__bg-img"></div>
+    <div class="container mt-3 px-md-5">
+        <div class="row">
+            <div class="col-12 background-dark text-white rounded p-3">
+                <h2>Profil</h2>
+                <p>
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">Tous les utilisateurs</a>
+                </p>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse" id="collapse1">
+                            <div class="card card-body bg-dark">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-dark ">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Date d'inscription</th>
+                                            <th scope="col">pseudo</th>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Prénom</th>
+                                            <th scope="col">Supprimer le compte</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in listeUser %}
+                                            <tr>
+                                                <th scope="row">{{ user.dateuser }}</th>
+                                                <td>{{ user.pseudouser }}</td>
+                                                <td>{{ user.nomuser }}</td>
+                                                <td>{{ user.prenomuser }}</td>
+                                                <td class="text-center">
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                                        data-target="#exampleModal-{{ user.iduser }}">
+                                                        <img style="filter:invert(100%);" src="/assets/icones/trash.png" alt="Corbeille">
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal-{{ user.iduser }}" tabindex="-1" role="dialog"
+                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Supprimer un compte utilisateur</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body text-dark">
+                                                                    Etes-vous sur de vouloir supprimer le compte de : {{ user.pseudouser }}
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Annuler</button>
+                                                                    <a href="index.php?routing=deleteAccount&amp;idUser={{ user.iduser }}&amp;currentPgUser={{currentPageUsers}}&amp;currentPgFiche={{currentPageFiches}}"
+                                                                        class="btn btn-primary">Supprimer</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-6 d-flex justify-content-center p-2">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                {% if numberPageUsers > 1 %}
+                                                    {% for i in 1..numberPageUsers %}
+                                                        {% if i == currentPageUsers %}
+                                                            <li class="page-item active">
+                                                                <span class="page-link">
+                                                                {{i}}
+                                                                <span class="sr-only">(current)</span>
+                                                            </span>
+                                                            </li>
+                                                        {% else %}
+                                                            <li class="page-item">
+                                                                <a href="index.php?routing=mon-compte&amp;pageUserIndex={{ i }}"
+                                                                    class="page-link bg-dark text-white">{{ i }}</a>
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 background-dark text-white d rounded mt-2 p-3">
+                <h2>Liste des fiches descriptives</h2>
+                <label for="allPage">Voir toute les fiches</label>
+                {% if stateAllFiche %}
+                    <a href="index.php?routing=mon-compte&amp;pageIndex=1" id="allPage"><img src="{{toogleImg(stateAllFiche)}}" alt="" width="40"></a>
+                {% else %}
+                    <a href="index.php?routing=mon-compte&amp;pageIndex=1&amp;allFiche" id="allPage"><img src="{{toogleImg(stateAllFiche)}}" alt="" width="40"></a> 
+                {% endif %}
+                <div class="table-responsive">
+                    <table class="table table-hover table-dark ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Photos</th>
+                                <th scope="col">Dates de création</th>
+                                <th scope="col">Noms communs</th>
+                                <th scope="col">Auteurs</th>
+                                <th scope="col">Visible au public</th>
+                                <th scope="col">Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fiche in listeFiches %}
+                                <tr>
+                                    <th scope="row">
+                                    {% if fiche.pathimg is not null %}
+										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/{{ fiche.idchamp }}/minSize/{{ fiche.pathimg }}" alt="{{ fiche.communchamp }}" height="100">
+										</a>
+									{% else %}
+										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/default.png" alt="{{ fiche.communchamp }}" height="100"></a>
+									{% endif %}
+                                    </th>
+                                    <td>{{ fiche.datechamp }}</td>
+                                    <td><a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}">{{ fiche.communchamp }}</a></td>
+                                    <td>{{ fiche.pseudouser }}</td>
+                                    <td>
+                                        <form action="index.php?routing=update" method="POST">
+                                            <div class="form-check">
+                                                <!-- <label class="form-check-label mr-2" for="defaultCheck1">
+                                                {% if fiche.autoriserchamp %}
+                                                    Oui
+                                                    {% else %}
+                                                    Non
+                                                    {% endif %}
+                                                </label> -->
+                                                <a href="index.php?routing=autoriser-fiche&amp;idFiche={{ fiche.idchamp }}&amp;currentPgFiche={{currentPageFiches}}"><img src="{{toogleImg(fiche.autoriserchamp)}}" alt="" width="40"></a>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                            data-target="#exampleModal-{{ fiche.idchamp }}">
+                                            <img style="filter:invert(100%);" src="/assets/icones/trash.png" alt="Corbeille">
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal-{{ fiche.idchamp }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title text-dark" id="exampleModalLabel">Supprimer une fiche</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body text-dark">
+                                                        {{ is_userConnect.pseudouser }} êtes-vous sur de vouloir supprimer cette fiche !
+                                        
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                                        <a href="index.php?routing=del-champ-ad&amp;idFich={{ fiche.idchamp }}&amp;currentPgFiche={{currentPageFiches}}"
+                                                            class="btn btn-primary">Supprimer</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <td>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-6 d-flex justify-content-center p-2">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                            {% if numberPageFiches > 1 %}
+                                {% for i in 1..numberPageFiches %}
+                                    {% if i == currentPageFiches %}
+                                        <li class="page-item active">
+                                            <span class="page-link">
+                                            {{i}}
+                                            <span class="sr-only">(current)</span>
+                                        </span>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a href="index.php?routing=mon-compte&amp;pageIndex={{ i }}"
+                                                class="page-link bg-dark text-white">{{ i }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

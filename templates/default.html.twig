@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		{% include 'includes/head.html.twig'%}
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		{% block meta %}{% endblock %}
+		{% block og %}{% endblock %}
+	</head>
+	<body>
+		<header>
+			{% include 'includes/navbar.html.twig' %}
+		</header
+		<main>
+			{% block body %}{% endblock %}
+		</main>
+		<footer>
+		
+		</footer>
+		{% include 'includes/script.html.twig' %}
+	</body>
+</html>

@@ -1,0 +1,212 @@
+{% extends "default.html.twig" %}
+
+{% block title %}
+    Guide des champignons - Espace membre
+{% endblock %}
+
+{% block meta %}
+    <meta name="Espace membre" content="Interagissez avec la base de données du guide des champignons.">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Guide des champignons - Espace membre">
+    <meta property="og:description" content="Interagissez avec la base de données du guide des champignons.">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="./assets/icones/logo.png }}"/>
+    <meta property="og:image:width" content="50" />
+    <meta property="og:image:height" content="50" />
+{% endblock %}
+
+{% block body %}
+	<div class="member__filter"></div>
+	<div class="member__bg-img"></div>
+	<div class="container mt-2 px-md-5 member">
+		<div class="row">
+			<div class="col-12 border border-dark background-dark text-white rounded">
+				<h2 class="p-2">Profil</h2>
+				{% if message %}<h3 class="p-2">{{message}}</h3>{% endif %}
+				<div class="table-responsive">
+					<table class="table table-hover table-dark rounded-lg">
+							<thead>
+								<tr>
+									<th scope="col" class="hidden-md">Date d'inscription</th>
+									<th scope="col" class="">Status</th>
+									<th scope="col">Pseudo</th>
+									<th scope="col" class="">Nom</th>
+									<th scope="col" class="">Prénom</th>
+									<th scope="col">Modifier mon profil</th>
+									<th scope="col">Supprimer mon compte</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">{{ is_userConnect.dateuser }}</th>
+									<td class="">{{ is_userConnect.roleuser }}</td>
+									<td>{{ is_userConnect.pseudouser }}</td>
+									<td class="">{{ is_userConnect.nomuser }}</td>
+									<td class="">{{ is_userConnect.prenomuser }}</td>
+									<td>
+										<a href="index.php?routing=mon-profil" class="btn btn-outline-success">
+											<img style="filter:invert(100%);" src="/assets/icones/update.png" alt="Modifer mon profil" width="32">
+										</a>
+									</td>
+									<td>
+										<!-- Button supprimer un compte -->
+										<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal-{{ is_userConnect.iduser }}">
+											<img style="filter:invert(100%);" src="/assets/icones/trash.png" alt="Corbeille">
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModal-{{ is_userConnect.iduser }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title text-dark" id="exampleModalLabel">Supprimer un compte utilisateur</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body text-dark">
+														{{ is_userConnect.pseudouser }} êtes-vous sur de vouloir supprimer votre compte !
+													
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+														<a href="index.php?routing=delete-member&amp;idUser={{ is_userConnect.iduser }}&amp;currentPgFiche={{currentPageFiches}}" class="btn btn-primary">Supprimer</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>	
+							</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-2">
+			<div class="col-12 border border-dark background-dark text-white rounded">
+				<h2>Liste des fiches descriptives</h2>
+                <label for="allPage">Voir toute les fiches</label>
+                {% if stateAllFiche %}
+                    <a href="index.php?routing=mon-compte&amp;pageIndex=1" id="allPage"><img src="{{toogleImg(stateAllFiche)}}" alt="" width="40"></a>
+                {% else %}
+                    <a href="index.php?routing=mon-compte&amp;pageIndex=1&amp;allFiche" id="allPage"><img src="{{toogleImg(stateAllFiche)}}" alt="" width="40"></a> 
+                {% endif %}
+				<hr class="bg-secondary">
+				<div class="row d-flex align-items-center mb-3">
+					<div class="col-4 col-sm-3 col-md-4 d-flex flex-nowrap align-items-center pb-1">
+						<div class="row">
+							<div class="col-12 col-md-8">
+								<h6>Nouvelle fiche descriptif</h6>	
+							</div>
+							<div class="col-12 col-md-4">
+								<a href="index.php?routing=ajouter-fiche" class="btn btn-outline-success">
+									<img style="filter:invert(100%);" src="/assets/icones/document.png" alt="Modifer mon profil" width="32">
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-8 col-sm-9 col-md-8">
+						<p class="member__info">Lorsque vous créer une fiche descriptive celle-ci n'est visible qu'a partir de votre compte, après validation elle sera accessible depuis l'espace public.</p>
+					</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-striped table-dark rounded-lg">
+						<thead>
+							<tr>
+								<th scope="col">Photos</th>
+								<th scope="col">Date de création</th>
+								<th scope="col">Nom commun</th>
+								<th scope="col">Auteur</th>
+								<th scope="col">Modifier</th>
+								<th scope="col">Supprimer</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for fiche in listeFiches %}
+								<tr>
+									<th scope="row">
+									{% if fiche.pathimg is not null %}
+										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/{{ fiche.idchamp }}/minSize/{{ fiche.pathimg }}" alt="{{ fiche.communchamp }}" height="100">
+										</a>
+									{% else %}
+										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/default.png" alt="{{ fiche.communchamp }}" height="100"></a>
+									{% endif %}
+									</th>
+									<td>{{ fiche.datechamp }}</td>
+									<td>
+										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}">{{ fiche.communchamp }}</a>
+									</td>
+									<td>{{ is_userConnect.pseudouser }}</td>
+									<td>
+										<a href="index.php?routing=update-fiche&amp;idChamp={{ fiche.idchamp }}" class="btn btn-outline-success">
+											<img style="filter:invert(100%);" src="/assets/icones/update.png" alt="Modifer mon profil" width="32">
+										</a>
+									</td>
+									<td>
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-outline-danger" data-toggle="modal"
+											data-target="#exampleModal-{{ fiche.idchamp }}">
+											<img style="filter:invert(100%);" src="/assets/icones/trash.png" alt="Corbeille">
+										</button>
+										
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModal-{{ fiche.idchamp }}" tabindex="-1" role="dialog"
+											aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title text-dark" id="exampleModalLabel">Supprimer une fiche</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body text-dark">
+														{{ is_userConnect.pseudouser }} êtes-vous sur de vouloir supprimer cette fiche !
+										
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+														<a href="index.php?routing=del-champ-mb&amp;idFich={{ fiche.idchamp }}&amp;currentPgFiche={{currentPageFiches}}"
+															class="btn btn-primary">Supprimer</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="row d-flex justify-content-center">
+					<div class="col-6 d-flex justify-content-center p-2">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								{% if numberPageFiches > 1 %}
+									{% for i in 1..numberPageFiches %}
+										{% if i == currentPageFiches %}
+											<li class="page-item active">
+												<span class="page-link">
+													{{i}}
+													<span class="sr-only">(current)</span>
+												</span>
+											</li>
+										{% else %}
+											<li class="page-item">
+												<a href="index.php?routing=mon-compte&amp;pageIndex={{ i }}" class="page-link bg-dark text-white">{{ i }}</a>
+											</li>
+										{% endif %}
+									{% endfor %}
+								{% endif %}
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

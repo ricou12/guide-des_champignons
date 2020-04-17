@@ -1,0 +1,33 @@
+{% extends "default.html.twig" %}
+
+{% block title %}
+    Guide des champignons - base de données interactive !
+{% endblock %}
+{% block meta %}
+    <meta name="Guide des champignons" content="Reconnaître facilement un champignon comestible ? Trouvez ces informations sur le guide des champignons. Participer à l'élaboration d'une base de données interactive.">
+{% endblock %}
+{% block og %}
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Guide des champignons - base de données interactive !">
+    <meta property="og:description" content="Reconnaître facilement un champignon comestible ? Trouvez ces informations sur le guide des champignons. Participer à l'élaboration d'une base de données interactive.">
+    <meta property="og:url" content="https://www.guidedeschampignons.com/">
+{% endblock %}
+
+{% block body %}
+<div class="home_background">
+</div>
+<div class="container-fluid d-flex flex-column justify-content-around align-items-center home">
+    <div class="row home__title">
+        <section class="col">
+            <h1 class="text-center text-white ">Champignons de nos régions</h1>
+        </section>
+    </div>
+    <div class="row home__comment">
+        <section class="col">
+            <a href="index.php?routing=loginVerify" style="text-decoration:none;"><h2 class="text-white text-center">Participez à l'élaboration d'une base de donnée interactive et
+                évolutive.</h2></a>
+        </section>
+    </div>
+</div>
+{% endblock %}

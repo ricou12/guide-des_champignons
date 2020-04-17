@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		{% include 'includes/head.html.twig'%}
+		<title>error</title>
+	</head>
+	<body>
+		<main>
+			<div class="erreur__bg-img"></div>
+			<div class="container-fluid d-flex flex-column justify-content-around align-items-center erreur">
+				<div class="row">
+					<div class="col">
+						<h1 class="erreur__title">ERREUR DE PAGE</h1>
+						<h3 class="text-white mt-2 text-center">CODE ERREUR :
+							{{error.code}}</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col text-center">
+						<h2 class="erreur__title">Vous avez emprunté le mauvais chemin</h2>
+						<h2 class="mt-4 text-white">{{ error.getMessage() }}</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						{% if with_redirect %}
+							<form action="index.php?routing={{ error.getRedirectUrl() }}" method="POST">
+								<button type="submit" class="btn btn-outline-light">
+									Retour
+								</button>
+							</form>
+						{% else %}
+							<form action="index.php?routing=home" method="POST">
+								<button type="submit" class="btn btn-outline-light">
+									Retour en page d'accueil
+								</button>
+							</form>
+						{% endif %}
+					</div>
+				</div>
+
+			</div>
+		</main>
+		{% include 'includes/script.html.twig' %}
+	</body>
+</html>

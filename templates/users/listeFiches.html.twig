@@ -1,0 +1,75 @@
+{% extends "default.html.twig" %}
+
+{% block title %}
+	guide des champignons - apprendre à reconnaitre les champignons comestibles
+{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="Liste évolutive de champignons, photos de champignons, caractéristiques.">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="guide des champignons - apprendre à reconnaitre les champignons comestibles">
+    <meta property="og:description" content="Liste évolutive de champignons, photos de champignons, caractéristiques.">
+    <meta property="og:url" content="">
+{% endblock %}
+
+{% block body %}
+<div class="book__bg"></div>
+<article class="container-fluid book">
+    <div class="row">
+        <section class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center">
+            {% for fiche in listeFiches %}
+                <div class="book__card box-shadow-down">
+                    <a href="index.php?routing=description&amp;idchamp={{ fiche.idchamp }}">
+                        <div class="book__card__eat d-flex justify-content-center align-items-center">
+                            <div class="text-center">
+                                <img class="book__card__eat__img" src="{{getImage(fiche.consochamp)}}" alt="?">
+                                <p class="text-white">{{fiche.consochamp}}</p>
+                            </div>
+                        </div>
+                        <div class="book__card__bloc-img">
+                            <div class="book__card__bloc-img__opacity"></div>
+                            {% if fiche.pathimg is not null %}
+                                <img class="book__card__bloc-img__image" src="assets/images/photo-fullscreen/{{fiche.idchamp}}/minSize/{{fiche.pathimg}}" alt="{{fiche.communchamp}}">
+                            {% else %}
+                                <img class="book__card__bloc-img__image" src="assets/images/photo-fullscreen/default.png" alt="{{fiche.communchamp}}">
+                            {% endif %}
+                        </div>
+                        <div class="book__card__titre d-flex flex-row justify-content-center align-items-center">
+                            <h5 class="book__card__titre--color text-center">{{fiche.communchamp}}</h5>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-6 d-flex justify-content-center p-3">
+           <nav aria-label="Page navigation example">
+                <ul class="pagination book__pagination">
+                    <li class="page-item">
+                        <a href="index.php?routing=fiches&amp;allFiches" class="page-link border book__pagination--color-full text-white">Tout voir</a>
+                    </li>
+                    {% for i in 1..pagination %}
+                        {% if i == currentPage %}
+                                <li class="page-item active">
+                                    <span class="page-link">
+                                        {{i}}
+                                    <span class="sr-only">(current)</span>
+                                    </span>
+                                </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a href="index.php?routing=fiches&amp;pageIndex={{ i }}" class="page-link book__pagination--color-index">{{ i }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</article>
+{% endblock %}
