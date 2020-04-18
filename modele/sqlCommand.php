@@ -81,15 +81,21 @@ class MyComponentsSql {
     /****************************************************
                   GESTION DU LOGIN
     *****************************************************/
-    public function createLogin($pseudo,$password)
-    {
-        // Je vérifie si un compte existe pour ce pseudo
+    public function isExistPseudo($pseudo){
+        // Je vérifie si le compte existe avec le pseudo.
         $query = $this->_dataBase->prepare('SELECT * FROM utilisateurs where pseudouser = :pseudo');
         $query->bindParam(':pseudo', $pseudo);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();
-        if($result)
+        return $result;
+    }
+
+
+    public function createLogin($pseudo,$password)
+    {
+        $is_exist_pseudo = $this->isExistPseudo($pseudo);
+        if($is_exist_pseudo)
         {
            return ['success' => false,'message' => "Désolé ! ce compte existe déja, veuillez vous connecter !"]; 
         }
@@ -112,23 +118,19 @@ class MyComponentsSql {
         }
     }
 
+    
     public function get_login($pseudo,$password)
     {
-        // Je vérifie si le compte existe avec le pseudo.
-        $query = $this->_dataBase->prepare('SELECT * FROM utilisateurs where pseudouser = :pseudo');
-        $query->bindParam(':pseudo', $pseudo);
-        $query->execute();
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-        $query->closeCursor();
-        if($result)
+        $is_exist_pseudo = $this->isExistPseudo($pseudo);
+        if($is_exist_pseudo)
         {
             // Hachage du password saisie par l'utilisateur.
             $hash_password = password_hash ($password ,PASSWORD_DEFAULT);
             // Vérifie si le hash du password saisie par l'utilisateur corresponds au hash de la base de donnees.
-            if(password_verify( $password, $result['passworduser']))
+            if(password_verify( $password, $is_exist_pseudo['passworduser']))
             {
-                // je recupere l'id et le role
-                return['success' => true, 'user' => $result];
+                // Renvoie le profil de l'utilisateur
+                return['success' => true, 'user' => $is_exist_pseudo];
             }
             else
             {
@@ -152,21 +154,32 @@ class MyComponentsSql {
 
     public function updateProfil($iduser,$pseudouser,$nomuser,$prenomuser)
     {
-        $query = $this->_dataBase->prepare('UPDATE utilisateurs SET pseudouser=:pseudouser,nomuser=:nomuser,prenomuser=:prenomuser WHERE iduser=:iduser');
-        $query->bindParam(':iduser',$iduser, PDO::PARAM_INT);
-        $query->bindParam(':pseudouser',$pseudouser, PDO::PARAM_INT);
-        $query->bindParam(':nomuser',$nomuser, PDO::PARAM_INT);
-        $query->bindParam(':prenomuser', $prenomuser, PDO::PARAM_INT); 
-        $result = $query->execute();
-        $query->closeCursor();
-        return $result;
+        $is_exist_pseudo = $this->isExistPseudo($pseudouser);
+        // Si le pseudo existe et n'est pas celui de l'utilisateur alors on ne modifie pas le profil
+        if($is_exist_pseudo && $is_exist_pseudo['iduser'] != $iduser)
+        {
+            return ['success' => false,'is_exist_other_speudo' => true];
+        }
+        // si le speudo n'existe pas (l'user a modifié son pseudo)
+        // ou si l'utlisateur ne l'a pas modifié alors modifie alors le profil
+        if(!$is_exist_pseudo || $is_exist_pseudo['iduser'] == $iduser )
+        {
+            $query = $this->_dataBase->prepare('UPDATE utilisateurs SET pseudouser=:pseudouser,nomuser=:nomuser,prenomuser=:prenomuser WHERE iduser=:iduser');
+            $query->bindParam(':iduser',$iduser, PDO::PARAM_INT);
+            $query->bindParam(':pseudouser',$pseudouser);
+            $query->bindParam(':nomuser',$nomuser);
+            $query->bindParam(':prenomuser', $prenomuser); 
+            $result = $query->execute();
+            $query->closeCursor();
+            return  ['success' => $result,'is_exist_other_speudo' => false];
+        }
     }
 
     public function updatepassword($iduser,$newPassword)
     {
-        $query = $this->_dataBase->prepare('UPDATE utilisateurs SET passworduser=:passworduser WHERE iduser=:iduser');
+        $query = $this->_dataBase->prepare('UPDATE utilisateurs SET passworduser = :passworduser WHERE iduser = :iduser');
         $query->bindParam(':iduser',$iduser, PDO::PARAM_INT);
-        $query->bindParam(':passworduser',$newPassword, PDO::PARAM_INT);
+        $query->bindParam(':passworduser',$newPassword);
         $result = $query->execute();
         $query->closeCursor();
         return $result;

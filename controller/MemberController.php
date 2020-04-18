@@ -38,8 +38,7 @@ class MemberController extends AppController
     function updateProfil($pseudo,$nom,$prenom)
     {
         $state = $this->sqlCommande->updateProfil($_SESSION['user']['iduser'],$pseudo,$nom,$prenom);
-        // si la mis à jour est OK j'actualise la variable SESSION user
-        if($state)
+        if($state['success'])
         {
             $_SESSION['user']['pseudouser'] =$pseudo;
             $_SESSION['user']['nomuser'] =$nom;
@@ -48,19 +47,27 @@ class MemberController extends AppController
         }
         else
         {
-            throw new ExceptionWithRedirect("Erreur, impossible de modifier votre compte !", 401, "mon-compte"); 
-        }  
+            if ($state['is_exist_other_speudo'])
+            {
+                $this->showUpdateProfil("Impossible de modifier votre profil,Ce pseudo est déja utilisé, veuillez en choisir un autre.");
+            }
+            else
+            {
+                throw new ExceptionWithRedirect("Erreur, impossible de modifier votre compte !", 401, "mon-compte");
+            }
+        }
     }
 
     // Mettre à jour son mot de passe
     function updatePassword($oldPassword,$newPassword,$confirmNewpassword)
     {
+        // Compare le nouveau mot de passe et celui de confirmation
         if ($confirmNewpassword === $newPassword)
         {
             // Vérifie si le hash du password saisie par l'utilisateur corresponds au hash de la base de donnees.
             if(password_verify( $oldPassword, $_SESSION['user']['passworduser']))
             {
-                $hash_newpassword = password_hash ($oldPassword ,PASSWORD_DEFAULT);
+                $hash_newpassword = password_hash ($newPassword ,PASSWORD_DEFAULT);
                 $state = $this->sqlCommande->updatepassword($_SESSION['user']['iduser'],$hash_newpassword);
                 if($state){
                     $_SESSION['user']['passworduser'] = $hash_newpassword;
@@ -70,6 +77,10 @@ class MemberController extends AppController
                 {
                     throw new ExceptionWithRedirect("Erreur impossible de modifier votre mot de passe !", 401, "mon-compte"); 
                 }
+            }
+            else
+            {
+                $this->showUpdateProfil("Votre mot de passe n'est pas valide !");
             }    
             
         }
