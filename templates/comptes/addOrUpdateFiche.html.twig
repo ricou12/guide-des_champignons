@@ -18,9 +18,7 @@
 {% endblock %}
 
 {% block og %}
-    <meta property="og:locale" content="fr_FR">
-    <meta property="og:type" content="website">
-	{% if dataText.communchamp %}
+    {% if dataText.communchamp %}
 		<meta property="og:title" content="Guide des champignons - Editer: {{dataText.communchamp}}">
     	<meta property="og:description" content="Editer {{dataText.communchamp}} dans notre base de données interactive, en partageant votre passion avec le guide des champignons.">
 	{% else %}

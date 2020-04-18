@@ -6,7 +6,10 @@
 			{% block title %}{% endblock %}
 		</title>
 		{% block meta %}{% endblock %}
-		{% block og %}{% endblock %}
+		{% block og %}
+			<meta property="og:locale" content="fr_FR"/>
+    		<meta property="og:type" content="website"/>
+		{% endblock %}
 	</head>
 	<body>
 		<header>

@@ -9,8 +9,6 @@
 {% endblock %}
 
 {% block og %}
-    <meta property="og:locale" content="fr_FR">
-    <meta property="og:type" content="website">
     <meta property="og:title" content="Guide des champignons - apprendre à reconnaitre : {{fiche.communchamp}}">
     <meta property="og:description" content="Découvrez les principales caractéristiques de {{fiche.communchamp}}, sur le guide des champignons.">
     <meta property="og:url" content="">
@@ -23,7 +21,7 @@
 <div class="container-fluid fiche">
     <div class="row">
 
-        <div class="col-12 col-md-6 order-md-5 col-lg-6 order-lg-3 col-xl-5 order-xl-3 p-3 p-lg-3 p-xl-0 fiche__photo">
+        <div class="col-12 col-md-6 order-md-5 col-lg-6 order-lg-3 col-xl-5 order-xl-3 p-3 p-lg-3 p-xl-0 mb-3 fiche__photo">
             <div id="carouselExampleIndicators" class="fiche__img carousel slide carousel-fade" data-ride="carousel">
                 <ol class="carousel-indicators">
                     {% for i in 0..images|length-1 %}
