@@ -92,23 +92,6 @@
             }
         }
     }
-
-    &__pagination {
-
-        &--color {
-
-            &-full {
-                background-color: rgb(63, 80, 62);
-            }
-
-            &-index {
-                background-color: rgb(63, 80, 62);
-                color: white;
-            }
-        }
-    }
-
-
 }
 
 @media screen and (min-width: 960px) {

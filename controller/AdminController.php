@@ -12,7 +12,7 @@ class AdminController extends AppController
         $listusers = $this->sqlCommande->listeUsers($currentPageUsers);
         $listeFiches = $this->sqlCommande->pageCompte($currentPageFiches,"",$allFiche);
         echo $this->render('comptes/administrateur.html.twig', 
-        ['title' => 'Compte administrateur',
+        ['title' => 'Administrateur',
         'is_userConnect' => $this->get_value_session(),
         'listeUser' => $listusers[1],
         'numberPageUsers' => $listusers[0],
@@ -56,15 +56,14 @@ class AdminController extends AppController
                     $pathImage ="./assets/images/photo-fullscreen/";
                     array_map('unlink', glob($pathImage.$idchamp."/minSize/"."*.*"));
                     array_map('unlink', glob($pathImage.$idchamp."/maxSize/"."*.*"));
-                    rmdir($pathImage.$idchamp."/minSize");
-                    rmdir($pathImage.$idchamp."/maxSize");
-                    rmdir($pathImage.$idchamp);
+                    if(file_exists('$pathImage.$idchamp."/minSize"')) rmdir($pathImage.$idchamp."/minSize");
+                    if(file_exists('$pathImage.$idchamp."/maxSize"')) rmdir($pathImage.$idchamp."/maxSize");
+                    if(file_exists('$pathImage.$idchamp')) rmdir($pathImage.$idchamp);
                 }
                 catch (Exception $e) 
                 {
                     throw new ExceptionWithRedirect("Erreur impossible de supprimer les photos !", 401, "mon-compte");
                 }
-                
                 header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
             }
             else

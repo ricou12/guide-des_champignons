@@ -26,14 +26,14 @@
     	<meta property="og:description" content="Ajouter une fiche descriptive de champignons dans notre base de données interactive.">
 	{% endif %}
     <meta property="og:url" content="">
-    <meta property="og:image" content="./assets/icones/logo.png }}"/>
+    <meta property="og:image" content="/assets/icones/logo.png"/>
     <meta property="og:image:width" content="100" />
     <meta property="og:image:height" content="100" />
 {% endblock %}
 
 {% block body %}
 <div class="added_bg-img"></div>
-<div class="container added my-3 p-4">
+<div class="container added my-2 p-4">
 	<div class="row">
 		<div class="col-12 mb-3">
 			<form action="{{route}}"  method="POST" enctype="multipart/form-data" class="px-3 pb-3 added_form">
@@ -185,15 +185,6 @@
 							</label>
 						</div>
 					</div>
-					{# <div class="col-6 text-center px-2">
-						<img src="{{ "/assets/lames/subdecurrentes.png" }}">
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios8" value="Subdécurrentes"{% if dataText.typelameschamp == "Subdécurrentes" %}checked{% endif %}>
-							<label class="form-check-label" for="gridRadios8">
-								Subdécurrentes
-							</label>
-						</div>
-					</div> #}
 				</div>
 				<div class="form-group mt-3">
 					<label for="exampleFormControlTextarea1">Hyménium(Lames - Tubes - Plis - Aiguillons - Pores)</label>
@@ -215,7 +206,7 @@
 					<label for="exampleFormControlTextarea1">Remarques</label>
 					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="remarques">{{dataText.remarqueschamp}}</textarea>
 				</div>
-				<button type="submit" class="btn-lg btn-primary">Enregistrer</button>
+				<button type="submit" class="btn-lg btn-oliveLg">Enregistrer</button>
 			</form>
 		</div>
 	</div>

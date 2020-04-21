@@ -1,16 +1,16 @@
 // Dépendance 
-@import "../node_modules/rfs/scss";
+// @import "../node_modules/rfs/scss";
 @import "animate";
+
 
 
 .home {
     @include waitShow;
-    min-height: 500px;
-    height: calc(100vh - 150px);
-    // background-color: rgba(0, 0, 0, 0.4);
+    // min-height: 500px;
+    // height: calc(100vh - 170px);
 
-   
-    &_background {
+
+    &__background {
         background-image: url("/assets/images/foret/foret-9.jpg");
         position: fixed;
         top: 0;

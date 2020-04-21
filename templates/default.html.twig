@@ -5,22 +5,28 @@
 		<title>
 			{% block title %}{% endblock %}
 		</title>
+
+		<!-- meta description-->
+		<link rel="shortcut icon" type="image/x-icon" href="/assets/icones/logo.png" />
 		{% block meta %}{% endblock %}
-		{% block og %}
-			<meta property="og:locale" content="fr_FR"/>
-    		<meta property="og:type" content="website"/>
-		{% endblock %}
+
+		<!-- SEO opengraph -->
+		<meta property="og:locale" content="fr_FR"/>
+		<meta property="og:type" content="website"/>
+		{% block og %}{% endblock %}
 	</head>
 	<body>
-		<header>
-			{% include 'includes/navbar.html.twig' %}
-		</header
-		<main>
-			{% block body %}{% endblock %}
-		</main>
-		<footer>
-		
-		</footer>
-		{% include 'includes/script.html.twig' %}
+		<div class="default">
+			<header>
+				{% include 'includes/navbar.html.twig' %}
+			</header
+			<main>
+				{% block body %}{% endblock %}
+			</main>
+			<footer>
+				{% include 'includes/footer.html.twig' %}
+			</footer>
+			{% include 'includes/script.html.twig' %}
+		</div>
 	</body>
 </html>

@@ -12,17 +12,16 @@
     <meta property="og:title" content="Guide des champignons - Espace membre">
     <meta property="og:description" content="Interagissez avec la base de données du guide des champignons.">
     <meta property="og:url" content="">
-    <meta property="og:image" content="./assets/icones/logo.png }}"/>
-    <meta property="og:image:width" content="50" />
-    <meta property="og:image:height" content="50" />
+    <meta property="og:image" content="/assets/icones/logo.png"/>
+    <meta property="og:image:width" content="100" />
+    <meta property="og:image:height" content="100" />
 {% endblock %}
 
 {% block body %}
-	<div class="member__filter"></div>
 	<div class="member__bg-img"></div>
-	<div class="container mt-2 px-md-5 member">
+	<div class="container flex-grow-1 my-2 px-md-5 member">
 		<div class="row">
-			<div class="col-12 border border-dark background-dark text-white rounded">
+			<div class="col-12 border border-dark bg-darkLight text-white rounded">
 				<h2 class="p-2">Profil</h2>
 				{% if message %}<h3 class="p-2">{{message}}</h3>{% endif %}
 				<div class="table-responsive">
@@ -85,7 +84,7 @@
 			</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-12 border border-dark background-dark text-white rounded">
+			<div class="col-12 border border-dark bg-darkLight text-white rounded">
 				<h2>Liste des fiches descriptives</h2>
                 <label for="allPage">Voir toute les fiches</label>
                 {% if stateAllFiche %}

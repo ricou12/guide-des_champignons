@@ -338,14 +338,20 @@ class MemberController extends AppController
             $result = $this->sqlCommande->deleteChampMembre($idchamp,$_SESSION['user']['iduser']);
             if($result)
             {
-                $pathImage = "./assets/images/photo-fullscreen/";
-                // supprime les fichiers et les dossiers si la requete s'est executé.
-                array_map('unlink', glob($pathImage.$idchamp."/minSize/"."*.*"));
-                array_map('unlink', glob($pathImage.$idchamp."/maxSize/"."*.*"));
-                rmdir($pathImage.$idchamp."/minSize");
-                rmdir($pathImage.$idchamp."/maxSize");
-                rmdir($pathImage.$idchamp);
-                header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
+                try
+                {
+                    $pathImage ="./assets/images/photo-fullscreen/";
+                    array_map('unlink', glob($pathImage.$idchamp."/minSize/"."*.*"));
+                    array_map('unlink', glob($pathImage.$idchamp."/maxSize/"."*.*"));
+                    if(file_exists('$pathImage.$idchamp."/minSize"')) rmdir($pathImage.$idchamp."/minSize");
+                    if(file_exists('$pathImage.$idchamp."/maxSize"')) rmdir($pathImage.$idchamp."/maxSize");
+                    if(file_exists('$pathImage.$idchamp')) rmdir($pathImage.$idchamp);
+                    header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
+                }
+                catch (Exception $e) 
+                {
+                    throw new ExceptionWithRedirect("Erreur impossible de supprimer les photos !", 401, "mon-compte");
+                }
             }
             else
             {

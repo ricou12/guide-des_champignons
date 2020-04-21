@@ -17,20 +17,21 @@ class LoginController extends AppController {
         }
         else
         {
-            echo $this->render('logger/register.html.twig', ['title' => 'Connexion',
-                'erreur' => $response['message']
-            ]);
+            $this->showRegister($response['message']);
         }
     }
 
     // rendu page login
-    function showRegister()
+    function showRegister($message="")
     {
-        echo $this->render('logger/register.html.twig', ['title' => 'Inscription']);
+        echo $this->render('logger/register.html.twig', 
+            ['title' => 'Inscription',
+            'erreur' => $message
+        ]);
     }
 
     // Rendu de la page se connecter
-    function showLoginVerify()
+    function showConnexion()
     {
         echo $this->render('logger/login.html.twig', ['title' => 'Connexion']);
     }

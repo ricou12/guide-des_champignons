@@ -12,20 +12,19 @@
     <meta property="og:title" content="Guide des champignons - Espace administrateur">
     <meta property="og:description" content="Administrer la base de données du guide des champignons.">
     <meta property="og:url" content="">
-    <meta property="og:image" content="./assets/icones/logo.png }}"/>
-    <meta property="og:image:width" content="50" />
-    <meta property="og:image:height" content="50" />
+    <meta property="og:image" content="/assets/icones/logo.png"/>
+    <meta property="og:image:width" content="100" />
+    <meta property="og:image:height" content="100" />
 {% endblock %}
 
 {% block body %}
-    <div class="member__filter"></div>
     <div class="member__bg-img"></div>
-    <div class="container mt-3 px-md-5">
+    <div class="container flex-grow-1 my-2 px-md-5">
         <div class="row">
-            <div class="col-12 background-dark text-white rounded p-3">
+            <div class="col-12 bg-darkLight text-white rounded p-3">
                 <h2>Profil</h2>
                 <p>
-                    <a class="btn btn-primary" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">Tous les utilisateurs</a>
+                    <a class="btn btn-light" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">Tous les utilisateurs</a>
                 </p>
                 <div class="row">
                     <div class="col">
@@ -115,7 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 background-dark text-white d rounded mt-2 p-3">
+            <div class="col-12 bg-darkLight text-white d rounded mt-2 p-3">
                 <h2>Liste des fiches descriptives</h2>
                 <label for="allPage">Voir toute les fiches</label>
                 {% if stateAllFiche %}

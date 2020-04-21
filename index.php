@@ -72,6 +72,10 @@ try
             {
                 $appController->getFiche('Public','',$_GET['idchamp']);
             }
+            else
+            {
+                throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "fiches");
+            }
         break;
 
         // Rendu page fiche descriptive session privée.
@@ -88,7 +92,7 @@ try
                 }
                 else
                 {
-                    $appController->getFiche('public','',$_GET['idchamp']);
+                    $appController->getFiche('Public','',$_GET['idchamp']);
                 }
             }
             else
@@ -108,7 +112,7 @@ try
              }
              else
              {
-                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource  !", 401, "loginVerify");
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource  !", 401, "connexion");
              }
             
         break;
@@ -162,7 +166,7 @@ try
          *          GESTION DE COMPTES
         ********************************************/
         // Rendu de la page créer un compte
-        case 'register':
+        case 'inscription':
             if($appController->get_value_session())
             {
                header("location:index.php?routing=mon-compte");
@@ -195,26 +199,26 @@ try
         break;
 
         // Rendu de la page se connecter
-        case 'loginVerify':
+        case 'connexion':
             if($appController->get_value_session())
             {
                  header('location:index.php?routing=mon-compte');
              }
              else
              {
-                $loginController->showLoginVerify(); 
+                $loginController->showConnexion(); 
              }          
         break;
 
         // Se connecte
-        case 'login':
+        case 'verifie-connection':
             if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['password']))
             {
              $loginController->LoginVerify($_POST['pseudo'],$_POST['password']);   
             }
             else
             {
-                header("location:index.php?routing=loginVerify");
+                header("location:index.php?routing=connexion");
             }
         break;
 
@@ -292,7 +296,7 @@ try
             }
             else
             {
-                header('location:index.php?routing=login');
+                header('location:index.php?routing=verifie-connection');
             }
         break;
 

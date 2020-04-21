@@ -12,14 +12,14 @@
     <meta property="og:title" content="Guide des champignons - Les informations générales de mon profil">
     <meta property="og:description" content="Le guide des champignons vous permets de définir les paramètre de votre profile.">
     <meta property="og:url" content="">
-    <meta property="og:image" content="./assets/icones/logo.png }}"/>
-    <meta property="og:image:width" content="50" />
-    <meta property="og:image:height" content="50" />
+    <meta property="og:image" content="/assets/icones/logo.png"/>
+    <meta property="og:image:width" content="100" />
+    <meta property="og:image:height" content="100" />
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="row d-flex justify-content-center mt-5">
+<div class="container flex-grow-1 profil">
+    <div class="row d-flex justify-content-center my-2">
         <div class="col-12 col-md-8 bg-dark text-white p-4 rounded-lg">
             <div class="form-group">
 				<h4 class="text-info">{{messageError}}</h4>
@@ -63,37 +63,38 @@
                 <button type="submit" class="btn btn-outline-light my-3">Enregistrer</button>
             </form>
         
-         <div class=" mt-3 border rounded-lg p-3">
-            <p>
-                <a class="btn btn-outline-light" data-toggle="collapse" href="#collapseExample" role="button"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    Changer de mot de passe
-                </a>
-            </p>
-            <div class="collapse" id="collapseExample">
-                <form action="index.php?routing=update-password" method="POST" class=" p-2 rounded-lg">
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-4 col-form-label">Mot de passe actuel</label>
-                        <div class="col-sm-8">
-                            <input type="password" class="form-control" id="inputPassword" name="oldPassword">
+            <div class="mt-3 border rounded-lg p-3">
+                <p>
+                    <a class="btn btn-outline-light" data-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Changer de mot de passe
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <form action="index.php?routing=update-password" method="POST" class=" p-2 rounded-lg">
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Mot de passe actuel</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="inputPassword" name="oldPassword">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputNewPassword" class="col-sm-4 col-form-label">Nouveau mot de
-                            passe</label>
-                        <div class="col-sm-8">
-                            <input type="password" class="form-control" id="inputNewPassword" name="newPassword">
+                        <div class="form-group row">
+                            <label for="inputNewPassword" class="col-sm-4 col-form-label">Nouveau mot de
+                                passe</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="inputNewPassword" name="newPassword">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputConfirmerNewPassword" class="col-sm-4 col-form-label">Confirmer votre nouveau mot de
-                            passe</label>
-                        <div class="col-sm-8">
-                            <input type="password" class="form-control" id="inputConfirmerNewPassword" name="confirmNewpassword">
+                        <div class="form-group row">
+                            <label for="inputConfirmerNewPassword" class="col-sm-4 col-form-label">Confirmer votre nouveau mot de
+                                passe</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="inputConfirmerNewPassword" name="confirmNewpassword">
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-outline-light">Enregistrer</button>
-                </form>
+                        <button type="submit" class="btn btn-outline-light">Enregistrer</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

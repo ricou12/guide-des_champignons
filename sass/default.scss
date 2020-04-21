@@ -1,0 +1,16 @@
+/* 
+    Méthode pour fixer le footer en bas de page sans utiliser position absolute,
+    <body>
+        <main>
+            <header></header>
+            <section></section> utiliser la propriété flex-grow:1; étirement le conteneur pour complèter l'espace vide.
+            <footer></footer>
+        </main>
+    </body>
+*/
+
+.default {
+    min-height:100vh; /* 1 */
+    display:flex; /* 2 */
+    flex-direction:column; /* 3 */
+}

@@ -11,7 +11,7 @@ class AppController extends BaseController {
     public function home()
     {
         echo $this->render('home.html.twig',
-            ['title' => 'Bienvenue','is_userConnect' => $this->get_value_session()]);
+            ['title' => '','is_userConnect' => $this->get_value_session()]);
     }
     
     // Rendu de la liste des fiches 
@@ -22,7 +22,7 @@ class AppController extends BaseController {
         if($currentPage <= $list['nbrePage'])
         {
             echo $this->render('users/listeFiches.html.twig', 
-            ['title' => 'Fiches signalétiques',
+            ['title' => 'Guide des champignons',
             'is_userConnect' => $this->get_value_session(),
             'listeFiches' => $list['listFiches'],
             'pagination' => $list['nbrePage'],
@@ -66,12 +66,12 @@ class AppController extends BaseController {
                 {
                     if($image['pathimg'] != "")
                     {
-                        array_push($images,"./assets/images/photo-fullscreen/".$image['idchamp'].'/maxSize/'.$image['pathimg']);
+                        array_push($images,"/assets/images/photo-fullscreen/".$image['idchamp'].'/maxSize/'.$image['pathimg']);
                     } 
                 }
                 if(empty($images))
                 {
-                    $images[0] = "./assets/images/photo-fullscreen/default.png";
+                    $images[0] = "/assets/images/photo-fullscreen/default.png";
                 }
                 return $images;
             } 

@@ -5,6 +5,9 @@
     background: linear-gradient(to right, #363c2a 0%, #e5f9d9 100%);
     color: white;
 
+    &-toggler-icon{
+        filter:invert(1);
+    }
 
     li {
         font-family: 'Roboto', sans-serif;

@@ -139,7 +139,7 @@ class MyComponentsSql {
         }
         else
         {
-            return ['success' => false, 'message' =>  "Désolé ! vous n'êtes pas enregistré, veuillez vous inscrire."]; 
+            return ['success' => false, 'message' =>  "Désolé ! vous n'êtes pas inscrit."]; 
         }
     }
 
@@ -161,7 +161,7 @@ class MyComponentsSql {
             return ['success' => false,'is_exist_other_speudo' => true];
         }
         // si le speudo n'existe pas (l'user a modifié son pseudo)
-        // ou si l'utlisateur ne l'a pas modifié alors modifie alors le profil
+        // ou si l'utlisateur ne l'a pas modifié alors modifie le profil
         if(!$is_exist_pseudo || $is_exist_pseudo['iduser'] == $iduser )
         {
             $query = $this->_dataBase->prepare('UPDATE utilisateurs SET pseudouser=:pseudouser,nomuser=:nomuser,prenomuser=:prenomuser WHERE iduser=:iduser');

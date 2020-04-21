@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center footer">
+    <div class="col-12 p-2">
+        <ul class="nav nav-pills justify-content-center flex-column flex-md-row align-items-center">
+            <li class="nav-item">
+                <a class="nav-link {{is_active(title,'')}}" href="index.php?routing=home">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{is_active(title,'Guide des champignons')}}" href="index.php?routing=fiches">Guide</a>
+            </li>
+            {% if is_userConnect %}
+            <li class="nav-item">
+                <a class="nav-link {{is_active(title,'comptes')}}" href="index.php?routing=mon-compte">Gérer mes fiches</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?routing=deconnexion">Me déconnecter</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link {{is_active(title,'Inscription')}}" href="index.php?routing=inscription">S'incrire</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{is_active(title,'Connexion')}}" href="index.php?routing=connexion">Se connecter</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+</div>
+
