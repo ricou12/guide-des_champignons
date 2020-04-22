@@ -18,10 +18,11 @@
 {% endblock %}
 
 {% block body %}
-	<div class="member__bg-img"></div>
+	{# <div class="member__bg-img"></div> #}
+	<div class="logger__background"></div>
 	<div class="container flex-grow-1 my-2 px-md-5 member">
 		<div class="row">
-			<div class="col-12 border border-dark bg-darkLight text-white rounded">
+			<div class="col-12 border border-dark bg-kaki text-white rounded">
 				<h2 class="p-2">Profil</h2>
 				{% if message %}<h3 class="p-2">{{message}}</h3>{% endif %}
 				<div class="table-responsive">
@@ -84,8 +85,8 @@
 			</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-12 border border-dark bg-darkLight text-white rounded">
-				<h2>Liste des fiches descriptives</h2>
+			<div class="col-12 border border-dark bg-kaki text-white rounded">
+				<h2 class="p-2">Liste des champignons</h2>
                 <label for="allPage">Voir toute les fiches</label>
                 {% if stateAllFiche %}
                     <a href="index.php?routing=mon-compte&amp;pageIndex=1" id="allPage"><img src="{{toogleImg(stateAllFiche)}}" alt="" width="40"></a>
@@ -101,7 +102,7 @@
 							</div>
 							<div class="col-12 col-md-4">
 								<a href="index.php?routing=ajouter-fiche" class="btn btn-outline-success">
-									<img style="filter:invert(100%);" src="/assets/icones/document.png" alt="Modifer mon profil" width="32">
+									<img style="filter:invert(100%);" src="/assets/icones/document.png" alt="Ajouter une fiche" width="32">
 								</a>
 							</div>
 						</div>

@@ -18,9 +18,10 @@
 {% endblock %}
 
 {% block body %}
+<div class="logger__background"></div>
 <div class="container py-2 flex-grow-1">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-6 bg-dark text-white p-3 rounded">
+    <div class="row d-flex justify-content-center p-2">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 bg-kaki text-white p-3 rounded">
             <form class="border p-2" action="index.php?routing=createRegister" method ="POST">
                 <div class="d-flex justify-content-between">
                     <h3 class="font-weight-bold">Inscription</h3>
@@ -44,7 +45,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-secondary">Enregistrer</button>
+                    <button type="submit" class="btn btn-light">Enregistrer</button>
                 </div>
             </form>
         </div>

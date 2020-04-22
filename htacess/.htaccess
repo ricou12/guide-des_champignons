@@ -1,21 +1,21 @@
 <IfModule mod_rewrite.c>
     RewriteEngine on
-    RewriteRule portail index.php?routing=home
-    RewriteRule guides-des-champignons index.php?routing=fiches
+    RewriteRule portail index.php?routing=portail
+    RewriteRule guides-des-champignons index.php?routing=guides-des-champignons
     RewriteRule description/([0-9]+) index.php?routing=description&idchamp=$1
     RewriteRule description-privee/([0-9]+) index.php?routing=fiche-descriptive&idchamp=$1
-    RewriteRule ajouter index.php?routing=addFiche
-    RewriteRule editer-une-fiche index.php?routing=update-fiche
-    RewriteRule edition index.php?routing=updateFiche
+    RewriteRule ajouter-la-fiche-descriptive index.php?routing=ajouter-la-description
+    RewriteRule editer-la-fiche-descriptive index.php?routing=update-fiche
+    RewriteRule edite-fiche index.php?routing=updateFiche
     RewriteRule supprimer-une-fiche-membre index.php?routing=del-champ-mb
     RewriteRule supprimer-une-fiche-admin index.php?routing=del-champ-ad
     RewriteRule inscription index.php?routing=inscription
     RewriteRule enregistrer index.php?routing=createRegister
-	RewriteRule connection index.php?routing=verifie-connection
     RewriteRule se-connecter index.php?routing=connexion
-    RewriteRule Deconnexion index.php?routing=deconnexion
-    RewriteRule compte/membre/([0-9]+)/([0-9]+)/ index.php?routing=mon-compte&pageIndex=$1&pageUserIndex=$2&allFiche
-    RewriteRule compte/administrateur/([0-9]+)/([0-9]+) index.php?routing=mon-compte&pageIndex=$1&allFiche=$2
+	RewriteRule connection index.php?routing=verifie-connection
+    RewriteRule deconnexion index.php?routing=deconnexion
+    RewriteRule membre/([0-9]+)/([0-9]+)/ index.php?routing=mon-compte&pageIndex=$1&pageUserIndex=$2&allFiche
+    RewriteRule administrateur/([0-9]+)/([0-9]+) index.php?routing=mon-compte&pageIndex=$1&allFiche=$2
     RewriteRule supprimer-son-compte index.php?routing=delete-member
     RewriteRule supprimer-compte-membre/([0-9]+)/([0-9]+)/([0-9]+) index.php?routing=deleteAccount&idUser=$1&currentPgUser=$2&currentPgFiche=$3
     RewriteRule mon-profil index.php?routing=mon-profil

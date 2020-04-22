@@ -76,13 +76,13 @@ class AdminController extends AppController
     // Autoriser ou masquer les fiches dans l'espace public
     public function autoriser($idchamp,$currentPgFiche)
     {
-        if($appController->get_value_session() && $_SESSION['user']['roleuser'] === 'Administrateur'){
+        if($this->get_value_session() && $_SESSION['user']['roleuser'] === 'Administrateur'){
             $this->sqlCommande->autoriser($idchamp);
             header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
         }
         else
         {
-            throw new ExceptionWithRedirect("Désolé, cette section est réservé à l'administrateur !", 404, "home");
+            throw new ExceptionWithRedirect("Désolé, cette section est réservé à l'administrateur !", 404, "portail");
         }
     }
 }

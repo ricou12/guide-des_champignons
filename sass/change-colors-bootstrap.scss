@@ -4,26 +4,31 @@
 // @import "../node_modules/bootstrap/scss/bootstrap/mixins";
 
 $olive: rgb(63, 80, 62);
+$kaki:rgba(39, 54, 26, 0.8);
+$navigate:rgba(32, 42, 30,0.5);
 $oliveLg: rgba(63, 80, 62,0.5);
 $grayLight:rgba(255, 255, 255, 0.5);
 $darkLight: rgba(52, 58, 64, 0.9);
 $pagination-active-bg:$grayLight;
 $pagination-active-color:$olive;
-$nav-pills-link-active-color:rgba(255, 255, 255, 0.4);
+$nav-pills-link-active-color:$grayLight;
 $nav-pills-link-active-bg:rgba(255, 255, 255, 0.1);
 $link-color:rgba(255, 255, 255, 0.7);
-$navbar-dark-toggler-border-color:rgb(144, 138, 138);
+// $navbar-dark-toggler-border-color:rgb(144, 138, 138);
+
 
 $theme-colors: (
    olive: $olive,
    oliveLg: $oliveLg,
+   kaki: $kaki,
    grayLight: $grayLight,
    darkLight: $darkLight,
+   navigate: $navigate,
    pagination-active-bg:$pagination-active-bg,
    nav-pills-link-active-color: $nav-pills-link-active-color,
    nav-pills-link-active-bg: $nav-pills-link-active-bg,
-   link-color: $link-color,
-   navbar-dark-toggler-border-color:$navbar-dark-toggler-border-color
+   link-color: $link-color
+   // navbar-dark-toggler-border-color:$navbar-dark-toggler-border-color
 );
 
 

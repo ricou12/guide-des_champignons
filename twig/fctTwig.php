@@ -32,11 +32,14 @@ $twig->addFunction($function);
 
 // Récupère la page active
 $function = new \Twig\TwigFunction('is_active', function ($titre,$link) {
-    $PageTitleAdminOrMembre = ['Administrateur','Membre'];
-    if($link === 'comptes'){
-        if(in_array($titre, $PageTitleAdminOrMembre)) return 'active';
+    $pageTitleAdminOrMembre = ['Administrateur','Membre'];
+    $pageAddOrEdit = ['Ajouter','Editer'];
+    if($link === 'gestion-fiches'){
+        if(in_array($titre, $pageAddOrEdit)) return 'active';
     }
-
+    if($link === 'comptes'){
+        if(in_array($titre, $pageTitleAdminOrMembre)) return 'active';
+    }
     if($link === $titre){
         return 'active';
     }

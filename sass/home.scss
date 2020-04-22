@@ -6,9 +6,9 @@
 
 .home {
     @include waitShow;
-    // min-height: 500px;
+    //  min-height: 800px;
     // height: calc(100vh - 170px);
-
+    min-height:70vh;
 
     &__background {
         background-image: url("/assets/images/foret/foret-9.jpg");
@@ -32,7 +32,8 @@
     h2 {
         letter-spacing: 10px;
         text-shadow: 2px 1px 5px rgb(0, 0, 0);
-        @include font-size(1.5rem);
+        font-size: 1.4em;
+        line-height: 1.9em;
         @include moveText-X;
     }
 
@@ -48,16 +49,17 @@
 
 }
 
-// @media screen and (max-width: 960px) {
-//     .home {
-//         min-height: 600px;
-//         height: calc(100vh - 125px);
-//     }
-// }
+@media screen and (max-width: 720px) {
+    .home {
 
-// @media screen and (max-width: 960px) {
-//     .home {
-//         min-height: 600px;
-//         height: calc(100vh - 125px);
-//     }
-// }
+        min-height:90vh;
+        h2{
+            font-size: 1.1em;
+            line-height: 1.7em;
+            letter-spacing: 0.1em;
+        }
+       
+    }
+}
+
+

@@ -15,7 +15,7 @@
     &__card {
         width: 20rem;
         position: relative;
-        background: linear-gradient(to right, rgb(146, 163, 143) 0%, rgba(251, 251, 251, 1) 50%, rgb(146, 163, 143) 100%);
+        background: linear-gradient(to right, rgba(146, 163, 143,0.7) 0%, rgba(251, 251, 251, 0.9) 50%, rgba(146, 163, 143,0.7) 100%);
         padding: 2em 2em 0 2em;
         margin: 20px 20px 0 0;
         z-index: 100;
@@ -71,7 +71,7 @@
         }
 
         &:hover {
-            background: linear-gradient(to right, rgb(121, 136, 119) 0%, rgba(251, 251, 251, 1) 50%, rgb(121, 136, 119) 100%);
+            background: linear-gradient(to right, rgba(121, 136, 119,0.7) 0%, rgba(251, 251, 251, 0.9) 50%, rgba(121, 136, 119,0.9) 100%);
 
             .book {
                 &__card {

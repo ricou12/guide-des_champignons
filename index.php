@@ -41,7 +41,7 @@ $memberController = new MemberController($twig, $sqlCommande);
 session_start();
  
 // ROUTAGE PAR DEFAULT (premier chargement)
-$page = 'home';
+$page = 'portail';
 
 if(isset($_GET['routing'])){
    $page =  $_GET['routing'];
@@ -56,7 +56,7 @@ try
          *          ACCES PUBLIC
         ********************************************/
         // Rendu de la page d'accueil.
-        case 'home':
+        case 'portail':
             $appController->home();
         break;
 
@@ -125,7 +125,7 @@ try
             }
             else
             {
-                throw new ExceptionWithRedirect("Erreur, assurez vous d'avoir remplit le champ Nom Commun et que vous ne dépassez pas la capacité max d'upload !", 401, "home");
+                throw new ExceptionWithRedirect("Erreur, assurez vous d'avoir remplit le champ Nom Commun et que vous ne dépassez pas la capacité max d'upload !", 401, "portail");
             } 
         break;
 
@@ -274,7 +274,7 @@ try
                     }
                     else
                     {
-                        throw new ExceptionWithRedirect("Vous ne possédez pas les droits pour supprimer ce compte  !", 401, "home");  
+                        throw new ExceptionWithRedirect("Vous ne possédez pas les droits pour supprimer ce compte  !", 401, "portail");  
                     }
                 }
                 else
@@ -284,7 +284,7 @@ try
             }
             else
             {
-                throw new ExceptionWithRedirect("Vous devez être connecté  !", 401, "home");  
+                throw new ExceptionWithRedirect("Vous devez être connecté  !", 401, "portail");  
             }
         break;
         
@@ -315,7 +315,7 @@ try
             }
             else
             {
-                throw new ExceptionWithRedirect("Vous devez vous connecter pour accèder à cette page  !", 404, "home");
+                throw new ExceptionWithRedirect("Vous devez vous connecter pour accèder à cette page  !", 404, "portail");
             }
         break;
 
@@ -334,7 +334,7 @@ try
             }
             else
             {
-                throw new ExceptionWithRedirect("Vous devez vous connecter pour accèder à cette page  !", 404, "home");
+                throw new ExceptionWithRedirect("Vous devez vous connecter pour accèder à cette page  !", 404, "portail");
             }
         break;
 
@@ -346,13 +346,13 @@ try
             }
             else
             {
-                throw new ExceptionWithRedirect("Désolé, cette page n'existe pas !", 404, "home");
+                throw new ExceptionWithRedirect("Désolé, cette page n'existe pas !", 404, "portail");
             }  
         break;
 
         // Si aucune page trouvée alors erreur 404
         default:
-            throw new ExceptionWithRedirect("Désolé, cette page n'existe pas !", 404, "home");
+            throw new ExceptionWithRedirect("Désolé, cette page n'existe pas !", 404, "portail");
         
         break;
     }
