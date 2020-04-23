@@ -1,28 +1,28 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once (__DIR__.'/../vendor/autoload.php');
 // RENDU DU TEMPLATE
-$loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/templates');
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../templates');
 // COMPILATION ET DEBUGGER
 $twig = new \Twig\Environment($loader, [
-    'cache' => __DIR__.'/compilation_cache',
+    'cache' => __DIR__.'/../compilation_cache',
     'debug' => true,
 ]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 // FONCTIONS PERSONALISES TWIG
-require_once ("twig/fctTwig.php");
+require_once ( __DIR__.'/../twig/fctTwig.php');
 
 // MODELE ET GESTION D'ERREURS
-require_once ("services/ExceptionWithRedirect.php");
-require_once ("modele/sqlCommand.php"); 
+require_once ( __DIR__.'/../services/ExceptionWithRedirect.php');
+require_once ( __DIR__.'/../modele/sqlCommand.php'); 
 
 
 // CONTROLLER
-require_once ("controller/AppController.php");
-require_once ("controller/LoginController.php");
-require_once ("controller/AdminController.php");
-require_once ("controller/MemberController.php");
+require_once ( __DIR__.'/../controller/AppController.php');
+require_once ( __DIR__.'/../controller/LoginController.php');
+require_once ( __DIR__.'/../controller/AdminController.php');
+require_once ( __DIR__.'/../controller/MemberController.php');
 
 // CONNEXION A LA BASE DE DONNEE
 try {

@@ -53,12 +53,12 @@ class AdminController extends AppController
             {
                 try
                 {
-                    $pathImage ="./assets/images/photo-fullscreen/";
+                    $pathImage = $_SERVER['DOCUMENT_ROOT']."/assets/images/photo-fullscreen/";
                     array_map('unlink', glob($pathImage.$idchamp."/minSize/"."*.*"));
                     array_map('unlink', glob($pathImage.$idchamp."/maxSize/"."*.*"));
-                    if(file_exists('$pathImage.$idchamp."/minSize"')) rmdir($pathImage.$idchamp."/minSize");
-                    if(file_exists('$pathImage.$idchamp."/maxSize"')) rmdir($pathImage.$idchamp."/maxSize");
-                    if(file_exists('$pathImage.$idchamp')) rmdir($pathImage.$idchamp);
+                    if(file_exists($pathImage.$idchamp."/minSize")) rmdir($pathImage.$idchamp."/minSize");
+                    if(file_exists($pathImage.$idchamp."/maxSize")) rmdir($pathImage.$idchamp."/maxSize");
+                    if(file_exists($pathImage.$idchamp)) rmdir($pathImage.$idchamp);
                 }
                 catch (Exception $e) 
                 {

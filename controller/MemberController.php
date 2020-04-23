@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__.'/AppController.php');
-require_once('services/ResizeImage.php');
+require_once(__DIR__.'/../services/ResizeImage.php');
 
 class MemberController extends AppController
 {
@@ -340,12 +340,12 @@ class MemberController extends AppController
             {
                 try
                 {
-                    $pathImage ="./assets/images/photo-fullscreen/";
+                    $pathImage =  $_SERVER['DOCUMENT_ROOT']."/assets/images/photo-fullscreen/";
                     array_map('unlink', glob($pathImage.$idchamp."/minSize/"."*.*"));
                     array_map('unlink', glob($pathImage.$idchamp."/maxSize/"."*.*"));
-                    if(file_exists('$pathImage.$idchamp."/minSize"')) rmdir($pathImage.$idchamp."/minSize");
-                    if(file_exists('$pathImage.$idchamp."/maxSize"')) rmdir($pathImage.$idchamp."/maxSize");
-                    if(file_exists('$pathImage.$idchamp')) rmdir($pathImage.$idchamp);
+                    if(file_exists($pathImage.$idchamp."/minSize"))rmdir($pathImage.$idchamp."/minSize");
+                    if(file_exists($pathImage.$idchamp."/maxSize")) rmdir($pathImage.$idchamp."/maxSize");
+                    if(file_exists($pathImage.$idchamp)) rmdir($pathImage.$idchamp);
                     header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
                 }
                 catch (Exception $e) 
