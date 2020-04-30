@@ -1,25 +1,25 @@
 <IfModule mod_rewrite.c>
     RewriteEngine on
-    RewriteRule portail index.php?routing=portail
+    RewriteRule portail portail
     RewriteRule guides-des-champignons index.php?routing=guides-des-champignons
     RewriteRule description/([0-9]+) index.php?routing=description&idchamp=$1
     RewriteRule description-privee/([0-9]+) index.php?routing=fiche-descriptive&idchamp=$1
     RewriteRule ajouter-la-fiche-descriptive index.php?routing=ajouter-la-description
-    RewriteRule editer-la-fiche-descriptive index.php?routing=update-fiche
-    RewriteRule edite-fiche index.php?routing=updateFiche
-    RewriteRule supprimer-une-fiche-membre index.php?routing=del-champ-mb
-    RewriteRule supprimer-une-fiche-admin index.php?routing=del-champ-ad
-    RewriteRule inscription index.php?routing=inscription
-    RewriteRule enregistrer index.php?routing=createRegister
-    RewriteRule se-connecter index.php?routing=connexion
-	RewriteRule connection index.php?routing=verifie-connection
+    RewriteRule editer-la-fiche-descriptive index.php?routing=editer-une-fiche-descriptive
+    RewriteRule edite-fiche index.php?routing=editer-description
+    RewriteRule supprimer-une-fiche-membre index.php?routing=supprimer-ma-fiche-descriptive
+    RewriteRule supprimer-une-fiche-admin index.php?routing=supprimer-description
+    RewriteRule creer-mon-compte index.php?routing=creer-mon-compte
+    RewriteRule enregistrer index.php?routing=creation-du-compte
+    RewriteRule se-connecter index.php?routing=se-connecter
+	RewriteRule connection index.php?routing=connexion
     RewriteRule deconnexion index.php?routing=deconnexion
     RewriteRule membre/([0-9]+)/([0-9]+)/ index.php?routing=mon-compte&pageIndex=$1&pageUserIndex=$2&allFiche
     RewriteRule administrateur/([0-9]+)/([0-9]+) index.php?routing=mon-compte&pageIndex=$1&allFiche=$2
-    RewriteRule supprimer-son-compte index.php?routing=delete-member
-    RewriteRule supprimer-compte-membre/([0-9]+)/([0-9]+)/([0-9]+) index.php?routing=deleteAccount&idUser=$1&currentPgUser=$2&currentPgFiche=$3
+    RewriteRule supprimer-son-compte index.php?routing=me-desincrire
+    RewriteRule supprimer-compte-membre/([0-9]+)/([0-9]+)/([0-9]+) index.php?routing=suppression-de-compte&idUser=$1&currentPgUser=$2&currentPgFiche=$3
     RewriteRule mon-profil index.php?routing=mon-profil
-    RewriteRule editer-mon-profil index.php?routing=update-profil
-    RewriteRule editer-mot-de-passe index.php?routing=update-password
+    RewriteRule editer-mon-profil index.php?routing=editer-mon-profil
+    RewriteRule editer-mot-de-passe index.php?routing=editer-mon-mot-de-passe
     RewriteRule autoriser/([0-9]+)/([0-9]+)/ index.php?routing=autoriser-fiche&idFiche=$1&currentPgFiche=$2
 </IfModule>

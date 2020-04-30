@@ -11,17 +11,24 @@ class AdminController extends AppController
     {
         $listusers = $this->sqlCommande->listeUsers($currentPageUsers);
         $listeFiches = $this->sqlCommande->pageCompte($currentPageFiches,"",$allFiche);
-        echo $this->render('comptes/administrateur.html.twig', 
-        ['title' => 'Administrateur',
-        'is_userConnect' => $this->get_value_session(),
-        'listeUser' => $listusers[1],
-        'numberPageUsers' => $listusers[0],
-        'currentPageUsers' => $currentPageUsers,
-        'listeFiches' => $listeFiches[1],
-        'numberPageFiches' => $listeFiches[0],
-        'currentPageFiches' => $currentPageFiches,
-        'stateAllFiche' => $allFiche,
-        ]);   
+        if($currentPageFiches <= $listeFiches[0] && count($listeFiches[1]) > 0)
+        {
+            echo $this->render('comptes/administrateur.html.twig', 
+            ['title' => 'Administrateur',
+            'is_userConnect' => $this->get_value_session(),
+            'listeUser' => $listusers[1],
+            'numberPageUsers' => $listusers[0],
+            'currentPageUsers' => $currentPageUsers,
+            'listeFiches' => $listeFiches[1],
+            'numberPageFiches' => $listeFiches[0],
+            'currentPageFiches' => $currentPageFiches,
+            'stateAllFiche' => $allFiche,
+            ]);
+        } 
+        else
+        {
+            throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "guide-des-champignons");
+        }   
     }
 
     // Supprime un compte
@@ -44,45 +51,37 @@ class AdminController extends AppController
     //  Supprime une fiche descriptive
     public function deleteChampAdmin($idchamp,$currentPgFiche)
     {
-        if( $this->get_value_session() && $_SESSION['user']['roleuser'] == 'Administrateur')
+        // Supprime la fiche et les enregistrements enfants avec la CONTRAINT ON DELETE CASCADE
+        $result = $this->sqlCommande->deleteChampAdmin($idchamp);
+        // supprime les fichiers et les dossiers si la requete s'est executé.
+        if($result)
         {
-            // Supprime la fiche et les enregistrements enfants avec la CONTRAINT ON DELETE CASCADE
-            $result = $this->sqlCommande->deleteChampAdmin($idchamp);
-            // supprime les fichiers et les dossiers si la requete s'est executé.
-            if($result)
+            try
             {
-                try
-                {
-                    $pathImage = $_SERVER['DOCUMENT_ROOT']."/assets/images/photo-fullscreen/";
-                    array_map('unlink', glob($pathImage.$idchamp."/minSize/"."*.*"));
-                    array_map('unlink', glob($pathImage.$idchamp."/maxSize/"."*.*"));
-                    if(file_exists($pathImage.$idchamp."/minSize")) rmdir($pathImage.$idchamp."/minSize");
-                    if(file_exists($pathImage.$idchamp."/maxSize")) rmdir($pathImage.$idchamp."/maxSize");
-                    if(file_exists($pathImage.$idchamp)) rmdir($pathImage.$idchamp);
-                }
-                catch (Exception $e) 
-                {
-                    throw new ExceptionWithRedirect("Erreur impossible de supprimer les photos !", 401, "mon-compte");
-                }
-                header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
+                $pathImage = $_SERVER['DOCUMENT_ROOT']."/assets/images/photo-fullscreen/";
+                array_map('unlink', glob($pathImage.$idchamp."/minSize/"."*.*"));
+                array_map('unlink', glob($pathImage.$idchamp."/maxSize/"."*.*"));
+                if(file_exists($pathImage.$idchamp."/minSize")) rmdir($pathImage.$idchamp."/minSize");
+                if(file_exists($pathImage.$idchamp."/maxSize")) rmdir($pathImage.$idchamp."/maxSize");
+                if(file_exists($pathImage.$idchamp)) rmdir($pathImage.$idchamp);
             }
-            else
+            catch (Exception $e) 
             {
-                throw new ExceptionWithRedirect("Erreur lors de la suppression !", 401, "mon-compte"); 
+                throw new ExceptionWithRedirect("Erreur impossible de supprimer les photos !", 401, "mon-compte");
             }
+            header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
+        }
+        else
+        {
+            throw new ExceptionWithRedirect("Erreur lors de la suppression !", 401, "mon-compte"); 
         }
     }
 
     // Autoriser ou masquer les fiches dans l'espace public
     public function autoriser($idchamp,$currentPgFiche)
     {
-        if($this->get_value_session() && $_SESSION['user']['roleuser'] === 'Administrateur'){
-            $this->sqlCommande->autoriser($idchamp);
-            header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
-        }
-        else
-        {
-            throw new ExceptionWithRedirect("Désolé, cette section est réservé à l'administrateur !", 404, "portail");
-        }
+        $this->sqlCommande->autoriser($idchamp);
+        header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
+         
     }
 }

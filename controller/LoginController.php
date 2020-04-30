@@ -11,9 +11,9 @@ class LoginController extends AppController {
         if($response['success'])
         {
             $_SESSION['user'] = $response['iduser'];
-            // Charge la page liste des fiches
+            // Charge la page liste des guide-des-champignons
             $list = $this->sqlCommande->listeFiches('1',false);
-            header('location: index.php?routing=mon-compte');
+            header('location:index.php?routing=mon-compte');
         }
         else
         {
@@ -46,7 +46,7 @@ class LoginController extends AppController {
             // Cree une session pour l'utilisateur 
             // session_start();
             $_SESSION['user'] = $response['user'];
-            header('location: index.php?routing=mon-compte');
+            header('location:index.php?routing=mon-compte');
         }
         else
         {

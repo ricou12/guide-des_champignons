@@ -22,7 +22,7 @@
 	<div class="logger__background"></div>
 	<div class="container flex-grow-1 my-2 px-md-5 member">
 		<div class="row">
-			<div class="col-12 border border-dark bg-kaki text-white rounded">
+			<div class="col-12 bg-kaki text-white rounded">
 				<h2 class="p-2">Profil</h2>
 				{% if message %}<h3 class="p-2">{{message}}</h3>{% endif %}
 				<div class="table-responsive">
@@ -72,7 +72,7 @@
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-														<a href="index.php?routing=delete-member&amp;idUser={{ is_userConnect.iduser }}&amp;currentPgFiche={{currentPageFiches}}" class="btn btn-primary">Supprimer</a>
+														<a href="index.php?routing=me-desincrire&amp;idUser={{ is_userConnect.iduser }}&amp;currentPgFiche={{currentPageFiches}}" class="btn btn-primary">Supprimer</a>
 													</div>
 												</div>
 											</div>
@@ -85,7 +85,7 @@
 			</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-12 border border-dark bg-kaki text-white rounded">
+			<div class="col-12 bg-kaki text-white rounded">
 				<h2 class="p-2">Liste des champignons</h2>
                 <label for="allPage">Voir toute les fiches</label>
                 {% if stateAllFiche %}
@@ -101,7 +101,7 @@
 								<h6>Nouvelle fiche descriptif</h6>	
 							</div>
 							<div class="col-12 col-md-4">
-								<a href="index.php?routing=ajouter-fiche" class="btn btn-outline-success">
+								<a href="index.php?routing=ajouter-une-fiche-descriptive" class="btn btn-outline-success">
 									<img style="filter:invert(100%);" src="/assets/icones/document.png" alt="Ajouter une fiche" width="32">
 								</a>
 							</div>
@@ -128,19 +128,19 @@
 								<tr>
 									<th scope="row">
 									{% if fiche.pathimg is not null %}
-										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/{{ fiche.idchamp }}/minSize/{{ fiche.pathimg }}" alt="{{ fiche.communchamp }}" height="100">
+										<a href="index.php?routing=description-privee&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/{{ fiche.idchamp }}/minSize/{{ fiche.pathimg }}" alt="{{ fiche.communchamp }}" height="100">
 										</a>
 									{% else %}
-										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/default.png" alt="{{ fiche.communchamp }}" height="100"></a>
+										<a href="index.php?routing=description-privee&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/default.png" alt="{{ fiche.communchamp }}" height="100"></a>
 									{% endif %}
 									</th>
 									<td>{{ fiche.datechamp }}</td>
 									<td>
-										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}">{{ fiche.communchamp }}</a>
+										<a href="index.php?routing=description-privee&amp;idchamp={{ fiche.idchamp }}">{{ fiche.communchamp }}</a>
 									</td>
 									<td>{{ is_userConnect.pseudouser }}</td>
 									<td>
-										<a href="index.php?routing=update-fiche&amp;idChamp={{ fiche.idchamp }}" class="btn btn-outline-success">
+										<a href="index.php?routing=editer-une-fiche-descriptive&amp;idChamp={{ fiche.idchamp }}" class="btn btn-outline-success">
 											<img style="filter:invert(100%);" src="/assets/icones/update.png" alt="Modifer mon profil" width="32">
 										</a>
 									</td>
@@ -168,7 +168,7 @@
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-														<a href="index.php?routing=del-champ-mb&amp;idFich={{ fiche.idchamp }}&amp;currentPgFiche={{currentPageFiches}}"
+														<a href="index.php?routing=supprimer-ma-fiche-descriptive&amp;idFich={{ fiche.idchamp }}&amp;currentPgFiche={{currentPageFiches}}"
 															class="btn btn-primary">Supprimer</a>
 													</div>
 												</div>

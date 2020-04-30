@@ -41,7 +41,7 @@ $memberController = new MemberController($twig, $sqlCommande);
 session_start();
  
 // ROUTAGE PAR DEFAULT (premier chargement)
-$page = 'portail';
+$page = 'portail'; 
 
 if(isset($_GET['routing'])){
    $page =  $_GET['routing'];
@@ -61,26 +61,33 @@ try
         break;
 
         // Rendu page liste des vignettes.
-        case 'fiches':
+        case 'guide-des-champignons':
             $page = isset($_GET['pageIndex']) ? $_GET['pageIndex'] : '1';
+            if(is_numeric($page))
+            {
             $appController->listeFiches($page,isset($_GET['allFiches']));
+            }
+            else
+            {
+                throw new ExceptionWithRedirect("Erreur impossible de charger la page !", 404, "guide-des-champignons");
+            }
         break;
 
         // Rendu page fiche descriptive session public
         case 'description':
-            if(isset($_GET['idchamp']) && !empty($_GET['idchamp']))
+            if(isset($_GET['idchamp']) && !empty($_GET['idchamp']) && is_numeric($_GET['idchamp']))
             {
                 $appController->getFiche('Public','',$_GET['idchamp']);
             }
             else
             {
-                throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "fiches");
+                throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "guide-des-champignons");
             }
         break;
 
         // Rendu page fiche descriptive session privée.
-         case 'fiche-descriptive':
-            if(isset($_GET['idchamp']) && !empty($_GET['idchamp']))
+         case 'description-privee':
+            if(isset($_GET['idchamp']) && !empty($_GET['idchamp']) && is_numeric($_GET['idchamp']))
             {
                 // Si il y a un id utilisateur
                 if($appController->get_value_session())
@@ -97,7 +104,7 @@ try
             }
             else
             {
-                throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "fiches");
+                throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "guide-des-champignons");
             }
         break;
 
@@ -105,68 +112,115 @@ try
          *          ACCES PRIVEE
         ********************************************/
         // Rendu de la page ajouter une fiche.
-        case 'ajouter-fiche':
+        case 'ajouter-une-fiche-descriptive':
              if($appController->get_value_session())
              {
                 $memberController->ShowAddFiche();
              }
              else
              {
-                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource  !", 401, "connexion");
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource  !", 401, "se-connecter");
              }
             
         break;
 
         // Ajouter une fiche.
         case 'addFiche':
-            if(isset($_POST['nomcommun']) && !empty($_POST['nomcommun']))
+            if($appController->get_value_session())
             {
-                $memberController->addFiche($_POST['nomcommun'],$_POST['nomlatin'],$_POST['nomlocal'],$_POST['chapeau'],$_POST['gridRadios'],$_POST['lames'],$_POST['pied'],$_POST['chair'],$_POST['habitat'],$_POST['remarques'],$_POST['conso'],$_FILES['photo']);  
+                if(isset($_POST['nomcommun']) && !empty($_POST['nomcommun']))
+                {
+                    $memberController->addFiche($_POST['nomcommun'],$_POST['nomlatin'],$_POST['nomlocal'],$_POST['chapeau'],$_POST['gridRadios'],$_POST['lames'],$_POST['pied'],$_POST['chair'],$_POST['habitat'],$_POST['remarques'],$_POST['conso'],$_FILES['photo']);  
+                }
+                else
+                {
+                    throw new ExceptionWithRedirect("Erreur, assurez vous d'avoir remplit le champ Nom Commun et que vous ne dépassez pas la capacité max d'upload !", 401, "portail");
+                } 
             }
             else
             {
-                throw new ExceptionWithRedirect("Erreur, assurez vous d'avoir remplit le champ Nom Commun et que vous ne dépassez pas la capacité max d'upload !", 401, "portail");
-            } 
+               throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource  !", 401, "se-connecter");
+            }
         break;
 
         // Rendu de la page MAJ d'une fiche.
-        case 'update-fiche':
-            if (isset($_GET['idChamp']) && !empty($_GET['idChamp']))
+        case 'editer-une-fiche-descriptive':
+            if($appController->get_value_session())
             {
-                $memberController->showUpdateFiche($_GET['idChamp']);
+                if (isset($_GET['idChamp']) && !empty($_GET['idChamp']) && is_numeric($_GET['idChamp']))
+                {
+                    $memberController->showUpdateFiche($_GET['idChamp']);
+                }
+            }
+            else
+            {
+               throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource  !", 401, "se-connecter");
             }
         break;
 
         // MAJ d'une fiche
-        case 'updateFiche':
-            if(isset($_POST['nomcommun']) && !empty($_POST['nomcommun']) && isset($_POST['idchamp']) && !empty($_POST['idchamp']))
+        case 'editer-description':
+            // Verifie si l'utilisateur est connecté et envoi son id de compte afin de déterminer qu'il soit propriétaire de la fiche.
+            if( $appController->get_value_session())
             {
-                $memberController->updateFiche($_POST['idchamp'],$_POST['nomcommun'],$_POST['nomlatin'],$_POST['nomlocal'],$_FILES['photo'],$_POST['conso'],$_POST['chapeau'],$_POST['gridRadios'],$_POST['lames'],$_POST['pied'],$_POST['chair'],$_POST['habitat'],$_POST['remarques']);
+                if(isset($_POST['nomcommun']) && !empty($_POST['nomcommun']) && isset($_POST['idchamp']) && !empty($_POST['idchamp']))
+                {
+                    $memberController->updateFiche($_POST['idchamp'],$_POST['nomcommun'],$_POST['nomlatin'],$_POST['nomlocal'],$_FILES['photo'],$_POST['conso'],$_POST['chapeau'],$_POST['gridRadios'],$_POST['lames'],$_POST['pied'],$_POST['chair'],$_POST['habitat'],$_POST['remarques']);
+                }
+                else
+                {
+                    $memberController->showUpdateFiche($_POST['idchamp'],"Veuillez remplir le champ nom commun"); 
+                }
             }
-            
+            else
+            {
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "se-connecter");
+            } 
         break;
 
         // delete fiche en tant que membre
-        case 'del-champ-mb':
-            if(isset($_GET['idFich']) && !empty($_GET['idFich']))
+        case 'supprimer-ma-fiche-descriptive':
+            // Verifie si l'utilisateur est connecté et envoi son id de compte afin de déterminer qu'il soit propriétaire de la fiche.
+            if( $appController->get_value_session())
+                {
+                if(isset($_GET['idFich']) && !empty($_GET['idFich']) && is_numeric($_GET['idFich']))
+                {
+                    $memberController->deleteChampMember($_GET['idFich'],$_GET['currentPgFiche']);
+                }  
+            }
+            else
             {
-                $memberController->deleteChampMember($_GET['idFich'],$_GET['currentPgFiche']);
-            }    
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "se-connecter");
+            }   
         break;
 
         // delete fiche en tant que administrateur
-        case 'del-champ-ad':
-            if(isset($_GET['idFich']) && !empty($_GET['idFich']))
+        case 'supprimer-description':
+            if( $appController->get_value_session() )
             {
-                $adminController->deleteChampAdmin($_GET['idFich'],$_GET['currentPgFiche']);
-            }    
+                if($_SESSION['user']['roleuser'] == 'Administrateur')
+                {
+                    if(isset($_GET['idFich']) && !empty($_GET['idFich']) && is_numeric($_GET['idFich']))
+                    {
+                        $adminController->deleteChampAdmin($_GET['idFich'],$_GET['currentPgFiche']);
+                    }
+                }
+                else
+                {
+                    header("location:index.php?routing=mon-compte".$_GET['currentPgFiche']);
+                }
+            }
+            else
+            {
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "se-connecter");
+            }     
         break;
 
         /*******************************************
          *          GESTION DE COMPTES
         ********************************************/
         // Rendu de la page créer un compte
-        case 'inscription':
+        case 'creer-mon-compte':
             if($appController->get_value_session())
             {
                header("location:index.php?routing=mon-compte");
@@ -177,29 +231,29 @@ try
             }
         break;
 
-        // Crée un compte
-        case 'createRegister':
-            // Vérifie si les champ sont remplis
-            if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['password']))
+        // Créer un compte
+        case 'creation-du-compte':
+            if($appController->get_value_session())
             {
-                $loginController->createRegister($_POST['pseudo'],$_POST['password']);   
+               header("location:index.php?routing=mon-compte");
             }
             else
             {
-                // si les champs sont vides et que l'utilisateur n'a pas ouvert de session.
-                if(!$appController->get_value_session())
+                // Vérifie si les champ sont remplis
+                if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['password']))
                 {
-                    $loginController->showRegister();
+                    $loginController->createRegister($_POST['pseudo'],$_POST['password']);   
                 }
                 else
                 {
-                     throw new ExceptionWithRedirect("Vous ne possédez pas les droits pour supprimer ce compte  !", 401, "mon-compte"); 
+                    // si les champs sont vides
+                    $loginController->showRegister();   
                 }
             }
         break;
 
         // Rendu de la page se connecter
-        case 'connexion':
+        case 'se-connecter':
             if($appController->get_value_session())
             {
                  header('location:index.php?routing=mon-compte');
@@ -211,80 +265,103 @@ try
         break;
 
         // Se connecte
-        case 'verifie-connection':
+        case 'connexion':
             if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['password']))
             {
-             $loginController->LoginVerify($_POST['pseudo'],$_POST['password']);   
+             $loginController->loginVerify($_POST['pseudo'],$_POST['password']);   
             }
             else
             {
-                header("location:index.php?routing=connexion");
+                header("location:/se-connecter");
             }
         break;
 
         // se déconnecter (detruit une session)
         case 'deconnexion':
-            $loginController->stop_session();
+            if($appController->get_value_session())
+            {
+                $loginController->stop_session();
+            }
         break;
 
         // rendu de la page mon compte admin ou member
         case 'mon-compte':
             if($appController->get_value_session())
             {
-                    switch ($_SESSION['user']['roleuser'])
-                    {
-                        case 'Administrateur' :
-                            $pageIndex = isset($_GET['pageIndex']) ? $_GET['pageIndex'] : '1';
-                            $pageUserIndex = isset($_GET['pageUserIndex']) ? $_GET['pageUserIndex'] : '1';
-                            $adminController->showCompteAdmin($pageIndex,$pageUserIndex,isset($_GET['allFiche']));
-                        break;
-                        case 'Membre' :
-                            $pageIndex = isset($_GET['pageIndex']) ? $_GET['pageIndex'] : '1';
-                            $memberController->showCompteMember($pageIndex,$_SESSION['user']['iduser'],isset($_GET['allFiche']));
-                        break;             
-                    }
-                }
-                else
+                switch ($_SESSION['user']['roleuser'])
                 {
-                    header('location: index.php?routing=fiches');
+                    case 'Administrateur' :
+                        $pageIndex = isset($_GET['pageIndex']) ? $_GET['pageIndex'] : '1';
+                        $pageUserIndex = isset($_GET['pageUserIndex']) ? $_GET['pageUserIndex'] : '1';
+                        if( is_numeric($pageIndex) && is_numeric($pageUserIndex) )
+                        {
+                             $adminController->showCompteAdmin($pageIndex,$pageUserIndex,isset($_GET['allFiche']));
+                        }
+                        else
+                        {
+                            throw new ExceptionWithRedirect("Une erreur c'est produite !", 404, "portail");
+                        } 
+                    break;
+                    
+                    case 'Membre' :
+                        $pageIndex = isset($_GET['pageIndex']) ? $_GET['pageIndex'] : '1';
+                        if( is_numeric($pageIndex))
+                        {
+                            $memberController->showCompteMember($pageIndex,$_SESSION['user']['iduser'],isset($_GET['allFiche']));
+                        }
+                        else
+                        {
+                            throw new ExceptionWithRedirect("Une erreur c'est produite !", 404, "portail");
+                        } 
+                    break;
+
+                    // Si aucune page trouvée alors erreur 404
+                    default:
+                        throw new ExceptionWithRedirect("Une erreur c'est produite !", 404, "portail");
+                    break;               
                 }
+            }
+            else
+            {
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "se-connecter");
+            }
         break;
 
         // Supprimer son compte en tant que membre
-        case 'delete-member':
-             if(isset($_SESSION['user']) && !empty($_SESSION['user']))
+        case 'me-desincrire':
+             if($appController->get_value_session())
             {
                 $memberController->deleteMember();
             }
             else
             {
-                 throw new ExceptionWithRedirect("Vous ne possédez pas les droits pour supprimer ce compte  !", 401, "fiches"); 
+                 throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "guide-des-champignons"); 
             }
         break;
 
         // Supprimer un compte en tant qu'administrateur
-        case 'deleteAccount':
+        case 'suppression-de-compte':
             if ( $appController->get_value_session())
             {
-                if ( isset($_GET['idUser']) && !empty($_GET['idUser']) )
+                if ( $_SESSION['user']['roleuser'] === "Administrateur" )
                 {
-                    if ( $_SESSION['user']['roleuser'] === "Administrateur" )
+                    if ( isset($_GET['idUser']) && !empty($_GET['idUser']) && is_numeric($_GET['idUser']) )
                     {
                         $adminController->deleteAccount( $_GET['idUser'],$_GET['currentPgUser'],$_GET['currentPgFiche'] );
                     }
                     else
                     {
-                        throw new ExceptionWithRedirect("Vous ne possédez pas les droits pour supprimer ce compte  !", 401, "portail");  
+                        header('location:index.php?routing=mon-compte');
                     }
                 }
                 else
                 {
-                    header('location:index.php?routing=mon-compte');
+                    throw new ExceptionWithRedirect("Vous ne possédez pas les droits pour supprimer ce compte  !", 401, "mon-compte");  
                 }
             }
             else
             {
-                throw new ExceptionWithRedirect("Vous devez être connecté  !", 401, "portail");  
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "se-connecter");  
             }
         break;
         
@@ -296,12 +373,12 @@ try
             }
             else
             {
-                header('location:index.php?routing=verifie-connection');
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "se-connecter");
             }
         break;
 
         // Modifier son profil
-        case 'update-profil':
+        case 'editer-mon-profil':
             if($appController->get_value_session())
             {
                 if (isset($_POST['pseudo']) && !empty($_POST['pseudo']))
@@ -315,12 +392,12 @@ try
             }
             else
             {
-                throw new ExceptionWithRedirect("Vous devez vous connecter pour accèder à cette page  !", 404, "portail");
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "se-connecter");
             }
         break;
 
         // Changer de mot de passe
-        case 'update-password':
+        case 'editer-mon-mot-de-passe':
             if($appController->get_value_session())
             {
                 if (isset($_POST['newPassword']) && isset($_POST['oldPassword']) && isset($_POST['confirmNewpassword']))
@@ -334,20 +411,34 @@ try
             }
             else
             {
-                throw new ExceptionWithRedirect("Vous devez vous connecter pour accèder à cette page  !", 404, "portail");
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "se-connecter");
             }
         break;
 
         // Masquer ou afficher au public
         case 'autoriser-fiche':
-           if(isset($_GET['idFiche']) && !empty($_GET['idFiche']))
+            if($appController->get_value_session())
             {
-                $adminController->autoriser($_GET['idFiche'],$_GET['currentPgFiche']);
+                if( $_SESSION['user']['roleuser'] === 'Administrateur' )
+                {
+                    if(isset($_GET['idFiche']) && !empty($_GET['idFiche']) && is_numeric($_GET['idFiche']))
+                    {
+                        $adminController->autoriser($_GET['idFiche'],$_GET['currentPgFiche']);
+                    }
+                    else
+                    {
+                        throw new ExceptionWithRedirect("Désolé, cette page n'existe pas !", 404, "portail");
+                    }  
+                }
+                else
+                {
+                    throw new ExceptionWithRedirect("Désolé, cette section est réservé à l'administrateur !", 404, "portail");
+                }
             }
             else
             {
-                throw new ExceptionWithRedirect("Désolé, cette page n'existe pas !", 404, "portail");
-            }  
+                throw new ExceptionWithRedirect("Une authentification est nécessaire pour accéder à la ressource !", 401, "se-connecter");
+            } 
         break;
 
         // Si aucune page trouvée alors erreur 404

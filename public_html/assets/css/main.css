@@ -35,7 +35,7 @@
   --navigate: rgba(32, 42, 30, 0.5);
   --pagination-active-bg: rgba(255, 255, 255, 0.5);
   --nav-pills-link-active-color: rgba(255, 255, 255, 0.5);
-  --nav-pills-link-active-bg: rgba(255, 255, 255, 0.1);
+  --nav-pills-link-active-bg: rgba(255, 255, 255, 0.3);
   --link-color: rgba(255, 255, 255, 0.7);
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
@@ -1466,19 +1466,19 @@ pre {
 .table-nav-pills-link-active-bg,
 .table-nav-pills-link-active-bg > th,
 .table-nav-pills-link-active-bg > td {
-  background-color: rgba(255, 255, 255, 0.748); }
+  background-color: rgba(255, 255, 255, 0.804); }
 
 .table-nav-pills-link-active-bg th,
 .table-nav-pills-link-active-bg td,
 .table-nav-pills-link-active-bg thead th,
 .table-nav-pills-link-active-bg tbody + tbody {
-  border-color: rgba(255, 255, 255, 0.532); }
+  border-color: rgba(255, 255, 255, 0.636); }
 
 .table-hover .table-nav-pills-link-active-bg:hover {
-  background-color: rgba(242, 242, 242, 0.748); }
+  background-color: rgba(242, 242, 242, 0.804); }
   .table-hover .table-nav-pills-link-active-bg:hover > td,
   .table-hover .table-nav-pills-link-active-bg:hover > th {
-    background-color: rgba(242, 242, 242, 0.748); }
+    background-color: rgba(242, 242, 242, 0.804); }
 
 .table-link-color,
 .table-link-color > th,
@@ -2374,29 +2374,29 @@ fieldset:disabled a.btn {
 
 .btn-nav-pills-link-active-bg {
   color: #212529;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.1); }
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.3); }
   .btn-nav-pills-link-active-bg:hover {
     color: #212529;
-    background-color: rgba(236, 236, 236, 0.1);
-    border-color: rgba(230, 230, 230, 0.1); }
+    background-color: rgba(236, 236, 236, 0.3);
+    border-color: rgba(230, 230, 230, 0.3); }
   .btn-nav-pills-link-active-bg:focus, .btn-nav-pills-link-active-bg.focus {
     color: #212529;
-    background-color: rgba(236, 236, 236, 0.1);
-    border-color: rgba(230, 230, 230, 0.1);
-    box-shadow: 0 0 0 0.2rem rgba(84, 87, 90, 0.5); }
+    background-color: rgba(236, 236, 236, 0.3);
+    border-color: rgba(230, 230, 230, 0.3);
+    box-shadow: 0 0 0 0.2rem rgba(144, 146, 148, 0.5); }
   .btn-nav-pills-link-active-bg.disabled, .btn-nav-pills-link-active-bg:disabled {
     color: #212529;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.1); }
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.3); }
   .btn-nav-pills-link-active-bg:not(:disabled):not(.disabled):active, .btn-nav-pills-link-active-bg:not(:disabled):not(.disabled).active,
   .show > .btn-nav-pills-link-active-bg.dropdown-toggle {
     color: #212529;
-    background-color: rgba(230, 230, 230, 0.1);
-    border-color: rgba(223, 223, 223, 0.1); }
+    background-color: rgba(230, 230, 230, 0.3);
+    border-color: rgba(223, 223, 223, 0.3); }
     .btn-nav-pills-link-active-bg:not(:disabled):not(.disabled):active:focus, .btn-nav-pills-link-active-bg:not(:disabled):not(.disabled).active:focus,
     .show > .btn-nav-pills-link-active-bg.dropdown-toggle:focus {
-      box-shadow: 0 0 0 0.2rem rgba(84, 87, 90, 0.5); }
+      box-shadow: 0 0 0 0.2rem rgba(144, 146, 148, 0.5); }
 
 .btn-link-color {
   color: #212529;
@@ -2761,22 +2761,22 @@ fieldset:disabled a.btn {
       box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5); }
 
 .btn-outline-nav-pills-link-active-bg {
-  color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.1); }
+  color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.3); }
   .btn-outline-nav-pills-link-active-bg:hover {
     color: #212529;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.1); }
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.3); }
   .btn-outline-nav-pills-link-active-bg:focus, .btn-outline-nav-pills-link-active-bg.focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5); }
   .btn-outline-nav-pills-link-active-bg.disabled, .btn-outline-nav-pills-link-active-bg:disabled {
-    color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.3);
     background-color: transparent; }
   .btn-outline-nav-pills-link-active-bg:not(:disabled):not(.disabled):active, .btn-outline-nav-pills-link-active-bg:not(:disabled):not(.disabled).active,
   .show > .btn-outline-nav-pills-link-active-bg.dropdown-toggle {
     color: #212529;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.1); }
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.3); }
     .btn-outline-nav-pills-link-active-bg:not(:disabled):not(.disabled):active:focus, .btn-outline-nav-pills-link-active-bg:not(:disabled):not(.disabled).active:focus,
     .show > .btn-outline-nav-pills-link-active-bg.dropdown-toggle:focus {
       box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5); }
@@ -3668,7 +3668,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: rgba(255, 255, 255, 0.5);
-  background-color: rgba(255, 255, 255, 0.1); }
+  background-color: rgba(255, 255, 255, 0.3); }
 
 .nav-fill .nav-item {
   flex: 1 1 auto;
@@ -4398,10 +4398,10 @@ input[type="button"].btn-block {
 
 .badge-nav-pills-link-active-bg {
   color: #212529;
-  background-color: rgba(255, 255, 255, 0.1); }
+  background-color: rgba(255, 255, 255, 0.3); }
   a.badge-nav-pills-link-active-bg:hover, a.badge-nav-pills-link-active-bg:focus {
     color: #212529;
-    background-color: rgba(230, 230, 230, 0.1); }
+    background-color: rgba(230, 230, 230, 0.3); }
   a.badge-nav-pills-link-active-bg:focus, a.badge-nav-pills-link-active-bg.focus {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5); }
@@ -4597,13 +4597,13 @@ input[type="button"].btn-block {
     color: rgba(43, 43, 43, 0.74); }
 
 .alert-nav-pills-link-active-bg {
-  color: rgba(14, 14, 14, 0.532);
-  background-color: rgba(255, 255, 255, 0.82);
-  border-color: rgba(255, 255, 255, 0.748); }
+  color: rgba(41, 41, 41, 0.636);
+  background-color: rgba(255, 255, 255, 0.86);
+  border-color: rgba(255, 255, 255, 0.804); }
   .alert-nav-pills-link-active-bg hr {
-    border-top-color: rgba(242, 242, 242, 0.748); }
+    border-top-color: rgba(242, 242, 242, 0.804); }
   .alert-nav-pills-link-active-bg .alert-link {
-    color: rgba(0, 0, 0, 0.532); }
+    color: rgba(16, 16, 16, 0.636); }
 
 .alert-link-color {
   color: rgba(94, 94, 94, 0.844);
@@ -4981,15 +4981,15 @@ input[type="button"].btn-block {
     border-color: rgba(68, 68, 68, 0.74); }
 
 .list-group-item-nav-pills-link-active-bg {
-  color: rgba(14, 14, 14, 0.532);
-  background-color: rgba(255, 255, 255, 0.748); }
+  color: rgba(41, 41, 41, 0.636);
+  background-color: rgba(255, 255, 255, 0.804); }
   .list-group-item-nav-pills-link-active-bg.list-group-item-action:hover, .list-group-item-nav-pills-link-active-bg.list-group-item-action:focus {
-    color: rgba(14, 14, 14, 0.532);
-    background-color: rgba(242, 242, 242, 0.748); }
+    color: rgba(41, 41, 41, 0.636);
+    background-color: rgba(242, 242, 242, 0.804); }
   .list-group-item-nav-pills-link-active-bg.list-group-item-action.active {
     color: #fff;
-    background-color: rgba(14, 14, 14, 0.532);
-    border-color: rgba(14, 14, 14, 0.532); }
+    background-color: rgba(41, 41, 41, 0.636);
+    border-color: rgba(41, 41, 41, 0.636); }
 
 .list-group-item-link-color {
   color: rgba(94, 94, 94, 0.844);
@@ -5750,12 +5750,12 @@ button.bg-nav-pills-link-active-color:focus {
   background-color: rgba(230, 230, 230, 0.5) !important; }
 
 .bg-nav-pills-link-active-bg {
-  background-color: rgba(255, 255, 255, 0.1) !important; }
+  background-color: rgba(255, 255, 255, 0.3) !important; }
 
 a.bg-nav-pills-link-active-bg:hover, a.bg-nav-pills-link-active-bg:focus,
 button.bg-nav-pills-link-active-bg:hover,
 button.bg-nav-pills-link-active-bg:focus {
-  background-color: rgba(230, 230, 230, 0.1) !important; }
+  background-color: rgba(230, 230, 230, 0.3) !important; }
 
 .bg-link-color {
   background-color: rgba(255, 255, 255, 0.7) !important; }
@@ -5850,7 +5850,7 @@ button.bg-link-color:focus {
   border-color: rgba(255, 255, 255, 0.5) !important; }
 
 .border-nav-pills-link-active-bg {
-  border-color: rgba(255, 255, 255, 0.1) !important; }
+  border-color: rgba(255, 255, 255, 0.3) !important; }
 
 .border-link-color {
   border-color: rgba(255, 255, 255, 0.7) !important; }
@@ -8155,10 +8155,10 @@ a.text-nav-pills-link-active-color:hover, a.text-nav-pills-link-active-color:foc
   color: rgba(217, 217, 217, 0.5) !important; }
 
 .text-nav-pills-link-active-bg {
-  color: rgba(255, 255, 255, 0.1) !important; }
+  color: rgba(255, 255, 255, 0.3) !important; }
 
 a.text-nav-pills-link-active-bg:hover, a.text-nav-pills-link-active-bg:focus {
-  color: rgba(217, 217, 217, 0.1) !important; }
+  color: rgba(217, 217, 217, 0.3) !important; }
 
 .text-link-color {
   color: rgba(255, 255, 255, 0.7) !important; }
@@ -8602,9 +8602,6 @@ p {
 
 .Admin_table_bg--dark:hover td {
   color: white !important; }
-
-.member .colortable {
-  background-color: #344038 important; }
 
 .member__info {
   font-size: 0.8em;

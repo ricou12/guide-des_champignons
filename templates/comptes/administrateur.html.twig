@@ -18,10 +18,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="member__bg-img"></div>
+    <div class="logger__background"></div>
     <div class="container flex-grow-1 my-2 px-md-5">
         <div class="row">
-            <div class="col-12 bg-darkLight text-white rounded p-3">
+            <div class="col-12 bg-kaki text-white rounded p-3">
                 <h2>Profil</h2>
                 <p>
                     <a class="btn btn-light" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">Tous les utilisateurs</a>
@@ -72,7 +72,7 @@
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
                                                                         data-dismiss="modal">Annuler</button>
-                                                                    <a href="index.php?routing=deleteAccount&amp;idUser={{ user.iduser }}&amp;currentPgUser={{currentPageUsers}}&amp;currentPgFiche={{currentPageFiches}}"
+                                                                    <a href="index.php?routing=suppression-de-compte&amp;idUser={{ user.iduser }}&amp;currentPgUser={{currentPageUsers}}&amp;currentPgFiche={{currentPageFiches}}"
                                                                         class="btn btn-primary">Supprimer</a>
                                                                 </div>
                                                             </div>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 bg-darkLight text-white d rounded mt-2 p-3">
+            <div class="col-12 bg-kaki text-white d rounded mt-2 p-3">
                 <h2>Liste des fiches descriptives</h2>
                 <label for="allPage">Voir toute les fiches</label>
                 {% if stateAllFiche %}
@@ -139,14 +139,14 @@
                                 <tr>
                                     <th scope="row">
                                     {% if fiche.pathimg is not null %}
-										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/{{ fiche.idchamp }}/minSize/{{ fiche.pathimg }}" alt="{{ fiche.communchamp }}" height="100">
+										<a href="index.php?routing=description-privee&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/{{ fiche.idchamp }}/minSize/{{ fiche.pathimg }}" alt="{{ fiche.communchamp }}" height="100">
 										</a>
 									{% else %}
-										<a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/default.png" alt="{{ fiche.communchamp }}" height="100"></a>
+										<a href="index.php?routing=description-privee&amp;idchamp={{ fiche.idchamp }}"><img src="/assets/images/photo-fullscreen/default.png" alt="{{ fiche.communchamp }}" height="100"></a>
 									{% endif %}
                                     </th>
                                     <td>{{ fiche.datechamp }}</td>
-                                    <td><a href="index.php?routing=fiche-descriptive&amp;idchamp={{ fiche.idchamp }}">{{ fiche.communchamp }}</a></td>
+                                    <td><a href="index.php?routing=description-privee&amp;idchamp={{ fiche.idchamp }}">{{ fiche.communchamp }}</a></td>
                                     <td>{{ fiche.pseudouser }}</td>
                                     <td>
                                         <form action="index.php?routing=update" method="POST">
@@ -186,7 +186,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                                        <a href="index.php?routing=del-champ-ad&amp;idFich={{ fiche.idchamp }}&amp;currentPgFiche={{currentPageFiches}}"
+                                                        <a href="index.php?routing=supprimer-description&amp;idFich={{ fiche.idchamp }}&amp;currentPgFiche={{currentPageFiches}}"
                                                             class="btn btn-primary">Supprimer</a>
                                                     </div>
                                                 </div>

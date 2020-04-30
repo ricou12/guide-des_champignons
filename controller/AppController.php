@@ -19,7 +19,7 @@ class AppController extends BaseController {
     {
         $list = $this->sqlCommande->listeFiches($currentPage,$isAllFiche);
         if($isAllFiche)$currentPage = 0;
-        if($currentPage <= $list['nbrePage'])
+        if($currentPage <= $list['nbrePage']  && count($list['listFiches']) > 0)
         {
             echo $this->render('users/listeFiches.html.twig', 
             ['title' => 'Guide des champignons',
@@ -31,7 +31,7 @@ class AppController extends BaseController {
         }
         else
         {
-            throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "fiches");
+            throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "guide-des-champignons");
         }  
     }
 
@@ -52,7 +52,7 @@ class AppController extends BaseController {
         }
         else
         {
-            throw new ExceptionWithRedirect("Cette page n'existe pas ou vous ne disposez pas des droits necessaires !", 404, "fiches");
+            throw new ExceptionWithRedirect("Cette page n'existe pas ou bien vous ne disposez pas des droits nécessaires !", 404, "guide-des-champignons");
         }
     }   
 
@@ -77,7 +77,7 @@ class AppController extends BaseController {
             } 
             else
             {
-                throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "fiches");
+                throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "guide-des-champignons");
             }   
     }
     

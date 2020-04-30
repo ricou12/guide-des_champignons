@@ -11,14 +11,21 @@ class MemberController extends AppController
     function showCompteMember($currentPageFiches,$idUser,$allFiche)
     {
         $listeFiches = $this->sqlCommande->pageCompte($currentPageFiches,$idUser,$allFiche);
-        echo $this->render('comptes/member.html.twig', 
-        ['title' => 'Membre',
-        'is_userConnect' => $_SESSION['user'],
-        'listeFiches' => $listeFiches[1],
-        'numberPageFiches' => $listeFiches[0],
-        'currentPageFiches' => $currentPageFiches,
-        'stateAllFiche' => $allFiche,
-        ]);   
+        if($currentPageFiches <= $listeFiches[0] && count($listeFiches[1]) > 0)
+        {
+            echo $this->render('comptes/member.html.twig', 
+            ['title' => 'Membre',
+            'is_userConnect' => $_SESSION['user'],
+            'listeFiches' => $listeFiches[1],
+            'numberPageFiches' => $listeFiches[0],
+            'currentPageFiches' => $currentPageFiches,
+            'stateAllFiche' => $allFiche,
+            ]);
+        } 
+        else
+        {
+            throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "guide-des-champignons");
+        }   
     }
 
     // Rendu page modifier profil actif
@@ -119,31 +126,24 @@ class MemberController extends AppController
     // Chargement de la page modifier une fiche si l'utilisateur connecté en est proprietaire.
     public function showUpdateFiche($idchamp,$message="")
     {
-        if($this->get_value_session())
+        $role = $_SESSION['user']['roleuser'];
+        $iduser = $_SESSION['user']['iduser'];
+        $fiche = $this->sqlCommande->getFiche($role,$iduser,$idchamp);
+        if($fiche)
         {
-            $role = $_SESSION['user']['roleuser'];
-            $iduser = $_SESSION['user']['iduser'];
-            $fiche = $this->sqlCommande->getFiche($role,$iduser,$idchamp);
-            if($fiche)
+            $images = [];
+            foreach($fiche as $key => $value)
             {
-                $images = [];
-                foreach($fiche as $key => $value)
-                {
-                    // recupere l'index de l'image
-                    $namePath = $fiche[$key]['idchamp'];
-                    if(isset($fiche[$key]['pathimg'])) $images[$key] = "/assets/images/photo-fullscreen/".$namePath."/minSize/".$fiche[$key]['pathimg'];
-                }
-                $this->showAddOrUpdateFiche("Editer","index.php?routing=updateFiche",$fiche[0],$images,$message);   
+                // recupere l'index de l'image
+                $namePath = $fiche[$key]['idchamp'];
+                if(isset($fiche[$key]['pathimg'])) $images[$key] = "/assets/images/photo-fullscreen/".$namePath."/minSize/".$fiche[$key]['pathimg'];
             }
-            else
-            {
-                throw new ExceptionWithRedirect("Impossible d'afficher cette page !", 404, "fiches");
-            }
+            $this->showAddOrUpdateFiche("Editer","index.php?routing=editer-description",$fiche[0],$images,$message);   
         }
         else
         {
-            throw new ExceptionWithRedirect("Vous devez être connecté !", 404, "fiches");
-        }   
+            throw new ExceptionWithRedirect("Impossible d'afficher cette page !", 404, "guide-des-champignons");
+        }
     }
 
     // Rendu des pages ajouter ou modifier
@@ -162,70 +162,58 @@ class MemberController extends AppController
     // Ajoute la description et crée le dossier ajoute les photos
     public function AddFiche($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$photos)
     {
-         // Verifie si l'utilisateur est connecté et envoi son id de compte afin de déterminer qu'il soit propriétaire de la fiche.
-        if( $this->get_value_session())
-            {
-            // Calculer si la capacité max d'upload n'est pas dépassé. 32000000
-            $size_upload = $this->maxUpload($photos);
-            if( $size_upload <  32000000)
-            {
-                // insert données dans la table champ
-                $idFiche = $this->sqlCommande->addFiche($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$_SESSION['user']['iduser']);
-                // Télécharge les photos
-                $this->uploadPhoto($photos, $idFiche);
-                header('location:index.php?routing=mon-compte');   
-            }
-            else
-            {
-                // recharge la page ajouter une fiche avec les données qui avaient été saisies hormis les images.
-                $message = "Vous avez dépassé la capacité maximun d'upload : ".round(($size_upload/1000000), 2)." Mo, vérifer vos images et redimensionner si necessaire !";
-                $dataText = [
-                    "communchamp" =>$nomcommun,
-                    'latinchamp' => $nomlatin,
-                    'localchamp' => $nomlocal,
-                    'chapeauchamp' => $chapeau,
-                    'typelameschamp' => $gridRadios,
-                    'lameschamp' => $lames,
-                    'piedchamp' => $pied,
-                    'chairchamp' => $chair,
-                    'habitatchamp' => $habitat,
-                    'remarqueschamp' => $remarques,
-                    'consochamp' => $conso,
-                    'photos' => $photos
-                ];
-                $this->showAddFiche($dataText,$message);
-            }  
-        }  
+        // Calculer si la capacité max d'upload n'est pas dépassé. 32000000
+        $size_upload = $this->maxUpload($photos);
+        if( $size_upload <  32000000)
+        {
+            // insert données dans la table champ
+            $idFiche = $this->sqlCommande->addFiche($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$_SESSION['user']['iduser']);
+            // Télécharge les photos
+            $this->uploadPhoto($photos, $idFiche);
+            header('location:index.php?routing=mon-compte');   
+        }
+        else
+        {
+            // recharge la page ajouter une fiche avec les données qui avaient été saisies hormis les images.
+            $message = "Vous avez dépassé la capacité maximun d'upload : ".round(($size_upload/1000000), 2)." Mo, vérifer vos images et redimensionner si necessaire !";
+            $dataText = [
+                "communchamp" =>$nomcommun,
+                'latinchamp' => $nomlatin,
+                'localchamp' => $nomlocal,
+                'chapeauchamp' => $chapeau,
+                'typelameschamp' => $gridRadios,
+                'lameschamp' => $lames,
+                'piedchamp' => $pied,
+                'chairchamp' => $chair,
+                'habitatchamp' => $habitat,
+                'remarqueschamp' => $remarques,
+                'consochamp' => $conso,
+                'photos' => $photos
+            ];
+            $this->showAddFiche($dataText,$message);
+        }   
     }
 
     // Mise à jour d'une fiche 
     public function updateFiche($idchamp,$nomcommun,$nomlatin,$nomlocal,$photos,$conso,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques)
     {
-        // Verifie si l'utilisateur est connecté et envoi son id de compte afin de déterminer qu'il soit propriétaire de la fiche.
-        if( $this->get_value_session())
+        // Calculer si la capacité max d'upload n'est pas dépassé. 24000000
+        $size_upload = $this->maxUpload($photos);
+        if( $size_upload < 24000000)
         {
-            // Calculer si la capacité max d'upload n'est pas dépassé. 24000000
-            $size_upload = $this->maxUpload($photos);
-            if( $size_upload < 24000000)
-            {
-                $iduser = $_SESSION['user']['iduser'];
-                // MAJ de la table champ
-                $this->sqlCommande->updateFiche($_SESSION['user']['iduser'],$idchamp,$nomcommun,$nomlatin,$nomlocal,$conso,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques);
-                // Upload des photos
-                $this->uploadPhoto($photos, $idchamp);
-                header('location:index.php?routing=mon-compte'); 
-            }
-            else
-            {
-                $message = "Vous avez dépassé la capacité maximun d'upload : ".round(($size_upload/1000000), 2)." Mo, vérifer vos images et redimensionner si necessaire !";
-                $this->showUpdateFiche($idchamp,$message);
-                exit;
-            }
+            $iduser = $_SESSION['user']['iduser'];
+            // MAJ de la table champ
+            $this->sqlCommande->updateFiche($_SESSION['user']['iduser'],$idchamp,$nomcommun,$nomlatin,$nomlocal,$conso,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques);
+            // Upload des photos
+            $this->uploadPhoto($photos, $idchamp);
+            header('location:index.php?routing=mon-compte'); 
         }
         else
         {
-            throw new ExceptionWithRedirect("Vous devez être connecté !", 404, "fiches");
-        }    
+            $message = "Vous avez dépassé la capacité maximun d'upload : ".round(($size_upload/1000000), 2)." Mo, vérifer vos images et redimensionner si necessaire !";
+            $this->showUpdateFiche($idchamp,$message);
+            exit;
+        } 
     }
 
     // Calcul la poids totale des photos.
@@ -332,31 +320,28 @@ class MemberController extends AppController
     //  Supprime une fiche descriptive
     public function deleteChampMember($idchamp,$currentPgFiche)
     {
-        if( $this->get_value_session())
+        // Supprime la fiche et les enregistrements enfants avec la CONTRAINT ON DELETE CASCADE
+        $result = $this->sqlCommande->deleteChampMembre($idchamp,$_SESSION['user']['iduser']);
+        if($result)
         {
-            // Supprime la fiche et les enregistrements enfants avec la CONTRAINT ON DELETE CASCADE
-            $result = $this->sqlCommande->deleteChampMembre($idchamp,$_SESSION['user']['iduser']);
-            if($result)
+            try
             {
-                try
-                {
-                    $pathImage =  $_SERVER['DOCUMENT_ROOT']."/assets/images/photo-fullscreen/";
-                    array_map('unlink', glob($pathImage.$idchamp."/minSize/"."*.*"));
-                    array_map('unlink', glob($pathImage.$idchamp."/maxSize/"."*.*"));
-                    if(file_exists($pathImage.$idchamp."/minSize"))rmdir($pathImage.$idchamp."/minSize");
-                    if(file_exists($pathImage.$idchamp."/maxSize")) rmdir($pathImage.$idchamp."/maxSize");
-                    if(file_exists($pathImage.$idchamp)) rmdir($pathImage.$idchamp);
-                    header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
-                }
-                catch (Exception $e) 
-                {
-                    throw new ExceptionWithRedirect("Erreur impossible de supprimer les photos !", 401, "mon-compte");
-                }
+                $pathImage =  $_SERVER['DOCUMENT_ROOT']."/assets/images/photo-fullscreen/";
+                array_map('unlink', glob($pathImage.$idchamp."/minSize/"."*.*"));
+                array_map('unlink', glob($pathImage.$idchamp."/maxSize/"."*.*"));
+                if(file_exists($pathImage.$idchamp."/minSize"))rmdir($pathImage.$idchamp."/minSize");
+                if(file_exists($pathImage.$idchamp."/maxSize")) rmdir($pathImage.$idchamp."/maxSize");
+                if(file_exists($pathImage.$idchamp)) rmdir($pathImage.$idchamp);
+                header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
             }
-            else
+            catch (Exception $e) 
             {
-                throw new ExceptionWithRedirect("Erreur lors de la suppression !", 404, "mon-compte");
+                throw new ExceptionWithRedirect("Erreur impossible de supprimer les photos !", 401, "mon-compte");
             }
+        }
+        else
+        {
+            throw new ExceptionWithRedirect("Erreur lors de la suppression !", 404, "mon-compte");
         }
     }
 

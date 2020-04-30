@@ -9,28 +9,30 @@
                     <a class="nav-link {{is_active(title,'')}}" href="index.php?routing=portail">Portail</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{is_active(title,'Guide des champignons')}}" href="index.php?routing=fiches">Guide</a>
+                    <a class="nav-link {{is_active(title,'Guide des champignons')}}" href="index.php?routing=guide-des-champignons">Guide</a>
                 </li>
                 {% if is_userConnect %}
-                <li class="nav-item">
-                    <a class="nav-link {{is_active(title,'comptes')}}" href="index.php?routing=mon-compte">Gérer mes fiches</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{is_active(title,'Ajouter')}}" href="index.php?routing=ajouter-fiche">Editer une fiche</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{is_active(title,'Modifier mon profil')}}" href="index.php?routing=mon-profil"> Modifer mon profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?routing=deconnexion">Me déconnecter</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{is_active(title,'comptes')}}" href="index.php?routing=mon-compte">Gérer mes fiches</a>
+                    </li>
+                    {% if is_userConnect.roleuser == 'Membre' %}
+                        <li class="nav-item">
+                            <a class="nav-link {{is_active(title,'Ajouter')}}" href="index.php?routing=ajouter-une-fiche-descriptive">Ajouter une fiche</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{is_active(title,'Modifier mon profil')}}" href="index.php?routing=mon-profil"> Modifer mon profil</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?routing=deconnexion">Me déconnecter</a>
+                    </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link {{is_active(title,'Inscription')}}" href="index.php?routing=inscription">S'incrire</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{is_active(title,'Connexion')}}" href="index.php?routing=connexion">Se connecter</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{is_active(title,'Inscription')}}" href="index.php?routing=creer-mon-compte">S'incrire</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{is_active(title,'Connexion')}}" href="index.php?routing=se-connecter">Se connecter</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
