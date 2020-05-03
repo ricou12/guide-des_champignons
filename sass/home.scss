@@ -3,24 +3,42 @@
 @import "animate";
 
 
-
 .home {
     @include waitShow;
-    //  min-height: 800px;
-    // height: calc(100vh - 170px);
     min-height:70vh;
 
-    &__background {
-        background-image: url("/assets/images/foret/foret-9.jpg");
+    // Gestion balise video    
+    &__opacity{
         position: fixed;
         top: 0;
         left: 0;
-        z-index: -100;
-        width: 100%;
-        height: 100%;
-        background-repeat: no-repeat;
+        z-index: -50;
+        min-width: 100%;
+        min-height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &__video-bg {
+        position: fixed; right: 0; bottom: 0;
+        min-width: 100%; min-height: 100%;
+        width: auto; height: auto; z-index: -100;
         background-size: cover;
     }
+
+    // internet explorer
+    // &__novideo {
+    //     background-image: url("/assets/images/foret/foret-9.jpg");
+    //     position: fixed;
+    //     top: 0;
+    //     left: 0;
+    //     z-index: -100;
+    //     width: 100%;
+    //     height: 100%;
+    //     background-repeat: no-repeat;
+    //     background-size: cover;
+    // }
+    // Fin gestion balise video
+
 
     h1 {
         letter-spacing: 10px;
@@ -30,35 +48,48 @@
     }
 
     h2 {
-        letter-spacing: 10px;
+        font-family: 'Tangerine', cursive;
+        letter-spacing: 8px;
         text-shadow: 2px 1px 5px rgb(0, 0, 0);
-        font-size: 1.4em;
-        line-height: 1.9em;
+        font-size: 3.5em;
+        line-height: 1.5em;
         @include moveText-X;
     }
-
-    &_content {
-        overflow: hidden;
-        transition: 0.3s;
-    }
-
-    &_content:hover {
-        border-radius: 7px;
-        transform: scale(1.05);
-    }
-
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 575px) {
+    
     .home {
-
+        
         min-height:90vh;
         h2{
-            font-size: 1.1em;
+            font-family: 'Tangerine', cursive;
+            font-size: 2.2em;
             line-height: 1.7em;
             letter-spacing: 0.1em;
         }
-       
+
+        // BLOCK VIDEO
+        &__video-bg {
+            display:none;
+        }
+        &__opacity{
+            display:none;
+        }
+
+        // image de fond mobile
+        &__background {
+            background-image: url("/assets/images/foret/home-sm.png");
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -100;
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        } 
+        // FIN BLOCK VIDEO
     }
 }
 

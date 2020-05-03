@@ -3,19 +3,26 @@
 // @import "../node_modules/bootstrap/scss/bootstrap/variables";
 // @import "../node_modules/bootstrap/scss/bootstrap/mixins";
 
+// ajout de couleurs personnalisées
 $olive: rgb(63, 80, 62);
-$kaki:rgba(39, 54, 26, 0.8);
-$navigate:rgba(32, 42, 30,0.5);
 $oliveLg: rgba(63, 80, 62,0.5);
+$kaki:rgba(39, 54, 26, 0.8);
 $grayLight:rgba(255, 255, 255, 0.5);
 $darkLight: rgba(52, 58, 64, 0.9);
-$pagination-active-bg:$grayLight;
-$pagination-active-color:$olive;
-$nav-pills-link-active-color:$grayLight;
+$navigate:rgba(32, 42, 30,0.5);
+$pagination-active-bg: $grayLight;
+$pagination-active-color: $olive;
+// Modifie la couleur active text et background theme nav.
+$nav-pills-link-active-color: $grayLight;
 $nav-pills-link-active-bg:rgba(255, 255, 255, 0.3);
 $link-color:rgba(255, 255, 255, 0.7);
-// $navbar-dark-toggler-border-color:rgb(144, 138, 138);
-
+// Modifie theme navbar-dark: color liens, au survol, active, bouton.
+//brown
+$navbar-dark-color: white;
+$navbar-dark-hover-color: rgb(214, 206, 195);
+$navbar-dark-active-color: rgb(253, 228, 173);
+// Couleur du bouton lorsque la navbar est effrondré.
+$navbar-dark-toggler-border-color:white;
 
 $theme-colors: (
    olive: $olive,
@@ -27,8 +34,11 @@ $theme-colors: (
    pagination-active-bg:$pagination-active-bg,
    nav-pills-link-active-color: $nav-pills-link-active-color,
    nav-pills-link-active-bg: $nav-pills-link-active-bg,
-   link-color: $link-color
-   // navbar-dark-toggler-border-color:$navbar-dark-toggler-border-color
+   link-color: $link-color,
+   navbar-dark-color: $navbar-dark-color,
+   navbar-dark-hover-color: $navbar-dark-hover-color,
+   navbar-dark-active-color: $navbar-dark-active-color,
+   navbar-dark-toggler-border-color: $navbar-dark-toggler-border-color
 );
 
 

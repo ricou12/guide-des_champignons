@@ -1,7 +1,10 @@
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.26, autoprefixer: v9.7.3) */
+
 .book {
     &__bg {
         background-image: url("/assets/images/foret/foret-3.jpg");
-        filter: blur(2px);
+        -webkit-filter: blur(2px);
+                filter: blur(2px);
         position: fixed;
         top: 0;
         left: 0;
@@ -15,6 +18,8 @@
     &__card {
         width: 20rem;
         position: relative;
+        background: -webkit-gradient(linear, left top, right top, from(rgba(146, 163, 143,0.7)), color-stop(50%, rgba(251, 251, 251, 0.9)), to(rgba(146, 163, 143,0.7)));
+        background: -o-linear-gradient(left, rgba(146, 163, 143,0.7) 0%, rgba(251, 251, 251, 0.9) 50%, rgba(146, 163, 143,0.7) 100%);
         background: linear-gradient(to right, rgba(146, 163, 143,0.7) 0%, rgba(251, 251, 251, 0.9) 50%, rgba(146, 163, 143,0.7) 100%);
         padding: 2em 2em 0 2em;
         margin: 20px 10px 20px 10px;
@@ -35,10 +40,14 @@
             height: 100%;
             border-radius: 10px;
             z-index: 200;
+            -webkit-transition: 1s;
+            -o-transition: 1s;
             transition: 1s;
 
             &__img {
                 height: 50px;
+                -webkit-transition: 0.5s;
+                -o-transition: 0.5s;
                 transition: 0.5s;
             }
         }
@@ -53,11 +62,15 @@
                 z-index: 150;
                 width: 100%;
                 height: 100%;
+                -webkit-transition: 1s;
+                -o-transition: 1s;
                 transition: 1s;
             }
 
             &__image {
                 width: 100%;
+                -webkit-transition: 1s;
+                -o-transition: 1s;
                 transition: 1s;
             }
         }
@@ -71,6 +84,8 @@
         }
 
         &:hover {
+            background: -webkit-gradient(linear, left top, right top, from(rgba(121, 136, 119,0.7)), color-stop(50%, rgba(251, 251, 251, 0.9)), to(rgba(121, 136, 119,0.9)));
+            background: -o-linear-gradient(left, rgba(121, 136, 119,0.7) 0%, rgba(251, 251, 251, 0.9) 50%, rgba(121, 136, 119,0.9) 100%);
             background: linear-gradient(to right, rgba(121, 136, 119,0.7) 0%, rgba(251, 251, 251, 0.9) 50%, rgba(121, 136, 119,0.9) 100%);
 
             .book {
@@ -81,7 +96,9 @@
                         }
 
                         &__image {
-                            transform: scale(1.2);
+                            -webkit-transform: scale(1.2);
+                                -ms-transform: scale(1.2);
+                                    transform: scale(1.2);
                         }
                     }
 
@@ -93,8 +110,8 @@
         }
     }
 }
-
-@media screen and (min-width: 960px) {
+// modifie la largeur des marges droite et gauche
+@media screen and (min-width: 992px) {
     .book {
         padding: 0 10% 0 10%;
     }

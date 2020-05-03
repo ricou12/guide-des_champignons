@@ -17,15 +17,21 @@
 
 {% block body %}
 <div class="home__background"></div>
+<div class="home__opacity"></div>
+<video class="home__video-bg" autoplay="true" loop muted  controls="controls">
+    <source src="/assets/video/bg-video.mp4" type="video/mp4">
+    <source src="/assets/video/bg-video.webm" type="video/webm">
+    {# <div class="home__novideo"></div> #}
+</video>
 <div class="container-fluid d-flex flex-column flex-grow-1 justify-content-around align-items-center home">
-    <div class="row home__title">
+    <div class="row">
         <section class="col">
-            <h1 class="text-center text-white ">Champignons de nos régions</h1>
+            <h1 class="text-center text-white p-2 p-lg-5">Champignons de nos régions</h1>
         </section>
     </div>
-    <div class="row home__comment">
+    <div class="row">
         <section class="col">
-            <a href="index.php?routing=se-connecter" style="text-decoration:none;"><h2 class="text-white text-center">Participez à l'élaboration d'une base de données interactive et
+            <a href="index.php?routing=se-connecter" style="text-decoration:none;"><h2 class="text-white text-center p-2 p-lg-5">Participez à l'élaboration d'une base de données interactive et
                 évolutive.</h2></a>
         </section>
     </div>
