@@ -8,31 +8,46 @@ h1 {
     @include font-size(6rem);
 }
 
-h2 {
+h2,h3,h4,h5,p{
     font-family: 'Libre Baskerville', serif;
+}
+
+h2 {
     @include font-size(2rem);
 }
 
 h3,
 h4 {
-    font-family: 'Libre Baskerville', serif;
     @include font-size(1rem);
 }
 
 h5 {
-    font-family: 'Libre Baskerville',
-        serif;
-    color: rgb(242, 184, 44);
     @include font-size(1.5rem);
 }
 
 p {
-    font-family: 'Libre Baskerville', serif;
     @include font-size(1.2rem);
     line-height: 1.5em;
-    color: #474847;
 }
 
+// Arriere plan image ou color plein écran
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    width: 100%;
+    height: 100%;
+}
+
+.txtShadow-dark{
+    text-shadow: 1px 1px 3px #000000 ;
+ }
+
+ .txtShadow-white{
+    text-shadow: 1px 1px 3px #ffffff;
+ }
+ 
 // ombrage des vignettes
 .box-shadow-down {
     -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);

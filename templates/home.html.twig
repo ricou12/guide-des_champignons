@@ -16,13 +16,14 @@
 {% endblock %}
 
 {% block body %}
-<div class="home__background"></div>
-<div class="home__opacity"></div>
+<div class="background home__bg--image"></div>
+{# Video #}
 <video class="home__video-bg" autoplay="true" loop muted  controls="controls">
     <source src="/assets/video/bg-video.mp4" type="video/mp4">
     <source src="/assets/video/bg-video.webm" type="video/webm">
-    {# <div class="home__novideo"></div> #}
 </video>
+<div class="background home__bg--color"></div>
+
 <div class="container-fluid d-flex flex-column flex-grow-1 justify-content-around align-items-center home">
     <div class="row">
         <section class="col">

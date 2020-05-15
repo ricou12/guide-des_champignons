@@ -1,13 +1,7 @@
 .logger {
 
-    &__background {
+    &__bg--image {
         background-image: url("/assets/images/foret/foret-3.jpg");
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -100;
-        width: 100%;
-        height: 100%;
         background-repeat: no-repeat;
         background-size: cover;
         -webkit-filter: blur(2px);

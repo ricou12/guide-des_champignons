@@ -18,10 +18,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="logger__background"></div>
+    <div class="background logger__bg--image"></div>
     <div class="container flex-grow-1 my-2 px-md-5">
         <div class="row">
-            <div class="col-12 bg-kaki text-white rounded p-3">
+            <div class="col-12 bg-greenLight text-white rounded p-3">
                 <h2>Profil</h2>
                 <p>
                     <a class="btn btn-light" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">Tous les utilisateurs</a>
@@ -30,60 +30,60 @@
                     <div class="col">
                         <div class="collapse" id="collapse1">
                             <div class="card card-body bg-dark">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-dark ">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Date d'inscription</th>
-                                            <th scope="col">pseudo</th>
-                                            <th scope="col">Nom</th>
-                                            <th scope="col">Prénom</th>
-                                            <th scope="col">Supprimer le compte</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for user in listeUser %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-dark">
+                                        <thead>
                                             <tr>
-                                                <th scope="row">{{ user.dateuser }}</th>
-                                                <td>{{ user.pseudouser }}</td>
-                                                <td>{{ user.nomuser }}</td>
-                                                <td>{{ user.prenomuser }}</td>
-                                                <td class="text-center">
-                                                    <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-outline-danger" data-toggle="modal"
-                                                        data-target="#exampleModal-{{ user.iduser }}">
-                                                        <img style="filter:invert(100%);" src="/assets/icones/trash.png" alt="Corbeille">
-                                                    </button>
+                                                <th scope="col">Date d'inscription</th>
+                                                <th scope="col">pseudo</th>
+                                                <th scope="col">Nom</th>
+                                                <th scope="col">Prénom</th>
+                                                <th scope="col">Supprimer le compte</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for user in listeUser %}
+                                                <tr>
+                                                    <th scope="row">{{ user.dateuser }}</th>
+                                                    <td>{{ user.pseudouser }}</td>
+                                                    <td>{{ user.nomuser }}</td>
+                                                    <td>{{ user.prenomuser }}</td>
+                                                    <td class="text-center">
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                                            data-target="#exampleModal-{{ user.iduser }}">
+                                                            <img style="filter:invert(100%);" src="/assets/icones/trash.png" alt="Corbeille">
+                                                        </button>
 
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal-{{ user.iduser }}" tabindex="-1" role="dialog"
-                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Supprimer un compte utilisateur</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body text-dark">
-                                                                    Etes-vous sur de vouloir supprimer le compte de : {{ user.pseudouser }}
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Annuler</button>
-                                                                    <a href="index.php?routing=suppression-de-compte&amp;idUser={{ user.iduser }}&amp;currentPgUser={{currentPageUsers}}&amp;currentPgFiche={{currentPageFiches}}"
-                                                                        class="btn btn-primary">Supprimer</a>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModal-{{ user.iduser }}" tabindex="-1" role="dialog"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title text-dark" id="exampleModalLabel">Supprimer un compte utilisateur</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body text-dark">
+                                                                        Etes-vous sur de vouloir supprimer le compte de : {{ user.pseudouser }}
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Annuler</button>
+                                                                        <a href="index.php?routing=suppression-de-compte&amp;idUser={{ user.iduser }}&amp;currentPgUser={{currentPageUsers}}&amp;currentPgFiche={{currentPageFiches}}"
+                                                                            class="btn btn-primary">Supprimer</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-6 d-flex justify-content-center p-2">
                                         <nav aria-label="Page navigation example">
@@ -100,7 +100,7 @@
                                                         {% else %}
                                                             <li class="page-item">
                                                                 <a href="index.php?routing=mon-compte&amp;pageUserIndex={{ i }}"
-                                                                    class="page-link bg-dark text-white">{{ i }}</a>
+                                                                    class="page-link bg-greenDark text-white">{{ i }}</a>
                                                             </li>
                                                         {% endif %}
                                                     {% endfor %}
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 bg-kaki text-white d rounded mt-2 p-3">
+            <div class="col-12 bg-greenLight text-white d rounded mt-2 p-3">
                 <h2>Liste des fiches descriptives</h2>
                 <label for="allPage">Voir toute les fiches</label>
                 {% if stateAllFiche %}
@@ -213,7 +213,7 @@
                                     {% else %}
                                         <li class="page-item">
                                             <a href="index.php?routing=mon-compte&amp;pageIndex={{ i }}"
-                                                class="page-link bg-dark text-white">{{ i }}</a>
+                                                class="page-link bg-greenDark text-white">{{ i }}</a>
                                         </li>
                                     {% endif %}
                                 {% endfor %}

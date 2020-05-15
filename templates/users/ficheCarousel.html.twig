@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="fiche__bg-img"></div>
+<div class="background fiche__bg--img"></div>
 <div class="container-fluid fiche">
     <div class="row">
 
@@ -62,8 +62,8 @@
         </div>
 
         <div class="col-12 col-md-12 order-md-1 col-lg-6 order-lg-2 col-xl-7 order-xl-2 mt-1 text-center fiche__header">
-            <h1 class="fiche__header__title">{{ fiche.communchamp }}</h1>
-            <h3 class="fiche__header__letter text-uppercase">{{ fiche.latinchamp }}</h3>
+            <h1 class="fiche__header__title text-gray">{{ fiche.communchamp }}</h1>
+            <h3 class="fiche__header__letter text-uppercase text-orange">{{ fiche.latinchamp }}</h3>
         </div>
 
         <div class="col-12 col-md-12 order-md-2 col-lg-6 order-lg-1 col-xl-5 order-xl-1 mt-2 d-flex justify-content-center align-items-end fiche__eat">
@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-6 order-md-7 col-lg-6 order-lg-4 col-xl-7 order-xl-4 px-3 px-md-4 py-3 p-lg-5 fiche__description">
+        <div class="col-12 col-md-6 order-md-7 col-lg-6 order-lg-4 col-xl-7 order-xl-4 px-3 px-md-4 py-3 p-lg-5 text-gray fiche__description">
             {% if fiche.localchamp %}
                 <p><span>Nom local</span><br> {{ fiche.localchamp }}</p>
             {% endif  -%}

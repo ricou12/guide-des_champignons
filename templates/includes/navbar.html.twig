@@ -3,7 +3,7 @@
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<div class="collapse navbar-collapse txtShadow-dark" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item {{is_active(title,'Guide des champignons')}}">
 				<a class="nav-link" href="index.php?routing=guide-des-champignons">Guide<span class="sr-only">(current)</span></a>
@@ -26,16 +26,23 @@
 		</ul>
 	</div>
 	<div class="collapse navbar-collapse d-inline">
-		<h2 class="text-white text-center m-0">{{title}}</h2>
+		<h2 class="text-white txtShadow-dark text-center m-0">{{title}}</h2>
 	</div>
 	
 	{% if is_userConnect %}
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<div class="collapse navbar-collapse navbar__connecter d-flex flex-nowrap justify-content-end mt-2 mt-lg-0 mr-lg-5">
 			<img src="/assets/icones/radio.svg" alt="connecté" width="45" class="mr-3">
-			<h5 class="text-light">{{is_userConnect.pseudouser}}</h5>
+			<h5 class=" txt-white txtShadow-dark" class="text-light">{{is_userConnect.pseudouser}}</h5>
 		</div>
 	</div>
+	{%  else %}
+	{# <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div class="collapse navbar-collapse navbar__connecter d-flex flex-nowrap justify-content-end mt-2 mt-lg-0 mr-lg-5">
+			<img src="/assets/icones/radio.svg" alt="connecté" width="45" class="mr-3">
+			<a class="nav-link {{is_active(title,'Connexion')}}" href="index.php?routing=se-connecter">Se connecter</a>
+		</div>
+	</div> #}
 	{% endif %}
 	
 

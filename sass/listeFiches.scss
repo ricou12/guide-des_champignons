@@ -1,16 +1,10 @@
 /* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.26, autoprefixer: v9.7.3) */
 
 .book {
-    &__bg {
+    &__bg--image {
         background-image: url("/assets/images/foret/foret-3.jpg");
         -webkit-filter: blur(2px);
                 filter: blur(2px);
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -100;
-        width: 100%;
-        height: 100%;
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -77,10 +71,6 @@
 
         &__titre {
             height: 100px;
-
-            &--color {
-                color: #665326;
-            }
         }
 
         &:hover {

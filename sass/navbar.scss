@@ -1,6 +1,9 @@
 .navbar {
-   li {
+    h2,li{
         font-family: 'Roboto', sans-serif;
+    }
+
+   li {
         font-size: 1.15em;
         letter-spacing: 0.5px;
         font-weight: 700;
@@ -8,7 +11,7 @@
 
     &__connecter {
         h5 {
-            color: white;
+            // color: white;
             font-weight: 400;
         }
         img{

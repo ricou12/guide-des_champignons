@@ -19,10 +19,10 @@
 
 {% block body %}
 	{# <div class="member__bg-img"></div> #}
-	<div class="logger__background"></div>
+	<div class="background logger__bg--image"></div>
 	<div class="container flex-grow-1 my-2 px-md-5 member">
 		<div class="row">
-			<div class="col-12 bg-kaki text-white rounded">
+			<div class="col-12 bg-greenLight text-white rounded">
 				<h2 class="p-2">Profil</h2>
 				{% if message %}<h3 class="p-2">{{message}}</h3>{% endif %}
 				<div class="table-responsive">
@@ -85,7 +85,7 @@
 			</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col-12 bg-kaki text-white rounded">
+			<div class="col-12 bg-greenLight text-white rounded">
 				<h2 class="p-2">Liste des champignons</h2>
                 <label for="allPage">Voir toute les fiches</label>
                 {% if stateAllFiche %}
@@ -195,7 +195,7 @@
 											</li>
 										{% else %}
 											<li class="page-item">
-												<a href="index.php?routing=mon-compte&amp;pageIndex={{ i }}" class="page-link bg-dark text-white">{{ i }}</a>
+												<a href="index.php?routing=mon-compte&amp;pageIndex={{ i }}" class="page-link bg-greenDark text-white">{{ i }}</a>
 											</li>
 										{% endif %}
 									{% endfor %}

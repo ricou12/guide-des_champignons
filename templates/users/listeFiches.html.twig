@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="book__bg"></div>
+<div class="background book__bg--image"></div>
 <article class="container-fluid flex-grow-1 book">
     <div class="row">
         <section class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center">
@@ -40,7 +40,7 @@
                             {% endif %}
                         </div>
                         <div class="book__card__titre d-flex flex-row justify-content-center align-items-center">
-                            <h5 class="book__card__titre--color text-center">{{fiche.communchamp}}</h5>
+                            <h5 class="text-greenDark txtShadow-white text-center">{{fiche.communchamp}}</h5>
                         </div>
                     </a>
                 </div>
@@ -57,7 +57,7 @@
                                 <span class="sr-only">(current)</span>
                             </span>
                         {% else %}
-                            <a href="index.php?routing=guide-des-champignons&amp;allFiches" class="page-link border bg-olive text-white">Tous</a>
+                            <a href="index.php?routing=guide-des-champignons&amp;allFiches" class="page-link border bg-greenDark text-white">Tous</a>
                         {% endif %}
                     </li>
                     {% for i in 1..pagination %}
@@ -70,7 +70,7 @@
                             </li>
                         {% else %}
                             <li class="page-item">
-                                <a href="index.php?routing=guide-des-champignons&amp;pageIndex={{ i }}" class="page-link bg-olive text-white">{{ i }}</a>
+                                <a href="index.php?routing=guide-des-champignons&amp;pageIndex={{ i }}" class="page-link bg-greenDark text-white">{{ i }}</a>
                             </li>
                         {% endif %}
                     {% endfor %}
