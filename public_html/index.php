@@ -42,11 +42,9 @@ session_start();
  
 // ROUTAGE PAR DEFAULT (premier chargement)
 $page = 'portail'; 
-
-if(isset($_GET['routing'])){
+if(isset($_GET['routing'])) {
    $page =  $_GET['routing'];
 }
-
 // ROUTING
 try
 {
@@ -65,7 +63,7 @@ try
             $page = isset($_GET['pageIndex']) ? $_GET['pageIndex'] : '1';
             if(is_numeric($page))
             {
-            $appController->listeFiches($page,isset($_GET['allFiches']));
+            $appController->getListMushrooms($page,isset($_GET['allFiches']));
             }
             else
             {
@@ -77,7 +75,7 @@ try
         case 'description':
             if(isset($_GET['idchamp']) && !empty($_GET['idchamp']) && is_numeric($_GET['idchamp']))
             {
-                $appController->getFiche('Public','',$_GET['idchamp']);
+                $appController->getSheetMushroom('Public','',$_GET['idchamp']);
             }
             else
             {
@@ -95,11 +93,11 @@ try
                     // Je récupère le role et id de l'utilisateur
                     $role = $_SESSION['user']['roleuser'];
                     $idUser = $_SESSION['user']['iduser'];
-                    $appController->getFiche($role,$idUser,$_GET['idchamp']);
+                    $appController->getSheetMushroom($role,$idUser,$_GET['idchamp']);
                 }
                 else
                 {
-                    $appController->getFiche('Public','',$_GET['idchamp']);
+                    $appController->getSheetMushroom('Public','',$_GET['idchamp']);
                 }
             }
             else
@@ -115,7 +113,7 @@ try
         case 'ajouter-une-fiche-descriptive':
              if($appController->get_value_session())
              {
-                $memberController->ShowAddFiche();
+                $memberController->ShowAddMushroom();
              }
              else
              {
@@ -130,7 +128,7 @@ try
             {
                 if(isset($_POST['nomcommun']) && !empty($_POST['nomcommun']))
                 {
-                    $memberController->addFiche($_POST['nomcommun'],$_POST['nomlatin'],$_POST['nomlocal'],$_POST['chapeau'],$_POST['gridRadios'],$_POST['lames'],$_POST['pied'],$_POST['chair'],$_POST['habitat'],$_POST['remarques'],$_POST['conso'],$_FILES['photo']);  
+                    $memberController->AddMushroom($_POST['nomcommun'],$_POST['nomlatin'],$_POST['nomlocal'],$_POST['chapeau'],$_POST['gridRadios'],$_POST['lames'],$_POST['pied'],$_POST['chair'],$_POST['habitat'],$_POST['remarques'],$_POST['conso'],$_FILES['photo']);  
                 }
                 else
                 {
@@ -149,7 +147,7 @@ try
             {
                 if (isset($_GET['idChamp']) && !empty($_GET['idChamp']) && is_numeric($_GET['idChamp']))
                 {
-                    $memberController->showUpdateFiche($_GET['idChamp']);
+                    $memberController->showUpdateMushroom($_GET['idChamp']);
                 }
             }
             else
@@ -165,11 +163,11 @@ try
             {
                 if(isset($_POST['nomcommun']) && !empty($_POST['nomcommun']) && isset($_POST['idchamp']) && !empty($_POST['idchamp']))
                 {
-                    $memberController->updateFiche($_POST['idchamp'],$_POST['nomcommun'],$_POST['nomlatin'],$_POST['nomlocal'],$_FILES['photo'],$_POST['conso'],$_POST['chapeau'],$_POST['gridRadios'],$_POST['lames'],$_POST['pied'],$_POST['chair'],$_POST['habitat'],$_POST['remarques']);
+                    $memberController->updateMushroom($_POST['idchamp'],$_POST['nomcommun'],$_POST['nomlatin'],$_POST['nomlocal'],$_FILES['photo'],$_POST['conso'],$_POST['chapeau'],$_POST['gridRadios'],$_POST['lames'],$_POST['pied'],$_POST['chair'],$_POST['habitat'],$_POST['remarques']);
                 }
                 else
                 {
-                    $memberController->showUpdateFiche($_POST['idchamp'],"Veuillez remplir le champ nom commun"); 
+                    $memberController->showUpdateMushroom($_POST['idchamp'],"Veuillez remplir le champ nom commun"); 
                 }
             }
             else
@@ -185,7 +183,7 @@ try
                 {
                 if(isset($_GET['idFich']) && !empty($_GET['idFich']) && is_numeric($_GET['idFich']))
                 {
-                    $memberController->deleteChampMember($_GET['idFich'],$_GET['currentPgFiche']);
+                    $memberController->deleteMushroomOfMember($_GET['idFich'],$_GET['currentPgFiche']);
                 }  
             }
             else
@@ -202,7 +200,7 @@ try
                 {
                     if(isset($_GET['idFich']) && !empty($_GET['idFich']) && is_numeric($_GET['idFich']))
                     {
-                        $adminController->deleteChampAdmin($_GET['idFich'],$_GET['currentPgFiche']);
+                        $adminController->deleteMushroomOfAdmin($_GET['idFich'],$_GET['currentPgFiche']);
                     }
                 }
                 else
@@ -260,7 +258,7 @@ try
              }
              else
              {
-                $loginController->showConnexion(); 
+                $loginController->showLogIn(); 
              }          
         break;
 
@@ -295,7 +293,7 @@ try
                         $pageUserIndex = isset($_GET['pageUserIndex']) ? $_GET['pageUserIndex'] : '1';
                         if( is_numeric($pageIndex) && is_numeric($pageUserIndex) )
                         {
-                             $adminController->showCompteAdmin($pageIndex,$pageUserIndex,isset($_GET['allFiche']));
+                             $adminController->showAccountAdmin($pageIndex,$pageUserIndex,isset($_GET['allFiche']));
                         }
                         else
                         {
@@ -307,7 +305,7 @@ try
                         $pageIndex = isset($_GET['pageIndex']) ? $_GET['pageIndex'] : '1';
                         if( is_numeric($pageIndex))
                         {
-                            $memberController->showCompteMember($pageIndex,$_SESSION['user']['iduser'],isset($_GET['allFiche']));
+                            $memberController->showAccountMember($pageIndex,$_SESSION['user']['iduser'],isset($_GET['allFiche']));
                         }
                         else
                         {
@@ -423,7 +421,7 @@ try
                 {
                     if(isset($_GET['idFiche']) && !empty($_GET['idFiche']) && is_numeric($_GET['idFiche']))
                     {
-                        $adminController->autoriser($_GET['idFiche'],$_GET['currentPgFiche']);
+                        $adminController->authorizePublication($_GET['idFiche'],$_GET['currentPgFiche']);
                     }
                     else
                     {

@@ -141,18 +141,18 @@
 @mixin login {
     -webkit-animation-name: login;
             animation-name: login;
-    -webkit-animation-duration: .9s;
-            animation-duration: .9s;
-    -webkit-animation-direction: alternate-reverse;
-            animation-direction: alternate-reverse;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    -webkit-animation-direction: alternate;
+            animation-direction: alternate;
     -webkit-animation-iteration-count: infinite;
             animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes login {
     to {
-        -webkit-filter:invert(0.5);
-                filter:invert(0.5);
+        -webkit-filter:invert(0.75);
+                filter:invert(0.75);
     }
     from {
         -webkit-filter:invert(1);
@@ -162,8 +162,8 @@
 
 @keyframes login {
     to {
-        -webkit-filter:invert(0.5);
-                filter:invert(0.5);
+        -webkit-filter:invert(0.7);
+                filter:invert(0.7);
     }
     from {
         -webkit-filter:invert(1);

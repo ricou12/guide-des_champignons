@@ -264,7 +264,6 @@ INSERT INTO `utilisateurs` (`iduser`, `dateuser`, `nomuser`, `prenomuser`, `role
 --
 ALTER TABLE `champ`
   ADD CONSTRAINT `champ_utilisateurs_FK` FOREIGN KEY (`iduser`) REFERENCES `utilisateurs` (`iduser`) ON DELETE SET NULL;
-
 --
 -- Contraintes pour la table `images`
 --

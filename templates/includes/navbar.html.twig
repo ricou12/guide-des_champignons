@@ -1,51 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-dark {% if title != '' %} bg-navigate {% endif %} p-3" id="pageup">
-	<a class="navbar-brand" href="index.php?routing=portail"><img class="logo mr-3" src="/assets/icones/logo.png" width="50" alt=""></a>
+<nav class="navbar navbar-expand-md navbar-dark {% if title == "Description" %} bg-navigate {% endif %} p-3" id="pageup">
+	{# Logo #}
+	<a class="navbar-brand" href="index.php?routing=portail"><img class="logo" src="/assets/icones/logo.png" width="50" alt=""></a>
+	{# Titre #}
+	<h3 class="text-white font-weight-bold txtShadow-dark m-0 d-md-none">{{title}}</h3>
+	{# Bouton collapse #}
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
+	
 	<div class="collapse navbar-collapse txtShadow-dark" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
+		<li class="nav-item {{is_active(title,'')}}">
+				<a class="nav-link" href="index.php?routing=portail">Accueil<span class="sr-only">(current)</span></a>
+			</li>
 			<li class="nav-item {{is_active(title,'Guide des champignons')}}">
-				<a class="nav-link" href="index.php?routing=guide-des-champignons">Guide<span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="index.php?routing=guide-des-champignons">Guide des champignons<span class="sr-only">(current)</span></a>
 			</li>
 			{% if is_userConnect %}
 				<li class="nav-item">
 					<a class="nav-link {{is_active(title,'comptes')}}" href="index.php?routing=mon-compte">Gérer mes fiches</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link {{is_active('','Deconnexion')}}" href="index.php?routing=deconnexion">Déconnexion</a>
-				</li>
-			{% else %}
-				<li class="nav-item">
-					<a class="nav-link {{is_active(title,'Inscription')}}" href="index.php?routing=creer-mon-compte">S'incrire</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link {{is_active(title,'Connexion')}}" href="index.php?routing=se-connecter">Se connecter</a>
-				</li>
 			{% endif %}
 		</ul>
-	</div>
-	<div class="collapse navbar-collapse d-inline">
-		<h2 class="text-white txtShadow-dark text-center m-0">{{title}}</h2>
+		<form class="form-inline my-2 my-md-0 mr-3">
+     	{% if is_userConnect %}
+		 <div class="dropdown">
+			<a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="navbar__connecter"><img src="/assets/icones/connexion.png" alt="connecté" width="45" class="mr-3">
+				{{is_userConnect.pseudouser}}</span>
+			</a>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				<a class="dropdown-item" href="index.php?routing=mon-profil">Mon profil</a>
+				<a class="dropdown-item" href="index.php?routing=deconnexion">Déconnexion</a>
+			</div>
+		</div>
+		{%  else %}
+		<a class="{is_active(title,'Connexion')}}" href="index.php?routing=se-connecter">
+			<img src="/assets/icones/connexion.png" alt="connecté" width="60">
+		</a>
+		{% endif %}
+    </form>
 	</div>
 	
-	{% if is_userConnect %}
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<div class="collapse navbar-collapse navbar__connecter d-flex flex-nowrap justify-content-end mt-2 mt-lg-0 mr-lg-5">
-			<img src="/assets/icones/radio.svg" alt="connecté" width="45" class="mr-3">
-			<h5 class=" txt-white txtShadow-dark" class="text-light">{{is_userConnect.pseudouser}}</h5>
-		</div>
-	</div>
-	{%  else %}
-	{# <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<div class="collapse navbar-collapse navbar__connecter d-flex flex-nowrap justify-content-end mt-2 mt-lg-0 mr-lg-5">
-			<img src="/assets/icones/radio.svg" alt="connecté" width="45" class="mr-3">
-			<a class="nav-link {{is_active(title,'Connexion')}}" href="index.php?routing=se-connecter">Se connecter</a>
-		</div>
-	</div> #}
-	{% endif %}
-	
-
 </nav>
+
+
 
 

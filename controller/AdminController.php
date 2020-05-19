@@ -7,10 +7,10 @@ class AdminController extends AppController
      *       GESTION DU COMPTE ADMINISTRATEUR
     ************************************************/
     // Affiche la page de l'administrateur
-    public function showCompteAdmin($currentPageFiches,$currentPageUsers,$allFiche = false)
+    public function showAccountAdmin($currentPageFiches,$currentPageUsers,$allFiche = false)
     {
-        $listusers = $this->sqlCommande->listeUsers($currentPageUsers);
-        $listeFiches = $this->sqlCommande->pageCompte($currentPageFiches,"",$allFiche);
+        $listusers = $this->sqlCommande->listUsers($currentPageUsers);
+        $listeFiches = $this->sqlCommande->listMushroomsPerUser($currentPageFiches,"",$allFiche);
         if($currentPageFiches <= $listeFiches[0] && count($listeFiches[1]) > 0)
         {
             echo $this->render('comptes/administrateur.html.twig', 
@@ -37,7 +37,7 @@ class AdminController extends AppController
         $response = $this->sqlCommande->deleteAccount($idUser);
         if($response)
         {
-            $this->showCompteAdmin($currentPageFiches,$currentPageUsers); 
+            $this->showAccountAdmin($currentPageFiches,$currentPageUsers); 
         }
         else
         {
@@ -49,10 +49,10 @@ class AdminController extends AppController
     *    GESTION DES FICHES RENDRE PUBLIC, DELETE
     **********************************************/
     //  Supprime une fiche descriptive
-    public function deleteChampAdmin($idchamp,$currentPgFiche)
+    public function deleteMushroomOfAdmin($idchamp,$currentPgFiche)
     {
         // Supprime la fiche et les enregistrements enfants avec la CONTRAINT ON DELETE CASCADE
-        $result = $this->sqlCommande->deleteChampAdmin($idchamp);
+        $result = $this->sqlCommande->deleteMushroomOfAdmin($idchamp);
         // supprime les fichiers et les dossiers si la requete s'est executé.
         if($result)
         {
@@ -78,9 +78,9 @@ class AdminController extends AppController
     }
 
     // Autoriser ou masquer les fiches dans l'espace public
-    public function autoriser($idchamp,$currentPgFiche)
+    public function authorizePublication($idchamp,$currentPgFiche)
     {
-        $this->sqlCommande->autoriser($idchamp);
+        $this->sqlCommande->authorizePublication($idchamp);
         header('location:index.php?routing=mon-compte&pageIndex='.$currentPgFiche);
          
     }

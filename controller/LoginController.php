@@ -12,7 +12,7 @@ class LoginController extends AppController {
         {
             $_SESSION['user'] = $response['iduser'];
             // Charge la page liste des guide-des-champignons
-            $list = $this->sqlCommande->listeFiches('1',false);
+            $list = $this->sqlCommande->getListMushrooms('1',false);
             header('location:index.php?routing=mon-compte');
         }
         else
@@ -31,7 +31,7 @@ class LoginController extends AppController {
     }
 
     // Rendu de la page se connecter
-    function showConnexion()
+    function showLogIn()
     {
         echo $this->render('logger/login.html.twig', ['title' => 'Connexion']);
     }
@@ -62,6 +62,6 @@ class LoginController extends AppController {
         // Détruit toutes les variables de session
         $_SESSION = array();
         session_destroy();
-        $this->listeFiches('1',false);
+        $this->getListMushrooms('1',false);
     }
 }

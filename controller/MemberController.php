@@ -8,9 +8,9 @@ class MemberController extends AppController
      *       GESTION DU COMPTE MEMBRE
     ************************************************/
     // Affiche la page d'administration des membres
-    function showCompteMember($currentPageFiches,$idUser,$allFiche)
+    function showAccountMember($currentPageFiches,$idUser,$allFiche)
     {
-        $listeFiches = $this->sqlCommande->pageCompte($currentPageFiches,$idUser,$allFiche);
+        $listeFiches = $this->sqlCommande->listMushroomsPerUser($currentPageFiches,$idUser,$allFiche);
         if($currentPageFiches <= $listeFiches[0] && count($listeFiches[1]) > 0)
         {
             echo $this->render('comptes/member.html.twig', 
@@ -106,7 +106,7 @@ class MemberController extends AppController
         {
             $_SESSION = array();
             session_destroy();
-            $this->listeFiches('1',false);
+            $this->getListMushrooms('1',false);
         }
         else
         {
@@ -118,17 +118,17 @@ class MemberController extends AppController
     *    GESTION DES FICHES AJOUT EDIT DELETE
     **********************************************/
     // Chargement de la page ajouter une fiche
-    public function showAddFiche($dataText = "",$message = "")
+    public function ShowAddMushroom($dataText = "",$message = "")
     {
         $this->showAddOrUpdateFiche('Ajouter',"index.php?routing=addFiche",$dataText,"",$message);
     }
 
     // Chargement de la page modifier une fiche si l'utilisateur connecté en est proprietaire.
-    public function showUpdateFiche($idchamp,$message="")
+    public function showUpdateMushroom($idchamp,$message="")
     {
         $role = $_SESSION['user']['roleuser'];
         $iduser = $_SESSION['user']['iduser'];
-        $fiche = $this->sqlCommande->getFiche($role,$iduser,$idchamp);
+        $fiche = $this->sqlCommande->getSheetMushroom($role,$iduser,$idchamp);
         if($fiche)
         {
             $images = [];
@@ -160,14 +160,14 @@ class MemberController extends AppController
     }
 
     // Ajoute la description et crée le dossier ajoute les photos
-    public function AddFiche($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$photos)
+    public function AddMushroom($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$photos)
     {
         // Calculer si la capacité max d'upload n'est pas dépassé. 32000000
         $size_upload = $this->maxUpload($photos);
         if( $size_upload <  32000000)
         {
             // insert données dans la table champ
-            $idFiche = $this->sqlCommande->addFiche($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$_SESSION['user']['iduser']);
+            $idFiche = $this->sqlCommande->AddMushroom($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$_SESSION['user']['iduser']);
             // Télécharge les photos
             $this->uploadPhoto($photos, $idFiche);
             header('location:index.php?routing=mon-compte');   
@@ -190,12 +190,12 @@ class MemberController extends AppController
                 'consochamp' => $conso,
                 'photos' => $photos
             ];
-            $this->showAddFiche($dataText,$message);
+            $this->ShowAddMushroom($dataText,$message);
         }   
     }
 
     // Mise à jour d'une fiche 
-    public function updateFiche($idchamp,$nomcommun,$nomlatin,$nomlocal,$photos,$conso,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques)
+    public function updateMushroom($idchamp,$nomcommun,$nomlatin,$nomlocal,$photos,$conso,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques)
     {
         // Calculer si la capacité max d'upload n'est pas dépassé. 24000000
         $size_upload = $this->maxUpload($photos);
@@ -203,7 +203,7 @@ class MemberController extends AppController
         {
             $iduser = $_SESSION['user']['iduser'];
             // MAJ de la table champ
-            $this->sqlCommande->updateFiche($_SESSION['user']['iduser'],$idchamp,$nomcommun,$nomlatin,$nomlocal,$conso,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques);
+            $this->sqlCommande->updateMushroom($_SESSION['user']['iduser'],$idchamp,$nomcommun,$nomlatin,$nomlocal,$conso,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques);
             // Upload des photos
             $this->uploadPhoto($photos, $idchamp);
             header('location:index.php?routing=mon-compte'); 
@@ -211,7 +211,7 @@ class MemberController extends AppController
         else
         {
             $message = "Vous avez dépassé la capacité maximun d'upload : ".round(($size_upload/1000000), 2)." Mo, vérifer vos images et redimensionner si necessaire !";
-            $this->showUpdateFiche($idchamp,$message);
+            $this->showUpdateMushroom($idchamp,$message);
             exit;
         } 
     }
@@ -236,7 +236,7 @@ class MemberController extends AppController
     // UPLOAD des photos. lors de l'ajout d'une nouvelle fiche
     public function uploadPhoto($photos,$idchamp)
     {
-        $fiche = $this->sqlCommande->getImagesperChamp($idchamp);
+        $fiche = $this->sqlCommande->getImagesPerMushroom($idchamp);
         // Parcours le tableau photos
         foreach($photos['error'] as $key => $value)
         {
@@ -252,7 +252,7 @@ class MemberController extends AppController
                if(!array_key_exists(strtolower($ext), $allowed))
                {
                 $message = "Erreur : Veuillez sélectionner un format de fichier valide.";
-                $this->showUpdateFiche($idchamp,$message);
+                $this->showUpdateMushroom($idchamp,$message);
                 die;   
                }
                 
@@ -318,7 +318,7 @@ class MemberController extends AppController
     }
 
     //  Supprime une fiche descriptive
-    public function deleteChampMember($idchamp,$currentPgFiche)
+    public function deleteMushroomOfMember($idchamp,$currentPgFiche)
     {
         // Supprime la fiche et les enregistrements enfants avec la CONTRAINT ON DELETE CASCADE
         $result = $this->sqlCommande->deleteChampMembre($idchamp,$_SESSION['user']['iduser']);

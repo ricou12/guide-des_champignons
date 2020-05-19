@@ -22,7 +22,7 @@ class MyComponentsSql {
                   LISTE ET FICHES INDIVIDUELLES
     *****************************************************/
     // Récupère toute les fiches signalétique et les images par jointures.
-    public function listeFiches($page,$isAllFiche)
+    public function getListMushrooms($page,$isAllFiche)
     {
         $query = $this->_dataBase->prepare('SELECT COUNT(*) FROM champ WHERE champ.autoriserchamp = 1');
         $query->execute();
@@ -34,7 +34,7 @@ class MyComponentsSql {
             $nbreperpage =  $result[0];
             $offset = 0;
         } else {
-            $nbreperpage = 8;
+            $nbreperpage = 10;
             $nbre_pages= ceil(intval($result[0]) / intval($nbreperpage));
             $offset = ( $page * $nbreperpage ) - $nbreperpage;
         }
@@ -48,7 +48,7 @@ class MyComponentsSql {
     }
 
     // Récupère une fiche signalétique et les images par jointures.
-    public function getFiche($role,$iduser,$idchamp)
+    public function getSheetMushroom($role,$iduser,$idchamp)
     {
         // c'est le role qui détermine les différences dans la requete
         $sql;
@@ -189,7 +189,7 @@ class MyComponentsSql {
                   PAGES D'ADMINISTRATION DES COMPTES
     *****************************************************/
     // Dresse la liste des comptes
-    public function listeUsers($page)
+    public function listUsers($page)
     {
         $query = $this->_dataBase->prepare('select count(*) from utilisateurs');
         $query->execute();
@@ -208,7 +208,7 @@ class MyComponentsSql {
     }
 
     //  Affiche la liste des fiches descriptive par utilisateurs.
-    public function pageCompte($page,$idUser="", $allFiche )
+    public function listMushroomsPerUser($page,$idUser="", $allFiche )
     {
         $sql ="";
         $query="";
@@ -247,7 +247,7 @@ class MyComponentsSql {
     }
 
     // Ajoute une fiche pour un utilisateur via son id stocké dans la variable de session
-    public function addFiche($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$iduser)
+    public function AddMushroom($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$iduser)
     {
          $query = $this->_dataBase->prepare('INSERT INTO champ (communchamp,latinchamp,localchamp,chapeauchamp,
             typelameschamp,lameschamp,piedchamp,chairchamp,habitatchamp,remarqueschamp,consochamp,iduser) 
@@ -270,7 +270,7 @@ class MyComponentsSql {
     }
  
     // update une fiche si son iduser stocké dans la variable de session = iduser de la fiche 
-    public function updateFiche($iduser,$idchamp,$nomcommun,$nomlatin,$nomlocal,$conso,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques)
+    public function updateMushroom($iduser,$idchamp,$nomcommun,$nomlatin,$nomlocal,$conso,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques)
     {
         $query = $this->_dataBase->prepare('UPDATE champ SET communchamp=:communchamp,latinchamp=:latinchamp,localchamp=:localchamp,chapeauchamp=:chapeauchamp,typelameschamp=:typelameschamp,lameschamp=:lameschamp,piedchamp=:piedchamp,chairchamp=:chairchamp,habitatchamp=:habitatchamp,remarqueschamp=:remarqueschamp,consochamp=:consochamp WHERE idchamp=:idchamp AND champ.iduser=:iduser');
         $query->bindParam(':iduser', $iduser);
@@ -290,7 +290,7 @@ class MyComponentsSql {
         $query->closeCursor();
     }
 
-    public function getImagesperChamp($idchamp)
+    public function getImagesPerMushroom($idchamp)
     {
         $query = $this->_dataBase->prepare('SELECT * FROM images WHERE idchamp = :idchamp');
         $query->bindParam(':idchamp',$idchamp);
@@ -328,7 +328,7 @@ class MyComponentsSql {
         return $result; 
     }
 
-    public function deleteChampAdmin($idchamp)
+    public function deleteMushroomOfAdmin($idchamp)
     { 
         $query = $this->_dataBase->prepare('DELETE FROM champ WHERE idchamp=:idchamp');
         $query->bindParam(':idchamp', $idchamp);
@@ -337,7 +337,7 @@ class MyComponentsSql {
         return $result; 
     }
 
-    public function autoriser($idchamp)
+    public function authorizePublication($idchamp)
     {
         $query = $this->_dataBase->prepare('UPDATE champ SET autoriserchamp = NOT autoriserchamp WHERE idchamp=:idchamp');
         $query->bindParam(':idchamp', $idchamp);

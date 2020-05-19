@@ -15,9 +15,9 @@ class AppController extends BaseController {
     }
     
     // Rendu de la liste des fiches 
-    public function listeFiches($currentPage, $isAllFiche)
+    public function getListMushrooms($currentPage, $isAllFiche)
     {
-        $list = $this->sqlCommande->listeFiches($currentPage,$isAllFiche);
+        $list = $this->sqlCommande->getListMushrooms($currentPage,$isAllFiche);
         if($isAllFiche)$currentPage = 0;
         if($currentPage <= $list['nbrePage']  && count($list['listFiches']) > 0)
         {
@@ -36,9 +36,9 @@ class AppController extends BaseController {
     }
 
     // Voir une fiche avec restriction en fonction du role ou en session public
-    public function getFiche($role,$iduser,$idchamp)
+    public function getSheetMushroom($role,$iduser,$idchamp)
     {
-        $fiche = $this->sqlCommande->getFiche($role,$iduser,$idchamp);
+        $fiche = $this->sqlCommande->getSheetMushroom($role,$iduser,$idchamp);
         if($fiche)
         {
             $images = $this->getImages($fiche);
