@@ -25,15 +25,23 @@ class LoginController extends AppController {
     function showRegister($message="")
     {
         echo $this->render('logger/register.html.twig', 
-            ['title' => 'Inscription',
+            [
+            'name' => 'inscription',
+            'title' => 'S\'inscrire',
             'erreur' => $message
-        ]);
+            ]
+        );
     }
 
     // Rendu de la page se connecter
     function showLogIn()
     {
-        echo $this->render('logger/login.html.twig', ['title' => 'Connexion']);
+        echo $this->render('logger/login.html.twig',
+            [
+            'name' => 'connexion',
+            'title' => 'Se connecter'
+            ]
+        );
     }
 
     // Vérifie si le compte existe
@@ -50,7 +58,10 @@ class LoginController extends AppController {
         }
         else
         {
-            echo $this->render('logger/login.html.twig', ['title' => 'Connexion',
+            echo $this->render('logger/login.html.twig',
+                [
+                'name' => 'connexion',
+                'title' => 'Se connecter',
                 'erreur' => $response['message']
             ]);
         }

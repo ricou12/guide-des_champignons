@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark {% if title == "Description" %} bg-navigate {% endif %} p-3" id="pageup">
 	{# Logo #}
-	<a class="navbar-brand" href="index.php?routing=portail"><img class="logo" src="/assets/icones/logo.png" width="50" alt=""></a>
+	<a class="pr-md-3" href="index.php?routing=portail"><img class="logo" src="/assets/icones/logo.png" width="50" alt=""></a>
 	{# Titre #}
 	<h3 class="text-white font-weight-bold txtShadow-dark m-0 d-md-none">{{title}}</h3>
 	{# Bouton collapse #}
@@ -10,15 +10,15 @@
 	
 	<div class="collapse navbar-collapse txtShadow-dark" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-		<li class="nav-item {{is_active(title,'')}}">
+		<li class="nav-item {{is_active(name,'accueil')}}">
 				<a class="nav-link" href="index.php?routing=portail">Accueil<span class="sr-only">(current)</span></a>
 			</li>
-			<li class="nav-item {{is_active(title,'Guide des champignons')}}">
+			<li class="nav-item {{is_active(name,'guide')}}">
 				<a class="nav-link" href="index.php?routing=guide-des-champignons">Guide des champignons<span class="sr-only">(current)</span></a>
 			</li>
 			{% if is_userConnect %}
 				<li class="nav-item">
-					<a class="nav-link {{is_active(title,'comptes')}}" href="index.php?routing=mon-compte">Gérer mes fiches</a>
+					<a class="nav-link {{is_active(name,'users')}}" href="index.php?routing=mon-compte">Gérer mes fiches</a>
 				</li>
 			{% endif %}
 		</ul>
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		{%  else %}
-		<a class="{is_active(title,'Connexion')}}" href="index.php?routing=se-connecter">
+		<a class="{is_active(name,'connexion')}}" href="index.php?routing=se-connecter">
 			<img src="/assets/icones/connexion.png" alt="connecté" width="60">
 		</a>
 		{% endif %}

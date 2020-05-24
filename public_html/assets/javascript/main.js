@@ -1,4 +1,5 @@
-// Ecoute les evenements change sur le conteneur upload
+// Ecoute les eveneman
+
 document.querySelector('.added__upload').addEventListener('change',(event) => {
 let my_element = event.target;
 let fichierSelectionne = my_element.files[0];

@@ -67,7 +67,7 @@ try
             }
             else
             {
-                throw new ExceptionWithRedirect("Erreur impossible de charger la page !", 404, "guide-des-champignons");
+                throw new ExceptionWithRedirect("Cette page n'existe pas !", 404, "guide-des-champignons");
             }
         break;
 
@@ -430,7 +430,7 @@ try
                 }
                 else
                 {
-                    throw new ExceptionWithRedirect("Désolé, cette section est réservé à l'administrateur !", 404, "portail");
+                    throw new ExceptionWithRedirect("Désolé, cette section est réservé à l'administrateur !", 401, "portail");
                 }
             }
             else

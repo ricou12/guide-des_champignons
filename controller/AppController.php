@@ -11,7 +11,12 @@ class AppController extends BaseController {
     public function home()
     {
         echo $this->render('home.html.twig',
-            ['title' => '','is_userConnect' => $this->get_value_session()]);
+            [
+            'name' => 'accueil',
+            'title' => 'Portail',
+            'is_userConnect' => $this->get_value_session()
+            ]
+        );
     }
     
     // Rendu de la liste des fiches 
@@ -22,12 +27,15 @@ class AppController extends BaseController {
         if($currentPage <= $list['nbrePage']  && count($list['listFiches']) > 0)
         {
             echo $this->render('users/listeFiches.html.twig', 
-            ['title' => 'Guide des champignons',
-            'is_userConnect' => $this->get_value_session(),
-            'listeFiches' => $list['listFiches'],
-            'pagination' => $list['nbrePage'],
-            'currentPage' => $currentPage
-            ]);
+                [
+                'name' => 'guide',
+                'title' => 'Guide des champignons',
+                'is_userConnect' => $this->get_value_session(),
+                'listeFiches' => $list['listFiches'],
+                'pagination' => $list['nbrePage'],
+                'currentPage' => $currentPage
+                ]
+            );
         }
         else
         {
@@ -43,12 +51,14 @@ class AppController extends BaseController {
         {
             $images = $this->getImages($fiche);
             echo $this->render('users/ficheCarousel.html.twig',
-            [
+                [
+                'name' => 'description',
                 'title' => 'Description',
                 'is_userConnect' => $this->get_value_session(),
                 'fiche' => $fiche[0],
                 'images' => $images
-            ]); 
+                ]
+            ); 
         }
         else
         {

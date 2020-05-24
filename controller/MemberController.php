@@ -11,16 +11,19 @@ class MemberController extends AppController
     function showAccountMember($currentPageFiches,$idUser,$allFiche)
     {
         $listeFiches = $this->sqlCommande->listMushroomsPerUser($currentPageFiches,$idUser,$allFiche);
-        if($currentPageFiches <= $listeFiches[0] && count($listeFiches[1]) > 0)
+        if($currentPageFiches <= $listeFiches[0] && count($listeFiches[1]) >= 0 || $listeFiches[0] == 0)
         {
             echo $this->render('comptes/member.html.twig', 
-            ['title' => 'Membre',
-            'is_userConnect' => $_SESSION['user'],
-            'listeFiches' => $listeFiches[1],
-            'numberPageFiches' => $listeFiches[0],
-            'currentPageFiches' => $currentPageFiches,
-            'stateAllFiche' => $allFiche,
-            ]);
+                [
+                'name' => 'users',
+                'title' => 'Espace membre',
+                'is_userConnect' => $_SESSION['user'],
+                'listeFiches' => $listeFiches[1],
+                'numberPageFiches' => $listeFiches[0],
+                'currentPageFiches' => $currentPageFiches,
+                'stateAllFiche' => $allFiche,
+                ]
+            );
         } 
         else
         {
@@ -34,11 +37,14 @@ class MemberController extends AppController
         // $profil = $this->sqlCommande->getProfil($_SESSION['user']['iduser']);
         $profil = $_SESSION ['user'];
         echo $this->render('comptes/profil.html.twig', 
-        ['title' => 'Modifier mon profil',
-        'profil' => $profil,
-        'messageError' => $messageError,
-        'is_userConnect' =>  $this->get_value_session(),
-        ]);
+            [
+            'name' => 'profil',
+            'title' => 'Modifier mon profil',
+            'profil' => $profil,
+            'messageError' => $messageError,
+            'is_userConnect' =>  $this->get_value_session(),
+            ]
+        );
     }
 
     // Mettre à jour son profil
@@ -150,13 +156,16 @@ class MemberController extends AppController
     public function showAddOrUpdateFiche($title,$route,$dataText = "",$dataImage="",$message)
     {
         echo $this->render('comptes\addOrUpdateFiche.html.twig',
-            ['title' => $title,
+            [
+            'name' => 'add-modifier',
+            'title' => $title,
             'route' => $route,
             'dataText' => $dataText,
             'dataImage' => $dataImage,
             'message' => $message,
             'is_userConnect' =>  $this->get_value_session(),
-            ]);        
+            ]
+        );        
     }
 
     // Ajoute la description et crée le dossier ajoute les photos

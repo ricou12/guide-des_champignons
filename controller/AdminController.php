@@ -14,16 +14,19 @@ class AdminController extends AppController
         if($currentPageFiches <= $listeFiches[0] && count($listeFiches[1]) > 0)
         {
             echo $this->render('comptes/administrateur.html.twig', 
-            ['title' => 'Administrateur',
-            'is_userConnect' => $this->get_value_session(),
-            'listeUser' => $listusers[1],
-            'numberPageUsers' => $listusers[0],
-            'currentPageUsers' => $currentPageUsers,
-            'listeFiches' => $listeFiches[1],
-            'numberPageFiches' => $listeFiches[0],
-            'currentPageFiches' => $currentPageFiches,
-            'stateAllFiche' => $allFiche,
-            ]);
+                [
+                'name' => 'users',
+                'title' => 'Administrateur',
+                'is_userConnect' => $this->get_value_session(),
+                'listeUser' => $listusers[1],
+                'numberPageUsers' => $listusers[0], 
+                'currentPageUsers' => $currentPageUsers,
+                'listeFiches' => $listeFiches[1],
+                'numberPageFiches' => $listeFiches[0],
+                'currentPageFiches' => $currentPageFiches,
+                'stateAllFiche' => $allFiche,
+                ]
+            );
         } 
         else
         {

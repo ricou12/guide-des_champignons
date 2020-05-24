@@ -1,18 +1,18 @@
 {% extends "default.html.twig" %}
 
 {% block title %}
-    Guide des champignons - base de données interactive !
+    Guide des champignons - base de données collaborative !
 {% endblock %}
 {% block meta %}
-    <meta name="Guide des champignons" content="Reconnaître facilement un champignon comestible ? Trouvez ces informations sur le guide des champignons. Participer à l'élaboration d'une base de données interactive."/>
+    <meta name="description" content="Reconnaître facilement un champignon comestible ? Trouvez ces informations sur le guide des champignons. Participer à l'élaboration d'une base de données interactive."/>
 {% endblock %}
 {% block og %}
     <meta property="og:title" content="Guide des champignons - base de données interactive !"/>
-    <meta property="og:description" content="Reconnaître facilement un champignon comestible ? Trouvez ces informations sur le guide des champignons. Participer à l'élaboration d'une base de données interactive."/>
-    <meta property="og:url" content="/index.php?routing=portail">
-    <meta property="og:image" content="/assets/icones/logo.png"/>
-    <meta property="og:image:width" content="100"/>
-    <meta property="og:image:height" content="100"/>
+    <meta property="og:description" content="Reconnaître facilement un champignon comestible ? Trouvez ces informations sur le guide des champignons. Participer à l'élaboration d'une base de données collaborative."/>
+    <meta property="og:url" content="{{url}}/index.php?routing=portail"/>
+    <meta property="og:image" content="{{url}}/assets/icones/logo.png"/>
+    <meta property="og:image:width" content="150"/>
+    <meta property="og:image:height" content="150"/>
 {% endblock %}
 
 {% block body %}
@@ -24,7 +24,7 @@
 </video>
 <div class="background home__bg--color"></div>
 
-<div class="container-fluid d-flex flex-column flex-grow-1 justify-content-around align-items-center home">
+<div class="container-fluid d-flex flex-column justify-content-around align-items-center home">
     <div class="row">
         <section class="col">
             <h1 class="text-center text-white p-2 p-lg-5">Champignons de nos régions</h1>

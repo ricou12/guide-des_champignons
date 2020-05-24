@@ -5,24 +5,26 @@
 {% endblock %}
 
 {% block meta %}
-    <meta name="Espace membre" content="Le guide des champignons vous permets de définir les paramètre de votre profile.">
+    <meta name="description" content="Espace membre - Le guide des champignons vous permets de définir les paramètre de votre profile.">
 {% endblock %}
 
 {% block og %}
     <meta property="og:title" content="Guide des champignons - Les informations générales de mon profil">
     <meta property="og:description" content="Le guide des champignons vous permets de définir les paramètre de votre profile.">
-    <meta property="og:url" content="">
-    <meta property="og:image" content="/assets/icones/logo.png"/>
-    <meta property="og:image:width" content="100" />
-    <meta property="og:image:height" content="100" />
+    <meta property="og:url" content="{{url}}/index.php?routing=mon-profil">
+    <meta property="og:image" content="{{url}}/assets/icones/logo.png"/>
+    <meta property="og:image:width" content="150" />
+    <meta property="og:image:height" content="150" />
 {% endblock %}
 
 {% block body %}
 <div class="background logger__bg--image"></div>
 <div class="background bgColor-blackLight"></div>
-<div class="container flex-grow-1 profil">
+<div class="container profil">
     <div class="row d-flex justify-content-center my-2">
+        
         <div class="col-12 col-md-8 bg-greenLight text-white p-4 rounded-lg">
+        <h1 class="text-center txtShadow text-light ftSize-medium d-none d-md-block">{{title}}</h1>
             <div class="form-group">
 				<h4 class="text-info">{{messageError}}</h4>
 			</div>

@@ -8962,11 +8962,17 @@ p {
 .txtShadow-white {
   text-shadow: 1px 1px 3px #ffffff; }
 
+.txtShadow {
+  text-shadow: 2px 1px 5px black; }
+
+.ftSize-medium {
+  font-size: 3em; }
+
 .box-shadow-down {
   -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
   box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0); }
 
-.navbar h2, .navbar li {
+.navbar h3, .navbar li {
   font-family: 'Roboto', sans-serif; }
 
 .navbar li {
@@ -9129,7 +9135,7 @@ p {
     letter-spacing: 8px;
     text-shadow: 2px 1px 5px black;
     font-size: 3.5em;
-    line-height: 1.5em;
+    line-height: 1.2em;
     -webkit-animation: moveX 2s;
     animation: moveX 2s; }
 
@@ -9138,7 +9144,7 @@ p {
     min-height: 90vh; }
     .home h2 {
       font-size: 2.2em;
-      line-height: 1.7em;
+      line-height: 1.5em;
       letter-spacing: 0.1em; }
     .home__video-bg {
       display: none; }
