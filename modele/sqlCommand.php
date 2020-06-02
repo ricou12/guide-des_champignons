@@ -92,16 +92,16 @@ class MyComponentsSql {
     }
 
 
-    public function createLogin($pseudo,$password)
+    public function createAccount($pseudo,$password)
     {
         $is_exist_pseudo = $this->isExistPseudo($pseudo);
         if($is_exist_pseudo)
         {
-           return ['success' => false,'message' => "Désolé ! ce compte existe déja, veuillez vous connecter !"]; 
+           return ['success' => false,'message' => "Désolé ! ce compte existe déja, choisissez un autre pseudo !"]; 
         }
         else
         {
-        // Hachage du password et ajout dans la base de donnée
+        // Hachage du password.
         $hash_password = password_hash ($password ,PASSWORD_DEFAULT);
         $query = $this->_dataBase->prepare('INSERT INTO utilisateurs (pseudouser,passworduser) VALUES (:pseudouser, :passworduser)');
         $query->bindParam(':pseudouser', $pseudo);

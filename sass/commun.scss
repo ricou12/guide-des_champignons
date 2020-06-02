@@ -40,14 +40,14 @@ p {
     height: 100%;
 }
 
-.bgColor-blackLight{
+.bgColor--blackLight{
     background-color: rgba(0, 0, 0, 0.3);
 }
-.txtShadow-dark{
+.txtShadow--dark{
     text-shadow: 1px 1px 3px #000000 ;
  }
 
- .txtShadow-white{
+ .txtShadow--white{
     text-shadow: 1px 1px 3px #ffffff;
  }
 
@@ -55,8 +55,8 @@ p {
     text-shadow: 2px 1px 5px rgb(0, 0, 0);
 }
 
-.ftSize-medium{
-font-size: 3em;
+.ftSize--medium{
+font-size: 2.5em;
 }
  
 // ombrage des vignettes

@@ -240,12 +240,12 @@ try
                 // Vérifie si les champ sont remplis
                 if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['password']))
                 {
-                    $loginController->createRegister($_POST['pseudo'],$_POST['password']);   
+                    $loginController->createAnAccount($_POST['pseudo'],$_POST['password']);   
                 }
                 else
                 {
                     // si les champs sont vides
-                    $loginController->showRegister();   
+                    $loginController->showRegister("Veuillez remplir les champs obligatoires.");   
                 }
             }
         break;

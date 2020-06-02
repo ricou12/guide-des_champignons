@@ -20,11 +20,11 @@
         background-color: rgba(255, 255, 255, 0.5);
     }
  
-    &_title--bg-color {
-        background-color: rgba(255, 255, 255, 0.6);
-    }
+    // &_title--bg-color {
+    //     background-color: rgba(255, 255, 255, 0.6);
+    // }
 
-    &_bg--img {
+    &__bg--img {
         background-image: url("/assets/images/foret/foret-1.jpg");
         position: fixed;
         background-repeat: no-repeat;
@@ -33,7 +33,7 @@
         filter: blur(2px);
     }
 
-    &_form {
+    &__form {
         border-radius: 10px;
         font-size: 1.1em;
 

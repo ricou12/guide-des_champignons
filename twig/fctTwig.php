@@ -30,13 +30,9 @@ $function = new \Twig\TwigFunction('toogleImg', function ($img) {
 });
 $twig->addFunction($function);
 
-// Récupère la page active
-$function = new \Twig\TwigFunction('is_active', function ($titre,$link) {
-    $pageTitleAdminOrMembre = ['Administrateur','Membre'];
-    if($link === 'comptes'){
-        if(in_array($titre, $pageTitleAdminOrMembre)) return 'active';
-    }
-    if($link === $titre){
+// Active le lien des composants de navigation pour la page en cours.
+$function = new \Twig\TwigFunction('is_active', function ($nameOfTemplate,$link) {
+    if($link === $nameOfTemplate){
         return 'active';
     }
 });

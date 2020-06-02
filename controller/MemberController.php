@@ -74,33 +74,41 @@ class MemberController extends AppController
     // Mettre à jour son mot de passe
     function updatePassword($oldPassword,$newPassword,$confirmNewpassword)
     {
-        // Compare le nouveau mot de passe et celui de confirmation
-        if ($confirmNewpassword === $newPassword)
+        // Verification de la conformité du mot de passe
+        //  6 caractères mini, au moins un chiffre une lettre majuscule et minuscule
+        if(preg_match('#(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}#', $oldPassword))
         {
-            // Vérifie si le hash du password saisie par l'utilisateur corresponds au hash de la base de donnees.
-            if(password_verify( $oldPassword, $_SESSION['user']['passworduser']))
+            // Compare le nouveau mot de passe et celui de confirmation
+            if ($confirmNewpassword === $newPassword)
             {
-                $hash_newpassword = password_hash ($newPassword ,PASSWORD_DEFAULT);
-                $state = $this->sqlCommande->updatepassword($_SESSION['user']['iduser'],$hash_newpassword);
-                if($state){
-                    $_SESSION['user']['passworduser'] = $hash_newpassword;
-                    $this->showUpdateProfil("Votre nouveau mot de passe a  été mis à jour");
+                // Vérifie si le hash du password saisie par l'utilisateur corresponds au hash de la base de donnees.
+                if(password_verify( $oldPassword, $_SESSION['user']['passworduser']))
+                {
+                    $hash_newpassword = password_hash ($newPassword ,PASSWORD_DEFAULT);
+                    $state = $this->sqlCommande->updatepassword($_SESSION['user']['iduser'],$hash_newpassword);
+                    if($state){
+                        $_SESSION['user']['passworduser'] = $hash_newpassword;
+                        $this->showUpdateProfil("Votre nouveau mot de passe a  été mis à jour");
+                    }
+                    else
+                    {
+                        throw new ExceptionWithRedirect("Erreur impossible de modifier votre mot de passe !", 401, "mon-compte"); 
+                    }
                 }
                 else
                 {
-                    throw new ExceptionWithRedirect("Erreur impossible de modifier votre mot de passe !", 401, "mon-compte"); 
-                }
+                    $this->showUpdateProfil("Mot de passe incorrecte !");
+                }      
             }
             else
             {
-                $this->showUpdateProfil("Votre mot de passe n'est pas valide !");
-            }    
-            
-        }
+                $this->showUpdateProfil("Votre nouveau mot de passe et celui de confirmation ne sont pas identiques");
+            }
+        } 
         else
         {
-            $this->showUpdateProfil("Votre nouveau mot de passe et celui de confirmation ne sont pas identiques");
-        } 
+            $this->showUpdateProfil("Votre mot de passe n'est pas conforme !");
+        }
     }
 
     // Supprime le compte utilisateur actif

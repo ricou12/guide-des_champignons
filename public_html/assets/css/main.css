@@ -8953,20 +8953,20 @@ p {
   width: 100%;
   height: 100%; }
 
-.bgColor-blackLight {
+.bgColor--blackLight {
   background-color: rgba(0, 0, 0, 0.3); }
 
-.txtShadow-dark {
+.txtShadow--dark {
   text-shadow: 1px 1px 3px #000000; }
 
-.txtShadow-white {
+.txtShadow--white {
   text-shadow: 1px 1px 3px #ffffff; }
 
 .txtShadow {
   text-shadow: 2px 1px 5px black; }
 
-.ftSize-medium {
-  font-size: 3em; }
+.ftSize--medium {
+  font-size: 2.5em; }
 
 .box-shadow-down {
   -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
@@ -9291,23 +9291,18 @@ p {
       border-radius: 20px; }
   .added__typeLame {
     background-color: rgba(255, 255, 255, 0.5); }
-  .added_title--bg-color {
-    background-color: rgba(255, 255, 255, 0.6); }
-  .added_bg--img {
+  .added__bg--img {
     background-image: url("/assets/images/foret/foret-1.jpg");
     position: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     -webkit-filter: blur(2px);
     filter: blur(2px); }
-  .added_form {
+  .added__form {
     border-radius: 10px;
     font-size: 1.1em; }
-    .added_form label {
+    .added__form label {
       font-weight: 800; }
-
-.Admin_table_bg--dark:hover td {
-  color: white !important; }
 
 .member__info {
   font-size: 0.8em;

@@ -19,7 +19,7 @@
 
 {% block body %}
 <div class="background logger__bg--image"></div>
-<div class="background bgColor-blackLight"></div>
+<div class="background bgColor--blackLight"></div>
 <div class="container py-2">
     <div class="row d-flex justify-content-center p-2">
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 bg-greenLight text-white p-3 rounded">
@@ -38,11 +38,10 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Mot de passe</label>
                     <div class="input-group mb-3">
-                        
-                    <input type="password" name="password"  class="form-control" id="exampleInputPassword1" required>
-                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right"
-                        title="Mot de passe valide : De 8 à 15 caractères,1 lettre minuscule,1 lettre majuscule,1 de ces caractères spéciaux: $ @ % * + - _ !">?
-                    </button>
+                        <input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" class="form-control" id="exampleInputPassword1" required>
+                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right"
+                            title="Mot de passe valide : doit contenir au moins 6 caractères, au moins un chiffre et une lettre majuscule et minuscule">?
+                        </button>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -54,5 +53,4 @@
 </div>
 
 {% endblock %}
-
-{# pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$" #}
+{# pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" #}

@@ -1,6 +1,0 @@
-guide - reconnaissance - description
-
-Ajout dans le script de contraintes de table
- Table champ ON DELETE SET NULL - En cas de suppression d'un compte utilisateurs passe la clé étrangére a NULL 
- Table images ON DELETE CASCADE - Aura pour effet de supprimer tous les enregistrements de la table images lié a un enregistrement de la table fiches descriptive dont la cle étrangère de la table images correspond a la clé primaire de la fiche descriptive.
-

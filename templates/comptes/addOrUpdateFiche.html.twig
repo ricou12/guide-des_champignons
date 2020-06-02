@@ -32,12 +32,12 @@
 {% endblock %}
 
 {% block body %}
-<div class="background added_bg--img"></div>
+<div class="background added__bg--img"></div>
 <div class="container added mb-2 p-4">
 	<div class="row">
 		<div class="col-12 mb-3">
 			<h1 class="text-center txtShadow text-light d-none d-md-block">{{title}}</h1>
-			<form action="{{route}}"  method="POST" enctype="multipart/form-data" class="px-3 pb-3 added_form">
+			<form action="{{route}}"  method="POST" enctype="multipart/form-data" class="px-3 pb-3 added__form">
 				<div class="form-row px-4">
 				<p class="added__errorMessage">{{message}}</p>
 				<input type="hidden" name="idchamp" value="{{ dataText.idchamp }}">
