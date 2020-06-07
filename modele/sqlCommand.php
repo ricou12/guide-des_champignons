@@ -134,7 +134,7 @@ class MyComponentsSql {
             }
             else
             {
-                return ['success' => false,'message' => "Erreur de mot saisie dans le mot de passe, veuillez réessayer."]; 
+                return ['success' => false,'message' => "Le mot de passe ne correspond pas, veuillez réessayer."]; 
             }
         }
         else

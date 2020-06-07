@@ -2,7 +2,7 @@
 require_once(__DIR__.'/AppController.php');
 
 class LoginController extends AppController {
-
+    // TODO verifier conformité mot de passe et pseudo 
     // Creation d'un compte
     function createAnAccount($pseudo,$password)
     {
@@ -31,7 +31,9 @@ class LoginController extends AppController {
         }
     }
 
+
     // rendu page inscription
+    //TODO afficher les messages 'infoPseudo' =>$infoPseudo,'infoMotPasse' =>$infoMtPasse,
     function showRegister($message="")
     {
         echo $this->render('logger/register.html.twig', 
@@ -39,7 +41,7 @@ class LoginController extends AppController {
             'name' => 'Inscription',
             'title' => 'S\'inscrire',
             'erreur' => $message
-            ]
+           ]
         );
     }
 

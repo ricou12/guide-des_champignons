@@ -244,6 +244,15 @@ try
                 }
                 else
                 {
+                    // TODO afficher un message sous chaque champ
+                    // if(empty($_POST['pseudo'])){
+                    //     $pseudo = "Merci de renseigner votre pseudo";
+                    // }
+                    // if(empty($_POST['password'])){
+                    //     $mtPasse = "Merci de saisir un mot de passe";
+                    // }
+                    // $loginController->showRegister($pseudo,$mtPasse); 
+
                     // si les champs sont vides
                     $loginController->showRegister("Veuillez remplir les champs obligatoires.");   
                 }
