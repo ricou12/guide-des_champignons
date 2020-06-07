@@ -1,7 +1,0 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine on
-
-    # Redirect all other calls to index.php
-    RewriteCond %{REQUEST_URI} !^/assets/
-    RewriteRule ^(.*)$ index.php [QSA,L]
-</IfModule>
