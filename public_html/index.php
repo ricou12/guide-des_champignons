@@ -231,30 +231,21 @@ try
 
         // Créer un compte
         case 'creation-du-compte':
+            // si une session est ouverte on redirige vers la page admin
             if($appController->get_value_session())
             {
                header("location:index.php?routing=mon-compte");
             }
             else
             {
-                // Vérifie si les champ sont remplis
-                if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['password']))
+                // Détermine si une variable est déclarée et est différente de NULL
+                if(isset($_POST['pseudo'])  && isset($_POST['password']) )
                 {
                     $loginController->createAnAccount($_POST['pseudo'],$_POST['password']);   
                 }
                 else
                 {
-                    // TODO afficher un message sous chaque champ
-                    // if(empty($_POST['pseudo'])){
-                    //     $pseudo = "Merci de renseigner votre pseudo";
-                    // }
-                    // if(empty($_POST['password'])){
-                    //     $mtPasse = "Merci de saisir un mot de passe";
-                    // }
-                    // $loginController->showRegister($pseudo,$mtPasse); 
-
-                    // si les champs sont vides
-                    $loginController->showRegister("Veuillez remplir les champs obligatoires.");   
+                    throw new ExceptionWithRedirect("Une erreur c'est produite !", 404, "portail");
                 }
             }
         break;

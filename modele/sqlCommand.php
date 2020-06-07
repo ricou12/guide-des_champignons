@@ -95,13 +95,6 @@ class MyComponentsSql {
     public function createAccount($pseudo,$password)
     {
         $is_exist_pseudo = $this->isExistPseudo($pseudo);
-        if($is_exist_pseudo)
-        {
-           return ['success' => false,'message' => "Désolé ! ce compte existe déja, choisissez un autre pseudo !"]; 
-        }
-        else
-        {
-        // Hachage du password.
         $hash_password = password_hash ($password ,PASSWORD_DEFAULT);
         $query = $this->_dataBase->prepare('INSERT INTO utilisateurs (pseudouser,passworduser) VALUES (:pseudouser, :passworduser)');
         $query->bindParam(':pseudouser', $pseudo);
@@ -114,8 +107,7 @@ class MyComponentsSql {
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();
-        return ['success' => true,'message' => "Merci d'avoir crée votre compte !",'iduser' => $result]; 
-        }
+        return ['profilUser' => $result]; 
     }
 
     

@@ -2,45 +2,86 @@
 require_once(__DIR__.'/AppController.php');
 
 class LoginController extends AppController {
-    // TODO verifier conformité mot de passe et pseudo 
     // Creation d'un compte
     function createAnAccount($pseudo,$password)
     {
-        // Verification de la conformité du mot de passe
-        //  6 caractères mini, au moins un chiffre une lettre majuscule et minuscule
-        if(preg_match('#(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}#', $password))
+        $valuePseudo = "";
+        $messageErrorPseudo = "";
+        $messageErrorPassword = "";
+        $isOkPseudo = false;
+        $IsOkPassword = false;
+        // Verifie que tous les champs soit renseignés et valides.
+        // Pseudo
+        if(empty($pseudo)){
+            $messageErrorPseudo = "Merci de renseigner votre pseudo";
+        }
+        else
         {
-            $response = $this->sqlCommande->createAccount($pseudo,$password);
-            // Si le compte a été crée.
-            if($response['success'])
+            $valuePseudo = $pseudo;
+             // Vérifie si le compte existe dans la base de données
+            if($this->sqlCommande->isExistPseudo($pseudo))
             {
-                $_SESSION['user'] = $response['iduser'];
-                // Charge la page membre
+                $messageErrorPseudo = "Désolé ! ce pseudo est utilisé. Veuillez en choisir un autre.";
+            } 
+            else
+            {
+                $isOkPseudo = true;
+            } 
+        }
+        // Password
+        if(empty($password)){
+            $messageErrorPassword = "Merci de saisir un mot de passe";
+        }
+        else
+        {
+            // Vérifie la conformité du mot de passe
+            if(preg_match('#(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}#', $password))
+            {
+                $IsOkPassword = true;
+            }
+            else
+            {
+                $messageErrorPassword = "Votre mot de passe n'est pas conforme.";
+            }
+        }
+
+        // Si le pseudo et password sont conforme, créér le compte.
+        if( $isOkPseudo && $IsOkPassword)
+        {
+            // Création du compte
+            $response = $this->sqlCommande->createAccount($pseudo,$password);
+            if($response['profilUser'])
+            {
+                $_SESSION['user'] = $response['profilUser'];
+                // Redirection vers la page membre
                 header('location:index.php?routing=mon-compte');
             }
             else
             {
-                // recharge la page s'inscrire et affiche le message
-                $this->showRegister($response['message']);
+                 // Si bug pendant l'enregistrement
+                 throw new ExceptionWithRedirect("Une erreur c'est produite !", 404, "portail");
             }
         }
         else
         {
-            // recharge la page s'inscrire et affiche le message
-            $this->showRegister('Le mot de passe n\'est pas conforme.');
+            // Affiche les messages dans le formulaire inscription
+            $this->showRegister($messageErrorPseudo,$messageErrorPassword,"",$valuePseudo); 
         }
+
     }
 
 
     // rendu page inscription
-    //TODO afficher les messages 'infoPseudo' =>$infoPseudo,'infoMotPasse' =>$infoMtPasse,
-    function showRegister($message="")
+    function showRegister($infoPseudo="",$infoPassword="",$message="",$pseudo="")
     {
         echo $this->render('logger/register.html.twig', 
             [
             'name' => 'Inscription',
             'title' => 'S\'inscrire',
-            'erreur' => $message
+            'infoPseudo' => $infoPseudo,
+            'infoPassword' => $infoPassword,
+            'erreur' => $message,
+            'pseudo' => $pseudo
            ]
         );
     }
