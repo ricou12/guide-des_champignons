@@ -1,5 +1,5 @@
-# Guide-des-champignons
+# Guide des champignons
 
-### Faire :
+### Installez les dépendances
 #### npm install
 #### composer install
