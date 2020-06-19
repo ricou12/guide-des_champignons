@@ -94,7 +94,6 @@ class MyComponentsSql {
 
     public function createAccount($pseudo,$password)
     {
-        $is_exist_pseudo = $this->isExistPseudo($pseudo);
         $hash_password = password_hash ($password ,PASSWORD_DEFAULT);
         $query = $this->_dataBase->prepare('INSERT INTO utilisateurs (pseudouser,passworduser) VALUES (:pseudouser, :passworduser)');
         $query->bindParam(':pseudouser', $pseudo);

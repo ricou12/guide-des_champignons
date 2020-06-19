@@ -1,6 +1,14 @@
 <?php
-// fonction twig qui converti le lien en dur en adresse réécrit
-// $twig = new \Twig\Environment($loader);
+// URL REWRITING : fonction twig qui réecrit les urls en adresse propre.
+// Change l'image pour le bouton page admin et membre lorsque l'on inverse l'etat
+$function = new \Twig\TwigFunction('url_rewrite', function ($url) {
+    // extrait les parametres de l'url
+    $_SERVER['QUERY_STRING'];
+
+    
+});
+$twig->addFunction($function);
+
 
 // Renvoi l'image correspondante 
 $function = new \Twig\TwigFunction('getImage', function ($comestible) {

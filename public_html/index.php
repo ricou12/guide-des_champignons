@@ -39,7 +39,24 @@ $loginController = new LoginController($twig, $sqlCommande);
 $adminController = new AdminController($twig, $sqlCommande);
 $memberController = new MemberController($twig, $sqlCommande);
 session_start();
- 
+
+// TODO
+// URL REWRITING creer une fonction Twig
+// $namePage = $_SERVER['HTTP_REFERER'];
+// $arr_namePage = explode("?",$namePage);
+// $firstUrl = $arr_namePage[0];
+
+// $root = $_SERVER['QUERY_STRING'];
+// $params = explode("&",$root);
+// $urlParams = array_reduce($params,'getValueOfParams');
+// function getValueOfParams($carry, $item){
+//     $value = explode("=",$item);
+//     $carry .= "/". $value[1];
+//     return $carry;
+// }
+// $urlRewrite = $firstUrl.$urlParams;
+
+
 // ROUTAGE PAR DEFAULT (premier chargement)
 $page = 'portail'; 
 if(isset($_GET['routing'])) {

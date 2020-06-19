@@ -5,19 +5,19 @@
 
 // ajout de couleurs personnalisées
 // Titre et texte description
-$gray: rgb(85, 84, 84);
+$gray: #555454;
 // Pagination
-$greenDark: rgb(63, 80, 62);
+$greenDark: #3f503e;
 // Navbar active, nom latin
-$orange: rgb(224, 139, 94);
+$orange: #e08b5e;
 // Formulaires
-$greenLight:rgba(39, 54, 26, 0.8);
+$greenLight:#27361acc;
 // composants Navs
 $whiteLight:rgba(255, 255, 255, 0.5);
 $navigate:rgba(32, 42, 30,0.5);
 $dropdown-link-active-bg: $orange;
 // Modification de la couleur du composant de pagination pour la classe active.
-$pagination-active-bg: white;
+$pagination-active-bg: #ffffff;
 $pagination-active-color: $greenDark;
 // Modification de la couleur du composant nav pour la classe active.
 $nav-pills-link-active-color: $whiteLight;
@@ -26,7 +26,7 @@ $nav-pills-link-active-bg: $whiteLight;
 $link-color:rgba(255, 255, 255, 0.7);
 // Modification de la couleur barre de navigation theme navbar-dark.
 $navbar-dark-color: white;
-$navbar-dark-hover-color: rgb(214, 206, 195);
+$navbar-dark-hover-color: #d6cec3;
 $navbar-dark-active-color: $orange;
 // Modification de la couleur du bouton lorsque la navbar s'est effrondrée.
 $navbar-dark-toggler-border-color:white;

@@ -45,7 +45,7 @@ class LoginController extends AppController {
             }
         }
 
-        // Si le pseudo et password sont conforme, créér le compte.
+        // Si le pseudo et password sont conformes.
         if( $isOkPseudo && $IsOkPassword)
         {
             // Création du compte
