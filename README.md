@@ -4,4 +4,4 @@
 
 ### Installez les dépendances
 #### npm install
-#### composer install
+#### composer install 
