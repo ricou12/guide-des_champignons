@@ -240,7 +240,7 @@ class MyComponentsSql {
     // Ajoute une fiche pour un utilisateur via son id stocké dans la variable de session
     public function AddMushroom($nomcommun,$nomlatin,$nomlocal,$chapeau,$gridRadios,$lames,$pied,$chair,$habitat,$remarques,$conso,$iduser)
     {
-         $query = $this->_dataBase->prepare('INSERT INTO champ (communchamp,latinchamp,localchamp,chapeauchamp,
+        $query = $this->_dataBase->prepare('INSERT INTO champ (communchamp,latinchamp,localchamp,chapeauchamp,
             typelameschamp,lameschamp,piedchamp,chairchamp,habitatchamp,remarqueschamp,consochamp,iduser) 
             VALUES(:communchamp,:latinchamp,:localchamp,:chapeauchamp,:typelameschamp,:lameschamp,:piedchamp,:chairchamp,:habitatchamp,:remarqueschamp,:consochamp,:iduser)');
         $query->bindParam(':communchamp', $nomcommun);

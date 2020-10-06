@@ -8,10 +8,6 @@
 		<!-- contrôler la mise en page sur les navigateurs mobiles -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<!-- information sur l'auteur et copyright  -->
-		<meta name="author" content="Eric Lanza" />
-		<meta name="copyright" content="copyright2020©Lanza" />
-
 		<!-- liens vers le CDN de Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Tangerine&display=swap" rel="stylesheet"/>
 		<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
@@ -20,23 +16,33 @@
 		<!-- lien vers le fichier css  -->
 		<link rel="stylesheet" href="/assets/css/main.css">
 
-		<!-- Titre de la page  -->
+		<!-- HTML Meta Tags -->
+		<meta name="author" content="Eric Lanza" />
+		<meta name="copyright" content="copyright2020©Lanza" />
 		<title>
 			{% block title %}{% endblock %}
 		</title>
-
-		<!-- meta description -->
 		<link rel="shortcut icon" type="image/x-icon" href="/assets/icones/logo.png" />
 		{% block meta %}{% endblock %}
 
 		<!-- autoriser l'indexation par les moteurs de recherche -->
 		<meta name="robots" content="index">
 
-		<!-- SEO opengraph -->
+		<!-- Facebook Meta Tags -->
 		<meta property="og:locale" content="fr_FR"/>
 		<meta property="og:type" content="website"/>
 		{% block og %}{% endblock %}
+		<meta property="og:image" content="{{url}}/assets/video/videoOg.gif"/>
+    	<meta property="og:image:width" content="300"/>
+    	<meta property="og:image:height" content="170"/>
+
+		<!-- Twitter Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image">
+		{% block twitter %}{% endblock %}
+		<meta name="twitter:image" content="{{url}}/assets/video/videoOg.gif"">
+
 	</head>
+	
 	<body>
 		<section class="d-flex flex-column default">
 			<header>

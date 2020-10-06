@@ -12,9 +12,11 @@
     <meta property="og:title" content="Guide des champignons - apprendre à reconnaitre : {{fiche.communchamp}}">
     <meta property="og:description" content="Découvrez les principales caractéristiques de {{fiche.communchamp}}, sur le guide des champignons.">
     <meta property="og:url" content="">
-    <meta property="og:image" content="{{url}}/assets/images/photo-fullscreen/{{ images[0] }}"/>
-    <meta property="og:image:width" content="150" />
-    <meta property="og:image:height" content="150" />
+{% endblock %}
+
+{% block twitter %}
+    <meta name="twitter:title" content="Guide des champignons - apprendre à reconnaitre : {{fiche.communchamp}}"/>
+    <meta name="twitter:description" content="Découvrez les principales caractéristiques de {{fiche.communchamp}}, sur le guide des champignons."/>
 {% endblock %}
 
 {% block body %}
