@@ -7,7 +7,5 @@
 - Front-end : HTML, CSS, Sass, TWIG
 
 ### Installez les dépendances
-
-#### npm install
-
-#### composer install 
+- npm install
+- composer install 
