@@ -1,6 +1,7 @@
 # Petit guide des champignons
 
-![[Petit guide des champignons](https://petit-guide-des-champignons.000webhostapp.com/)](https://github.com/ricou12/guide-des-champignons/blob/master/public_html/assets/images/ArPl.jpg)
+[![Petit guide des champignons](https://petit-guide-des-champignons.000webhostapp.com/)]
+(https://github.com/ricou12/guide-des-champignons/blob/master/public_html/assets/images/ArPl.jpg " Petit guide des champignons")
 
 ## Architecture MVC personnalisée
 - Back-end : PHP , MySQL
