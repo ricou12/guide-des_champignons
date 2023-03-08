@@ -1,6 +1,10 @@
-# [Guide des champignons (architecture MVC personnalisée)](https://petit-guide-des-champignons.000webhostapp.com/)
+# Petit guide des champignons
 
-##  ( Html, Css, Sass, Bootstrap, Twig, PHP, SQL)
+![[Petit guide des champignons](https://petit-guide-des-champignons.000webhostapp.com/)](https://github.com/ricou12/guide-des-champignons/blob/master/public_html/assets/images/ArPl.jpg)
+
+## Architecture MVC personnalisée
+- Back-end : PHP , MySQL
+- Front-end : HTML, CSS, Sass, TWIG
 
 ### Installez les dépendances
 #### npm install
